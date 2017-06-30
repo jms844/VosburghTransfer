@@ -5,14 +5,14 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="EWFINFWWAPV16"
   DTS:CreatorName="CORP\jms844"
-  DTS:DTSID="{D2FEEBB2-672E-4C83-A283-CF3E21AF406D}"
+  DTS:DTSID="{BEC3AC0E-B8B5-4B25-9275-E3658881E8F3}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.0500.272"
+  DTS:LastModifiedProductVersion="13.0.4001.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="PackageEmp"
+  DTS:ObjectName="EmpereonTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{4F4BB6C8-4349-4811-98AF-BB2400C4D848}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{E53CF249-1BD8-46A8-8555-8A3834917872}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -115,7 +115,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Declare @start as datetime = ?;
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Declare @start as datetime = ?;
 
 Select
 	[row_date]
@@ -1064,7 +1064,7 @@ Where
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."

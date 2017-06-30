@@ -5,14 +5,14 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="6LVFP32"
   DTS:CreatorName="CORP\jms844"
-  DTS:DTSID="{73DD61AC-F65D-4E8B-8518-19352C957005}"
+  DTS:DTSID="{CE43934B-E438-48DC-B362-1E1CC4FBAC92}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.0500.272"
+  DTS:LastModifiedProductVersion="13.0.4001.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="PackageMain"
+  DTS:ObjectName="MainTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="26"
-  DTS:VersionGUID="{ADE4D7CF-0FE3-4863-BAE2-3B5E2D8CFC26}">
+  DTS:VersionBuild="28"
+  DTS:VersionGUID="{BC8BF25F-970C-4150-BFCE-139FC46B0876}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -75,7 +75,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>PackageAlorica.dtsx</PackageName>
+              <PackageName>AloricaTransfer.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -92,7 +92,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>PackageEmp.dtsx</PackageName>
+              <PackageName>EmpereonTransfer.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -109,7 +109,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>PackageIbex.dtsx</PackageName>
+              <PackageName>IbexTransfer.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -126,7 +126,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>PartnerOtd.dtsx</PackageName>
+              <PackageName>OtdTransfer.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -143,7 +143,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>PackageSykes.dtsx</PackageName>
+              <PackageName>SykesTransfer.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -160,7 +160,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>PackageTni.dtsx</PackageName>
+              <PackageName>TniTransfer.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -178,7 +178,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>PackageTp.dtsx</PackageName>
+              <PackageName>TpTransfer.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -195,7 +195,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>PackageFrontier.dtsx</PackageName>
+              <PackageName>FrontierTransfer.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -372,11 +372,11 @@
           Id="Package\Sequence Container\Execute Package Ibex"
           TopLeft="786.5,5.49999999999989" />
         <NodeLayout
-          Size="193,42"
+          Size="182,42"
           Id="Package\Sequence Container\Execute Package OTD"
           TopLeft="1029,5.49999999999989" />
         <NodeLayout
-          Size="193,42"
+          Size="188,42"
           Id="Package\Sequence Container\Execute Package Sykes"
           TopLeft="1283,5.49999999999989" />
         <NodeLayout
@@ -541,13 +541,13 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
-          TopLeft="1125.5,47.4999999999999">
+          TopLeft="1120,47.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-237.833333333333,60"
+              EndConnector="-232.333333333333,60.0000000000001"
               Start="0,0"
-              End="-237.833333333333,52.5">
+              End="-232.333333333333,52.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -558,32 +558,32 @@
                     Point2="0,31.6866359447005"
                     Point3="-4,31.6866359447005" />
                   <mssgle:LineSegment
-                    End="-233.833333333333,31.6866359447005" />
+                    End="-228.333333333333,31.6866359447005" />
                   <mssgle:CubicBezierSegment
-                    Point1="-233.833333333333,31.6866359447005"
-                    Point2="-237.833333333333,31.6866359447005"
-                    Point3="-237.833333333333,35.6866359447005" />
+                    Point1="-228.333333333333,31.6866359447005"
+                    Point2="-232.333333333333,31.6866359447005"
+                    Point3="-232.333333333333,35.6866359447005" />
                   <mssgle:LineSegment
-                    End="-237.833333333333,52.5" />
+                    End="-232.333333333333,52.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-144.221119791666,36.6866359447005,50.60890625,11.609375"
+              BoundingBox="-141.471119791667,36.6866359447005,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 6]"
-          TopLeft="1379.5,47.4999999999999">
+          TopLeft="1377,47.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-471.5,60"
+              EndConnector="-469,60.0000000000001"
               Start="0,0"
-              End="-471.5,52.5">
+              End="-469,52.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -594,20 +594,20 @@
                     Point2="0,35.7009345794393"
                     Point3="-4,35.7009345794393" />
                   <mssgle:LineSegment
-                    End="-467.5,35.7009345794393" />
+                    End="-465,35.7009345794393" />
                   <mssgle:CubicBezierSegment
-                    Point1="-467.5,35.7009345794393"
-                    Point2="-471.5,35.7009345794393"
-                    Point3="-471.5,39.7009345794393" />
+                    Point1="-465,35.7009345794393"
+                    Point2="-469,35.7009345794393"
+                    Point3="-469,39.7009345794393" />
                   <mssgle:LineSegment
-                    End="-471.5,52.5" />
+                    End="-469,52.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-261.054453125,40.7009345794393,50.60890625,11.609375"
+              BoundingBox="-259.804453125,40.7009345794393,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>

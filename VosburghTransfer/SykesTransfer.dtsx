@@ -5,14 +5,14 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="EWFINFWWAPV16"
   DTS:CreatorName="CORP\jms844"
-  DTS:DTSID="{6F7FB32D-EF07-4D51-B40A-3B5674232850}"
+  DTS:DTSID="{C0B0FD75-116F-4B66-8B5A-3ED3B93C0995}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.0500.272"
+  DTS:LastModifiedProductVersion="13.0.4001.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="PackageSykes"
+  DTS:ObjectName="SykesTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{3C21549D-0BE1-4838-B1B9-F1E3D8FB2D5D}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{3508FB4C-CAFA-4BD7-A30F-6472EB42C70F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -115,7 +115,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -672,7 +672,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Declare @start as datetime = ?;
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Declare @start as datetime = ?;
 
 Select
 	[row_date]

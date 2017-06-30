@@ -5,14 +5,14 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="EWFINFWWAPV16"
   DTS:CreatorName="CORP\jms844"
-  DTS:DTSID="{18ABA821-BD04-471B-9716-CA37F942AEB9}"
+  DTS:DTSID="{511454E6-3EA5-4A0C-8E85-89E99F9BD25E}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.0500.272"
+  DTS:LastModifiedProductVersion="13.0.4001.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="PackageIbex"
+  DTS:ObjectName="IbexTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{FB4C4B52-67ED-4060-AF2E-5DBA44C0B85B}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{38AEB717-A83E-43C1-B51A-ED2505A0D560}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -115,7 +115,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -668,7 +668,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Declare @start as datetime = ?;
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Declare @start as datetime = ?;
 
 Select
 	[row_date]
@@ -1617,7 +1617,7 @@ Where
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Declare @start as date = ?;
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Declare @start as date = ?;
 
 Select
 	[row_date]
@@ -4215,6 +4215,14 @@ Where
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\For each date\IBEX hSplit Transfer\Ibex hSplit Historical Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\For each date\IBEX hSplit Transfer\hSplit Stg">
     <Properties>
       <Property>
@@ -4224,14 +4232,6 @@ Where
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\For each date\IBEX hSplit Transfer\Ibex hSplit Historical Data">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
