@@ -7,12 +7,12 @@
   DTS:CreatorName="CORP\jms844"
   DTS:DTSID="{723385BA-5F8D-40FD-A9A5-83B2AC187B3C}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LastModifiedProductVersion="14.0.0500.272"
   DTS:LocaleID="1033"
   DTS:ObjectName="PackageFrontier"
   DTS:PackageType="5"
-  DTS:VersionBuild="33"
-  DTS:VersionGUID="{28C1AFC5-9CB0-45A5-B99D-57F2A9FA9ECE}">
+  DTS:VersionBuild="47"
+  DTS:VersionGUID="{B615B377-A1D0-4647-B8C0-28A915E27F92}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -142,55 +142,54 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Declare @start as datetime = ?;
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Declare @start as datetime = ?;
 
 Select
 	[row_date]
     ,cast(cast((starttime - starttime % 100) / 2400.0 + ((starttime % 100) / 1440.0) as datetime) as time(0)) as interval
     ,[acd]
     ,[split]
-    ,[i_availtime]
-    ,[i_ringtime]
-    ,[ringtime]
-    ,[ringcalls]
-    ,[i_acdtime]
-    ,[acdtime]
-    ,[acdcalls]
-    ,[i_acwtime]
-    ,[acwtime]
-    ,[i_acwouttime]
-    ,[acwouttime]
-    ,[acwoutcalls]
-    ,[i_acwintime]
-    ,[acwintime]
-    ,[acwincalls]
-    ,[i_auxtime]
-    ,[i_auxouttime]
-    ,[auxouttime]
-    ,[auxoutcalls]
-    ,[i_auxintime]
-    ,[auxintime]
-    ,[auxincalls]
-    ,[i_othertime]
-    ,[i_acdothertime]
-    ,[holdtime]
-    ,[holdcalls]
-    ,[holdabncalls]
-    ,[transferred]
-    ,[conference]
-    ,[abncalls]
-    ,[abntime]
-    ,[acceptable]
-    ,[i_arrived]
-    ,[dequecalls]
-    ,[busycalls]
-    ,[disccalls]
-    ,[outflowcalls]
-    ,[anstime]
+    ,Sum([i_availtime])[i_availtime]
+    ,Sum([i_ringtime])[i_ringtime]
+    ,Sum([ringtime])[ringtime]
+    ,Sum([ringcalls])[ringcalls]
+    ,Sum([i_acdtime])[i_acdtime]
+    ,Sum([acdtime])[acdtime]
+    ,Sum([acdcalls])[acdcalls]
+    ,Sum([i_acwtime])[i_acwtime]
+    ,Sum([acwtime])[acwtime]
+    ,Sum([i_acwouttime])[i_acwouttime]
+    ,Sum([acwouttime])[acwouttime]
+    ,Sum([acwoutcalls])[acwoutcalls]
+    ,Sum([i_acwintime])[i_acwintime]
+    ,Sum([acwintime])[acwintime]
+    ,Sum([acwincalls])[acwincalls]
+    ,Sum([i_auxtime])[i_auxtime]
+    ,Sum([i_auxouttime])[i_auxouttime]
+    ,Sum([auxouttime])[auxouttime]
+    ,Sum([auxoutcalls])[auxoutcalls]
+    ,Sum([i_auxintime])[i_auxintime]
+    ,Sum([auxintime])[auxintime]
+    ,Sum([auxincalls])[auxincalls]
+    ,Sum([i_othertime])[i_othertime]
+    ,Sum([i_acdothertime])[i_acdothertime]
+    ,Sum([holdtime])[holdtime]
+    ,Sum([holdcalls])[holdcalls]
+    ,Sum([holdabncalls])[holdabncalls]
+    ,Sum([transferred])[transferred]
+    ,Sum([conference])[conference]
+    ,Sum([abncalls])[abncalls]
+    ,Sum([abntime])[abntime]
+    ,Sum([acceptable])[acceptable]
+    ,Sum([i_arrived])[i_arrived]
+    ,Sum([dequecalls])[dequecalls]
+    ,Sum([busycalls])[busycalls]
+    ,Sum([disccalls])[disccalls]
+    ,Sum([outflowcalls])[outflowcalls]
+    ,Sum([anstime])[anstime]
 	,Cast(? as tinyInt) vendorID
 	,month(row_date) monthNum
 	,year(row_date) yearNum
-	,DateFromParts(year(row_date),month(row_date),1) monthDate
 From
 	vw_Hsplit
 Where
@@ -199,7 +198,12 @@ Where
 	and (i_availtime &gt; 0
 		or acdcalls &gt; 0
 		or abncalls &gt; 0
-		or i_arrived &gt; 0);</property>
+		or i_arrived &gt; 0)
+Group by
+	row_date
+	,starttime
+	,acd
+	,split;</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -640,15 +644,6 @@ Where
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[interval]"
                           name="interval"
                           truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[monthDate]"
-                          dataType="dbDate"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[monthDate]"
-                          lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[monthDate]"
-                          name="monthDate"
-                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -702,7 +697,7 @@ Where
                           name="i_othertime" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwincalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="acwincalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwintime]"
@@ -710,7 +705,7 @@ Where
                           name="acwintime" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxincalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="auxincalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxintime]"
@@ -718,7 +713,7 @@ Where
                           name="auxintime" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwoutcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="acwoutcalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwouttime]"
@@ -726,7 +721,7 @@ Where
                           name="acwouttime" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxoutcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="auxoutcalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxouttime]"
@@ -734,7 +729,7 @@ Where
                           name="auxouttime" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acdcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="acdcalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[anstime]"
@@ -750,7 +745,7 @@ Where
                           name="acwtime" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[holdcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="holdcalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[holdtime]"
@@ -758,19 +753,19 @@ Where
                           name="holdtime" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[holdabncalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="holdabncalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[transferred]"
-                          dataType="i2"
+                          dataType="i4"
                           name="transferred" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[conference]"
-                          dataType="i2"
+                          dataType="i4"
                           name="conference" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[abncalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="abncalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[abntime]"
@@ -778,23 +773,23 @@ Where
                           name="abntime" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[dequecalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="dequecalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[busycalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="busycalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[disccalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="disccalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[outflowcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="outflowcalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acceptable]"
-                          dataType="i2"
+                          dataType="i4"
                           name="acceptable" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_ringtime]"
@@ -806,7 +801,7 @@ Where
                           name="ringtime" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[ringcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           name="ringcalls" />
                         <externalMetadataColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_acdothertime]"
@@ -832,10 +827,6 @@ Where
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[interval]"
                           dataType="dbTime2"
                           name="interval" />
-                        <externalMetadataColumn
-                          refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[monthDate]"
-                          dataType="dbDate"
-                          name="monthDate" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -910,7 +901,7 @@ Where
                           name="i_othertime" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwincalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwincalls]"
                           name="acwincalls" />
                         <outputColumn
@@ -920,7 +911,7 @@ Where
                           name="acwintime" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxincalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxincalls]"
                           name="auxincalls" />
                         <outputColumn
@@ -930,7 +921,7 @@ Where
                           name="auxintime" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwoutcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwoutcalls]"
                           name="acwoutcalls" />
                         <outputColumn
@@ -940,7 +931,7 @@ Where
                           name="acwouttime" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxoutcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxoutcalls]"
                           name="auxoutcalls" />
                         <outputColumn
@@ -950,7 +941,7 @@ Where
                           name="auxouttime" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acdcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acdcalls]"
                           name="acdcalls" />
                         <outputColumn
@@ -970,7 +961,7 @@ Where
                           name="acwtime" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[holdcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[holdcalls]"
                           name="holdcalls" />
                         <outputColumn
@@ -980,22 +971,22 @@ Where
                           name="holdtime" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[holdabncalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[holdabncalls]"
                           name="holdabncalls" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[transferred]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[transferred]"
                           name="transferred" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[conference]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[conference]"
                           name="conference" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[abncalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[abncalls]"
                           name="abncalls" />
                         <outputColumn
@@ -1005,27 +996,27 @@ Where
                           name="abntime" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[dequecalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[dequecalls]"
                           name="dequecalls" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[busycalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[busycalls]"
                           name="busycalls" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[disccalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[disccalls]"
                           name="disccalls" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[outflowcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[outflowcalls]"
                           name="outflowcalls" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acceptable]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acceptable]"
                           name="acceptable" />
                         <outputColumn
@@ -1040,7 +1031,7 @@ Where
                           name="ringtime" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ringcalls]"
-                          dataType="i2"
+                          dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ringcalls]"
                           name="ringcalls" />
                         <outputColumn
@@ -1068,11 +1059,6 @@ Where
                           dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[yearNum]"
                           name="yearNum" />
-                        <outputColumn
-                          refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[monthDate]"
-                          dataType="dbDate"
-                          lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[monthDate]"
-                          name="monthDate" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
@@ -1115,7 +1101,7 @@ Where
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1432,12 +1418,6 @@ Where
                           cachedName="yearNum"
                           externalMetadataColumnId="Package\For each date\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[yearNum]" />
-                        <inputColumn
-                          refId="Package\For each date\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[monthDate]"
-                          cachedDataType="dbDate"
-                          cachedName="monthDate"
-                          externalMetadataColumnId="Package\For each date\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[monthDate]"
-                          lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[monthDate]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -1621,10 +1601,6 @@ Where
                           refId="Package\For each date\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
                           dataType="i4"
                           name="yearNum" />
-                        <externalMetadataColumn
-                          refId="Package\For each date\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[monthDate]"
-                          dataType="dbDate"
-                          name="monthDate" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1709,84 +1685,6 @@ Where
               version="1">
               <components>
                 <component
-                  refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion"
-                  componentClassID="Microsoft.DataConvert"
-                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-                  description="Data Conversion"
-                  name="Data Conversion"
-                  usesDispositions="true">
-                  <inputs>
-                    <input
-                      refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Inputs[Data Conversion Input]"
-                      name="Data Conversion Input">
-                      <inputColumns>
-                        <inputColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Inputs[Data Conversion Input].Columns[logid]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="15"
-                          cachedName="logid"
-                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[logid]" />
-                      </inputColumns>
-                      <externalMetadataColumns />
-                    </input>
-                  </inputs>
-                  <outputs>
-                    <output
-                      refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Outputs[Data Conversion Output]"
-                      exclusionGroup="1"
-                      name="Data Conversion Output"
-                      synchronousInputId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Inputs[Data Conversion Input]">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of logid]"
-                          dataType="wstr"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          length="15"
-                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of logid]"
-                          name="Copy of logid"
-                          truncationRowDisposition="FailComponent">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Specifies the input column used as the source of data for the conversion."
-                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[logid]}</property>
-                            <property
-                              dataType="System.Boolean"
-                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                              name="FastParse">false</property>
-                          </properties>
-                        </outputColumn>
-                      </outputColumns>
-                      <externalMetadataColumns />
-                    </output>
-                    <output
-                      refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Outputs[Data Conversion Error Output]"
-                      exclusionGroup="1"
-                      isErrorOut="true"
-                      name="Data Conversion Error Output"
-                      synchronousInputId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Inputs[Data Conversion Input]">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                          dataType="i4"
-                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                          name="ErrorCode"
-                          specialFlags="1" />
-                        <outputColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                          dataType="i4"
-                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                          name="ErrorColumn"
-                          specialFlags="2" />
-                      </outputColumns>
-                      <externalMetadataColumns />
-                    </output>
-                  </outputs>
-                </component>
-                <component
                   refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent"
                   componentClassID="Microsoft.OLEDBSource"
                   contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
@@ -1811,16 +1709,15 @@ Where
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select
 	[row_date]
     ,cast(cast((starttime - starttime % 100) / 2400.0 + ((starttime % 100) / 1440.0) as datetime) as time(0)) as interval
     ,[acd]
     ,[split]
-    ,[logid]
+    ,Cast(rtrim(ltrim(logid)) as nvarchar(20)) logid
     ,Cast(? as int) [vendorID]
     ,Month(row_date) [monthNum]
     ,Year(row_date) [yearNum]
-    ,DateFromParts(Year(row_date),Month(row_date),1) [monthDate]
     ,Sum([ti_stafftime])	[ti_stafftime]
     ,Sum([ti_availtime])	    [ti_availtime]
     ,Sum([i_ringtime])	    [i_ringtime]
@@ -2020,6 +1917,9 @@ Where
 FROM vw_Hagent
 Where
         row_date = ?
+        and logid is not null
+        and acd is not null
+        and split is not null
 Group by
 	[row_date]
     ,[starttime]
@@ -2087,17 +1987,6 @@ Group by
                           externalMetadataColumnId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].ExternalColumns[split]"
                           lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[split]"
                           name="split"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[logid]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].ExternalColumns[logid]"
-                          length="15"
-                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[logid]"
-                          name="logid"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
                           refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[i_stafftime]"
@@ -3891,13 +3780,14 @@ Group by
                           name="interval"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[monthDate]"
-                          dataType="dbDate"
+                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[logid]"
+                          dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].ExternalColumns[monthDate]"
-                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[monthDate]"
-                          name="monthDate"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].ExternalColumns[logid]"
+                          length="20"
+                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[logid]"
+                          name="logid"
                           truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
@@ -3914,12 +3804,6 @@ Group by
                           refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].ExternalColumns[split]"
                           dataType="i2"
                           name="split" />
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].ExternalColumns[logid]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="logid" />
                         <externalMetadataColumn
                           refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].ExternalColumns[i_stafftime]"
                           dataType="i4"
@@ -4717,9 +4601,10 @@ Group by
                           dataType="dbTime2"
                           name="interval" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].ExternalColumns[monthDate]"
-                          dataType="dbDate"
-                          name="monthDate" />
+                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].ExternalColumns[logid]"
+                          dataType="wstr"
+                          length="20"
+                          name="logid" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -4749,9 +4634,8 @@ Group by
                           name="split" />
                         <outputColumn
                           refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Error Output].Columns[logid]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
+                          dataType="wstr"
+                          length="20"
                           lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Error Output].Columns[logid]"
                           name="logid" />
                         <outputColumn
@@ -4769,11 +4653,6 @@ Group by
                           dataType="i4"
                           lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Error Output].Columns[i_availtime]"
                           name="i_availtime" />
-                        <outputColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Error Output].Columns[monthDate]"
-                          dataType="dbDate"
-                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Error Output].Columns[monthDate]"
-                          name="monthDate" />
                         <outputColumn
                           refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Error Output].Columns[ti_availtime]"
                           dataType="i4"
@@ -5791,7 +5670,7 @@ Group by
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -7051,18 +6930,12 @@ Group by
                           externalMetadataColumnId="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg.Inputs[OLE DB Destination Input].ExternalColumns[interval]"
                           lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[interval]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg.Inputs[OLE DB Destination Input].Columns[Copy of logid]"
+                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg.Inputs[OLE DB Destination Input].Columns[logid]"
                           cachedDataType="wstr"
-                          cachedLength="15"
-                          cachedName="Copy of logid"
+                          cachedLength="20"
+                          cachedName="logid"
                           externalMetadataColumnId="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg.Inputs[OLE DB Destination Input].ExternalColumns[logid]"
-                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of logid]" />
-                        <inputColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg.Inputs[OLE DB Destination Input].Columns[monthDate]"
-                          cachedDataType="dbDate"
-                          cachedName="monthDate"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg.Inputs[OLE DB Destination Input].ExternalColumns[monthDate]"
-                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[monthDate]" />
+                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[logid]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -7888,10 +7761,6 @@ Group by
                           refId="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
                           dataType="i4"
                           name="ID" />
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg.Inputs[OLE DB Destination Input].ExternalColumns[monthDate]"
-                          dataType="dbDate"
-                          name="monthDate" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -7920,23 +7789,284 @@ Group by
                     </output>
                   </outputs>
                 </component>
+                <component
+                  refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="Lookup"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[ACD_LOGIN]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[ACD_LOGIN]) [refTable]
+where [refTable].[acd] = ? and [refTable].[ACD_LOGIN_ID] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ACD_LOGIN_ID" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ACD_INST_SK" dataType="DT_NUMERIC" length="0" precision="15" scale="1" codePage="0"/&gt;&lt;referenceColumn name="EMP_SK" dataType="DT_NUMERIC" length="0" precision="15" scale="1" codePage="0"/&gt;&lt;referenceColumn name="ACD_GRP_ID" dataType="DT_WSTR" length="128" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="acd" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[acd]};#{Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[logid]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Connections[OleDbConnection]"
+                      connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Inputs[Lookup Input].Columns[acd]"
+                          cachedDataType="i2"
+                          cachedName="acd"
+                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[acd]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">acd</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Inputs[Lookup Input].Columns[logid]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="logid"
+                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output].Columns[logid]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">ACD_LOGIN_ID</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
               </components>
               <paths>
                 <path
-                  refId="Package\Foreach Loop Container\Frontier hAgent Transfer.Paths[Data Conversion Output]"
+                  refId="Package\Foreach Loop Container\Frontier hAgent Transfer.Paths[Lookup Match Output]"
                   endId="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg.Inputs[OLE DB Destination Input]"
-                  name="Data Conversion Output"
-                  startId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Outputs[Data Conversion Output]" />
+                  name="Lookup Match Output"
+                  startId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Outputs[Lookup Match Output]" />
                 <path
                   refId="Package\Foreach Loop Container\Frontier hAgent Transfer.Paths[OLE DB Source Output]"
-                  endId="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion.Inputs[Data Conversion Input]"
+                  endId="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup.Inputs[Lookup Input]"
                   name="OLE DB Source Output"
                   startId="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent.Outputs[OLE DB Source Output]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
         </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\hAgent Merge"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{aec59253-037f-4207-8916-248e448e5f7a}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="hAgent Merge"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+              SQLTask:SqlStatementSource="exec fact.updateHagent;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Rebuild stgHagent Index"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{12eb9f2c-0512-43c5-9749-587fb13be6a7}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Rebuild stgHagent Index"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+              SQLTask:SqlStatementSource="exec rebuildStgHagent" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Truncate hAgent Stg"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{b7eb0892-db80-4ac5-a29c-8c051e819952}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate hAgent Stg"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+              SQLTask:SqlStatementSource="Truncate Table hAgentStg" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Update latest day hAgent"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{474f896e-45ea-4ab3-b09d-099db1df92ad}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update latest day hAgent"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+              SQLTask:SqlStatementSource="exec updateLastDateHagent" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
       </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{49A6EA17-4436-4198-B3CA-093382919B32}"
+          DTS:From="Package\Foreach Loop Container\Frontier hAgent Transfer"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\Update latest day hAgent"
+          DTS:Value="2" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{B4A974CF-1FF5-4ED8-B58E-220BE11E7173}"
+          DTS:From="Package\Foreach Loop Container\Rebuild stgHagent Index"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Foreach Loop Container\hAgent Merge" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{34FFB056-3C90-49C5-8FA1-96C450423207}"
+          DTS:From="Package\Foreach Loop Container\hAgent Merge"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Foreach Loop Container\Truncate hAgent Stg" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{0E64A0A5-6923-47B2-A68F-E954EB728623}"
+          DTS:From="Package\Foreach Loop Container\Update latest day hAgent"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Foreach Loop Container\Rebuild stgHagent Index" />
+      </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
@@ -8032,7 +8162,7 @@ Group by
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="188,42"
           Id="Package\For each date\Frontier hSplit Transfer"
@@ -8043,29 +8173,54 @@ Group by
           PanelSize="199,103"
           Size="199,146"
           Id="Package\For each date"
-          TopLeft="21,107.5" />
+          TopLeft="318.5,311.5" />
         <NodeLayout
           Size="195,42"
           Id="Package\Foreach Loop Container\Frontier hAgent Transfer"
-          TopLeft="13.5,7.5" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="222,102"
-          Size="222,145"
-          Id="Package\Foreach Loop Container"
-          TopLeft="312,110" />
+          TopLeft="7,5.5" />
         <NodeLayout
-          Size="237,42"
-          Id="Package\Get all Dates for updating hAgent"
-          TopLeft="298.5,7.5" />
+          Size="145,42"
+          Id="Package\Foreach Loop Container\hAgent Merge"
+          TopLeft="32,311.5" />
         <NodeLayout
-          Size="230,42"
-          Id="Package\Get all Dates for updating hSplit"
-          TopLeft="5.50000000000001,5.5" />
+          Size="195,42"
+          Id="Package\Foreach Loop Container\Rebuild stgHagent Index"
+          TopLeft="7.00000000000003,209.5" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Foreach Loop Container\Truncate hAgent Stg"
+          TopLeft="16.5,413.5" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Foreach Loop Container\Update latest day hAgent"
+          TopLeft="5.50000000000001,107.5" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="120.5,47.5">
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="104.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-25.304453125,20.4453125,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="104.5,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -8086,19 +8241,100 @@ Group by
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="420,49.5">
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="104.5,353.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.5"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,53">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,53" />
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="104.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="209,511"
+          Size="209,554"
+          Id="Package\Foreach Loop Container"
+          TopLeft="19.5000000000001,107.5" />
+        <NodeLayout
+          Size="237,42"
+          Id="Package\Get all Dates for updating hAgent"
+          TopLeft="5.50000000000006,5.5" />
+        <NodeLayout
+          Size="230,42"
+          Id="Package\Get all Dates for updating hSplit"
+          TopLeft="303,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="418,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,264"
+              Start="0,0"
+              End="0,256.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,256.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="124,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8173,55 +8409,57 @@ Group by
     design-time-name="Package\Foreach Loop Container\Frontier hAgent Transfer">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg"
+          TopLeft="70.5,233.5" />
         <NodeLayout
           Size="224,42"
           Id="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent"
           TopLeft="25.5,11.5" />
         <NodeLayout
-          Size="131,42"
-          Id="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg"
-          TopLeft="65.5,201.5" />
-        <NodeLayout
-          Size="156,42"
-          Id="Package\Foreach Loop Container\Frontier hAgent Transfer\Data Conversion"
-          TopLeft="54.5,105.5" />
+          Size="113,42"
+          Id="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup"
+          TopLeft="86.5,123.5" />
         <EdgeLayout
-          Id="Package\Foreach Loop Container\Frontier hAgent Transfer.Paths[OLE DB Source Output]"
-          TopLeft="135,53.5">
+          Id="Package\Foreach Loop Container\Frontier hAgent Transfer.Paths[Lookup Match Output]"
+          TopLeft="139.5,165.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,52"
+              EndConnector="0,68"
               Start="0,0"
-              End="0,44.5">
+              End="0,60.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44.5" />
+                    End="0,60.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,24.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Foreach Loop Container\Frontier hAgent Transfer.Paths[Data Conversion Output]"
-          TopLeft="131.75,147.5">
+          Id="Package\Foreach Loop Container\Frontier hAgent Transfer.Paths[OLE DB Source Output]"
+          TopLeft="140.25,53.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,54"
+              EndConnector="0,70"
               Start="0,0"
-              End="0,46.5">
+              End="0,62.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,46.5" />
+                    End="0,62.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8234,14 +8472,6 @@ Group by
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Foreach Loop Container\Frontier hAgent Transfer\hAgent Stg">
     <Properties>
       <Property>
@@ -8251,6 +8481,37 @@ Group by
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Frontier hAgent Transfer\Frontier Historical Data hAgent">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Frontier hAgent Transfer\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[ACD_LOGIN]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
