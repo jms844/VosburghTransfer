@@ -7,12 +7,12 @@
   DTS:CreatorName="CORP\jms844"
   DTS:DTSID="{FD2C1B23-D2FD-42BA-B317-207537834543}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LastModifiedProductVersion="14.0.0500.272"
   DTS:LocaleID="1033"
   DTS:ObjectName="TniTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{D1014CA1-B7CF-403F-97ED-E27B6EC23994}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{FC7D7F41-6F4D-4AB1-9D88-0E0693BA6B63}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -115,7 +115,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -672,7 +672,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Declare @start as datetime = ?;
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Declare @start as datetime = ?;
 
 Select
 	Coalesce(cd.CallDate, hsplit.row_date) row_date
@@ -716,7 +716,7 @@ Select
 		When Skill_Id in (1262, 1276, 1307) then Sum(ANS60)
 		else Sum(ANS120)
 	end as acceptable	
-	,Sum(i_arrived)i_arrived
+	,Sum(acdcalls)i_arrived
 	,Sum(dequecalls)dequecalls
 	,Sum(busycalls)busycalls
 	,Sum(disccalls)disccalls
