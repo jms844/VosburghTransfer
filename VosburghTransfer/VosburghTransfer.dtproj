@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">6LVFP32</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzLrKz97+CUuXJ7T56WzyIQAAAAACAAAAAAADZgAAwAAAABAAAADllf4BLbyfI0G9AKygSy9EAAAAAASAAACgAAAAEAAAAIb6tQoNpzv2b//C/Nzpj86IAAAAX2g4kqX4isn6gKs2nnknN9rpSyrMz6Ybe9xEegyOezg7n2JQM7qLyQiSTzE1oM2N/dszmm8v/opH8kg9cYApSxlR7tN/mrKxUpWB2l1mosjOujerb3JYYrTlx8NxRI4uDg5IGzPAzPdXNe7erBub6XO6ABuvGLvLBUAmIxFsAyGOtjId6yxZCxQAAABKn8uGnQCecbessIlKPLEJMVKwDA==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzLrKz97+CUuXJ7T56WzyIQAAAAACAAAAAAADZgAAwAAAABAAAAA7agMc7dyfdJ8L5WNas+OCAAAAAASAAACgAAAAEAAAAFA3Bc2H37SK3LUZ8LVDUwSIAAAAvKEXi0DAZLRa+VUInOFOYmswZibdTD46ni8IOjmROCC0Hp5stm48nkTIQtxdh8AO+CsMe7L7r1LI02icvU0X5RLkzP8jtfboD2YyM+uB/vqCYRwHCIo2s2kh9X+7iim4nr9E2OFBtD2Di1tEqehTdHH7dPDJ1tAlkR82GhS6WapMgDUYTsbwixQAAAC0WObETnL/8tVPiegEpdAoJfqPjw==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -39,11 +39,14 @@
           <SSIS:Package SSIS:Name="TniTransfer.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="TpTransfer.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="OtdTransfer.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="ForecastTransfer.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="ForGrpTransfer.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
           <SSIS:ConnectionManager SSIS:Name="SQLINFWWDVD05_DCDEV05.FSRE.conmgr" />
           <SSIS:ConnectionManager SSIS:Name="SQLINFWWDVP03_DCPRD03.Avaya_ECH.conmgr" />
           <SSIS:ConnectionManager SSIS:Name="SQLINFWWDVP03_DCPRD03.InterfaceMaintenance.conmgr" />
+          <SSIS:ConnectionManager SSIS:Name="SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1.conmgr" />
         </SSIS:ConnectionManagers>
         <SSIS:DeploymentInfo>
           <SSIS:ProjectConnectionParameters>
@@ -263,6 +266,80 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
+            <SSIS:Parameter SSIS:Name="CM.SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1.InitialCatalog">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">WFM</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
+            <SSIS:Parameter SSIS:Name="CM.SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1.Password">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
+            <SSIS:Parameter SSIS:Name="CM.SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1.RetainSameConnection">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">false</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
+            <SSIS:Parameter SSIS:Name="CM.SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1.ServerName">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">SQLINFWWDVP59\DCPRD59</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
+            <SSIS:Parameter SSIS:Name="CM.SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1.UserName">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">Workforceuser</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -540,6 +617,40 @@
                   </SSIS:Properties>
                 </SSIS:Parameter>
               </SSIS:Parameters>
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="ForecastTransfer.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{2B3A3CAA-49E9-4739-8474-A32ED5E76126}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">ForecastTransfer</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{7CD8A2F5-A639-43DF-A0F0-5AAD31ED1CAC}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="ForGrpTransfer.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{AABA6E2A-9135-44E3-8128-A1EAD47A1245}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">ForGrpTransfer</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">3</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{842EC281-82CB-4531-B5DC-8A84585A1248}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
             </SSIS:PackageMetaData>
           </SSIS:PackageInfo>
         </SSIS:DeploymentInfo>
