@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MainTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="28"
-  DTS:VersionGUID="{BC8BF25F-970C-4150-BFCE-139FC46B0876}">
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{C22EFABB-2D03-47EF-A380-26D9FB2B0567}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />

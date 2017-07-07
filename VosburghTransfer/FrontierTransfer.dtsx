@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="FrontierTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="48"
-  DTS:VersionGUID="{55B24880-9A43-42D6-AB67-6AAEFA1B5A46}">
+  DTS:VersionBuild="50"
+  DTS:VersionGUID="{86664C13-89C3-4F38-89FD-22D90B072F48}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -7972,7 +7972,7 @@ where [refTable].[acd] = ? and [refTable].[ACD_LOGIN_ID] = ?</property>
           DTS:LocaleID="-1"
           DTS:ObjectName="hAgent Merge"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -7989,7 +7989,7 @@ where [refTable].[acd] = ? and [refTable].[ACD_LOGIN_ID] = ?</property>
           DTS:LocaleID="-1"
           DTS:ObjectName="Rebuild stgHagent Index"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -8006,7 +8006,7 @@ where [refTable].[acd] = ? and [refTable].[ACD_LOGIN_ID] = ?</property>
           DTS:LocaleID="-1"
           DTS:ObjectName="Truncate hAgent Stg"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -8023,7 +8023,7 @@ where [refTable].[acd] = ? and [refTable].[ACD_LOGIN_ID] = ?</property>
           DTS:LocaleID="-1"
           DTS:ObjectName="Update latest day hAgent"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -8085,7 +8085,7 @@ where [refTable].[acd] = ? and [refTable].[ACD_LOGIN_ID] = ?</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="Get all Dates for updating hAgent"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -8113,7 +8113,7 @@ where [refTable].[acd] = ? and [refTable].[ACD_LOGIN_ID] = ?</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="Get all Dates for updating hSplit"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -8465,7 +8465,9 @@ where [refTable].[acd] = ? and [refTable].[ACD_LOGIN_ID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

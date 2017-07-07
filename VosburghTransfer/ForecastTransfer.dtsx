@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ForecastTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{36D0433B-2A74-4369-8685-D561F2849104}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{E5509644-C31D-4DD0-84D9-2992F6F63F0F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -107,13 +107,14 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-          SQLTask:SqlStatementSource="Update FgForecast&#xA;Set&#xA;&#x9;FgForecast.[Current] = 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="Update&#xA;&#x9;dst&#xA;Set&#xA;&#x9;[Current] = 0&#xA;From FgForecast dst Join (&#xA;&#x9;Select&#xA;&#x9;&#x9;FOR_GRP_SK&#xA;&#x9;&#x9;,FOR_DATE&#xA;&#x9;&#x9;,INTERVAL&#xA;&#x9;&#x9;,MAX(CRE_TS) CRE_TS&#xA;&#x9;From&#xA;&#x9;&#x9;FgForecast&#xA;&#x9;Group by&#xA;&#x9;&#x9;FOR_GRP_SK&#xA;&#x9;&#x9;,FOR_DATE&#xA;&#x9;&#x9;,INTERVAL&#xA;) src&#xA;&#x9;on dst.FOR_GRP_SK = src.FOR_GRP_SK&#xA;&#x9;and dst.FOR_DATE = src.FOR_DATE&#xA;&#x9;and dst.INTERVAL = src.INTERVAL&#xA;&#x9;and dst.CRE_TS != src.CRE_TS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task 3"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{BAA72A1E-1DD6-4C70-8D4B-6D50DA4A27F0}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -197,13 +198,13 @@
                               containsID="true"
                               dataType="System.String"
                               description="Derived Column Expression"
-                              name="Expression"> FALSE </property>
+                              name="Expression"> TRUE </property>
                             <property
                               containsID="true"
                               dataType="System.String"
                               description="Derived Column Friendly Expression"
                               expressionType="Notify"
-                              name="FriendlyExpression"> FALSE </property>
+                              name="FriendlyExpression"> TRUE </property>
                           </properties>
                         </outputColumn>
                       </outputColumns>
@@ -423,6 +424,10 @@
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Current]"
                           dataType="bool"
                           name="Current" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WeekNum]"
+                          dataType="i4"
+                          name="WeekNum" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -504,9 +509,11 @@ From
 		ON FR.FOR_RUN_SK = RSFR.FOR_RUN_SK
 WHERE
 	FR.MEMO LIKE 'LOCK%'
-	AND DATEADD(MI,START_MOMENT - BIAS_MI,'1899-12-30') &gt; GETDATE()
+	AND DATEADD(MI,START_MOMENT - BIAS_MI,'1899-12-30') &gt; CRE_TS
 	AND  FRFM.FOR_GRP_SK = ?
-	AND  FR.CRE_TS &gt; ?</property>
+	AND  FR.CRE_TS &gt; ?
+Order by
+	CRE_TS</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
