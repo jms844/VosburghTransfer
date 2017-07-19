@@ -1,28 +1,28 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="6/30/2017 2:13:38 PM"
-  DTS:CreationName="Microsoft.Package"
+  DTS:CreationName="SSIS.Package.3"
   DTS:CreatorComputerName="6LVFP32"
   DTS:CreatorName="CORP\jms844"
   DTS:DTSID="{AABA6E2A-9135-44E3-8128-A1EAD47A1245}"
-  DTS:ExecutableType="Microsoft.Package"
+  DTS:ExecutableType="SSIS.Package.3"
   DTS:LastModifiedProductVersion="13.0.4001.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="ForGrpTransfer"
   DTS:PackageType="5"
   DTS:VersionBuild="4"
-  DTS:VersionGUID="{FFEE9A7E-E1CA-41B9-B557-29FC7506BE26}">
+  DTS:VersionGUID="{21A9F7ED-E8A1-4A12-A666-2ADAF9680709}">
   <DTS:Property
-    DTS:Name="PackageFormatVersion">8</DTS:Property>
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Transfer For Grps"
-      DTS:CreationName="Microsoft.Pipeline"
+      DTS:CreationName="SSIS.Pipeline.3"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{76E00E74-4923-49B3-BC63-A37745278CA8}"
-      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:ExecutableType="SSIS.Pipeline.3"
       DTS:LocaleID="-1"
       DTS:ObjectName="Transfer For Grps"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
@@ -33,7 +33,7 @@
           <components>
             <component
               refId="Package\Transfer For Grps\Conditional Split"
-              componentClassID="Microsoft.ConditionalSplit"
+              componentClassID="DTSTransform.ConditionalSplit.3"
               contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
               name="Conditional Split"
@@ -124,7 +124,7 @@
             </component>
             <component
               refId="Package\Transfer For Grps\eWFM For Grp"
-              componentClassID="Microsoft.OLEDBSource"
+              componentClassID="DTSAdapter.OLEDBSource.3"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
               name="eWFM For Grp"
@@ -147,7 +147,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -173,8 +173,8 @@
               <connections>
                 <connection
                   refId="Package\Transfer For Grps\eWFM For Grp.Connections[OleDbConnection]"
-                  connectionManagerID="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1]"
+                  connectionManagerID="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:invalid"
+                  connectionManagerRefId="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:invalid"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -677,7 +677,7 @@
             </component>
             <component
               refId="Package\Transfer For Grps\Existing For Grp"
-              componentClassID="Microsoft.OLEDBSource"
+              componentClassID="DTSAdapter.OLEDBSource.3"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
               name="Existing For Grp"
@@ -700,7 +700,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -726,8 +726,8 @@
               <connections>
                 <connection
                   refId="Package\Transfer For Grps\Existing For Grp.Connections[OleDbConnection]"
-                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
+                  connectionManagerRefId="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -834,7 +834,7 @@
             </component>
             <component
               refId="Package\Transfer For Grps\For Grps"
-              componentClassID="Microsoft.OLEDBDestination"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
               name="For Grps"
@@ -857,7 +857,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -891,8 +891,8 @@
               <connections>
                 <connection
                   refId="Package\Transfer For Grps\For Grps.Connections[OleDbConnection]"
-                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
+                  connectionManagerRefId="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -978,7 +978,7 @@
             </component>
             <component
               refId="Package\Transfer For Grps\Merge Join"
-              componentClassID="Microsoft.MergeJoin"
+              componentClassID="DTSTransform.MergeJoin.3"
               contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
               description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
               name="Merge Join"
@@ -1122,7 +1122,7 @@
             </component>
             <component
               refId="Package\Transfer For Grps\Sort"
-              componentClassID="Microsoft.Sort"
+              componentClassID="DTSTransform.Sort.3"
               contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
               description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
               name="Sort"
@@ -1811,7 +1811,7 @@
             </component>
             <component
               refId="Package\Transfer For Grps\Sort 1"
-              componentClassID="Microsoft.Sort"
+              componentClassID="DTSTransform.Sort.3"
               contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
               description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
               name="Sort 1"
@@ -1987,7 +1987,7 @@
 <!--If you manually edit this section and make a mistake, you can delete it. -->
 <!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
-  Version="8">
+  Version="sql11">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">

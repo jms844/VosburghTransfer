@@ -1,28 +1,28 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="6/2/2017 8:24:49 AM"
-  DTS:CreationName="Microsoft.Package"
+  DTS:CreationName="SSIS.Package.3"
   DTS:CreatorComputerName="6LVFP32"
   DTS:CreatorName="CORP\jms844"
   DTS:DTSID="{CE43934B-E438-48DC-B362-1E1CC4FBAC92}"
-  DTS:ExecutableType="Microsoft.Package"
+  DTS:ExecutableType="SSIS.Package.3"
   DTS:LastModifiedProductVersion="13.0.4001.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="MainTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="29"
-  DTS:VersionGUID="{C22EFABB-2D03-47EF-A380-26D9FB2B0567}">
+  DTS:VersionBuild="32"
+  DTS:VersionGUID="{D8E20C77-2739-4D2A-9B4A-8FECD19BB7CA}">
   <DTS:Property
-    DTS:Name="PackageFormatVersion">8</DTS:Property>
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\hSplit Merge"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{4c43ea85-e07e-4b2a-8a95-815bfba41438}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="hSplit Merge"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
@@ -36,10 +36,10 @@
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Rebuild stgHsplit Index"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{2BACF801-B403-4FD1-A082-6E9D5B0FAABE}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="Rebuild stgHsplit Index"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
@@ -63,11 +63,11 @@
       <DTS:Executables>
         <DTS:Executable
           DTS:refId="Package\Sequence Container\Execute Package Alorica"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
           DTS:Disabled="True"
           DTS:DTSID="{78CCEFFB-345D-4D76-9C5D-F41690E84C21}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package Alorica"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
@@ -81,10 +81,10 @@
         </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Sequence Container\Execute Package Empereon"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
           DTS:DTSID="{fa5983c2-a0a2-4261-bea8-0f5ad251fc48}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package Empereon"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
@@ -98,10 +98,10 @@
         </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Sequence Container\Execute Package Ibex"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
           DTS:DTSID="{96b550aa-6dd6-4a26-8d25-1d9dc0f23e87}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package Ibex"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
@@ -115,10 +115,10 @@
         </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Sequence Container\Execute Package OTD"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
           DTS:DTSID="{982f2a32-c981-4aac-bbe9-5d9c0207f868}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package OTD"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
@@ -132,10 +132,10 @@
         </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Sequence Container\Execute Package Sykes"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
           DTS:DTSID="{b29ed97b-99b9-49ad-925c-bbc48fd50c8a}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package Sykes"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
@@ -149,10 +149,10 @@
         </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Sequence Container\Execute Package TNI"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
           DTS:DTSID="{2da5b4ff-c268-4a33-a0f7-f7ecba6b5a87}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package TNI"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
@@ -166,11 +166,11 @@
         </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Sequence Container\Execute Package TP"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
           DTS:Disabled="True"
           DTS:DTSID="{ea7a9eb4-d978-4452-9781-61a9e4a8e330}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package TP"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
@@ -184,10 +184,10 @@
         </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Sequence Container\Execute PackageFrontier"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute PackageFrontier"
           DTS:DTSID="{36C7E6AA-72E3-4142-AE6A-665F0D885D57}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute PackageFrontier"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
@@ -201,10 +201,10 @@
         </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Sequence Container\Update latest day hSplit"
-          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:Description="Execute SQL Task"
           DTS:DTSID="{2194143B-06EB-4E61-A862-A0F953AA1690}"
-          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update latest day hSplit"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
@@ -294,10 +294,10 @@
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Truncate hSplit Stg"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{cd0d2cf5-451d-4325-99f6-66ca51bff728}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="Truncate hSplit Stg"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
@@ -344,7 +344,7 @@
 <!--If you manually edit this section and make a mistake, you can delete it. -->
 <!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
-  Version="8">
+  Version="sql11">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">

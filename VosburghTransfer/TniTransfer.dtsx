@@ -1,20 +1,20 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="6/23/2017 3:54:37 PM"
-  DTS:CreationName="Microsoft.Package"
+  DTS:CreationName="SSIS.Package.3"
   DTS:CreatorComputerName="EWFINFWWAPV16"
   DTS:CreatorName="CORP\jms844"
   DTS:DTSID="{FD2C1B23-D2FD-42BA-B317-207537834543}"
-  DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.0500.272"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.4001.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="TniTransfer"
   DTS:PackageType="5"
   DTS:VersionBuild="7"
-  DTS:VersionGUID="{FC7D7F41-6F4D-4AB1-9D88-0E0693BA6B63}">
+  DTS:VersionGUID="{B04F59B1-C67F-4D4D-8F45-3C7F4353461D}">
   <DTS:Property
-    DTS:Name="PackageFormatVersion">8</DTS:Property>
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:PackageParameters>
     <DTS:PackageParameter
       DTS:CreationName=""
@@ -65,7 +65,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="For each date">
       <DTS:ForEachEnumerator
-        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:CreationName="Microsoft.SqlServer.Dts.Runtime.Enumerators.ADO.ForEachADOEnumerator, Microsoft.SqlServer.ForEachADOEnumerator, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
         DTS:DTSID="{d87bbb67-6034-4bfc-a26a-70ddec520e10}"
         DTS:ObjectName="{147CC1F7-BB42-4DEC-AB37-E3CC2A031584}">
         <DTS:ObjectData>
@@ -78,10 +78,10 @@
       <DTS:Executables>
         <DTS:Executable
           DTS:refId="Package\For each date\TNI hSplit Transfer"
-          DTS:CreationName="Microsoft.Pipeline"
+          DTS:CreationName="SSIS.Pipeline.3"
           DTS:Description="Data Flow Task"
           DTS:DTSID="{edf13583-d582-4ae4-a38c-69346bb331d2}"
-          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:ExecutableType="SSIS.Pipeline.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="TNI hSplit Transfer"
           DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
@@ -92,7 +92,7 @@
               <components>
                 <component
                   refId="Package\For each date\TNI hSplit Transfer\hSplit Stg"
-                  componentClassID="Microsoft.OLEDBDestination"
+                  componentClassID="DTSAdapter.OLEDBDestination.3"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
                   description="OLE DB Destination"
                   name="hSplit Stg"
@@ -115,7 +115,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -149,8 +149,8 @@
                   <connections>
                     <connection
                       refId="Package\For each date\TNI hSplit Transfer\hSplit Stg.Connections[OleDbConnection]"
-                      connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                      connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
+                      connectionManagerRefId="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -649,7 +649,7 @@
                 </component>
                 <component
                   refId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data"
-                  componentClassID="Microsoft.OLEDBSource"
+                  componentClassID="DTSAdapter.OLEDBSource.3"
                   contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
                   description="OLE DB Source"
                   name="TNI hSplit Historical Data"
@@ -672,7 +672,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Declare @start as datetime = ?;
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Declare @start as datetime = ?;
 
 Select
 	Coalesce(cd.CallDate, hsplit.row_date) row_date
@@ -757,8 +757,8 @@ Group by Skill_Id, CallDate, Interval,row_date,starttime,split;</property>
                   <connections>
                     <connection
                       refId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Connections[OleDbConnection]"
-                      connectionManagerID="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP03_DCPRD03.InterfaceMaintenance]"
+                      connectionManagerID="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:invalid"
+                      connectionManagerRefId="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:invalid"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -1627,10 +1627,10 @@ Group by Skill_Id, CallDate, Interval,row_date,starttime,split;</property>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Get all Dates for updating hSplit"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{23995553-27f7-482a-860f-1076e967c5af}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="Get all Dates for updating hSplit"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
@@ -1669,7 +1669,7 @@ Group by Skill_Id, CallDate, Interval,row_date,starttime,split;</property>
 <!--If you manually edit this section and make a mistake, you can delete it. -->
 <!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
-  Version="8">
+  Version="sql11">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
