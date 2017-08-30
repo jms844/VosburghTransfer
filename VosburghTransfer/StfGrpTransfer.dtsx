@@ -1,62 +1,46 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="6/30/2017 2:13:38 PM"
+  DTS:CreationDate="8/21/2017 4:04:14 PM"
   DTS:CreationName="SSIS.Package.3"
   DTS:CreatorComputerName="6LVFP32"
   DTS:CreatorName="CORP\jms844"
-  DTS:DTSID="{AABA6E2A-9135-44E3-8128-A1EAD47A1245}"
+  DTS:DTSID="{FF3DC36E-6DC6-4241-844B-744D49764841}"
   DTS:ExecutableType="SSIS.Package.3"
   DTS:LastModifiedProductVersion="13.0.4001.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="ForGrpTransfer"
+  DTS:ObjectName="StfGrpTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{5AE0B833-C31E-40BD-8C9E-DF26653C9F67}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{70A33185-DA9E-48D0-BC80-E546E82B4B72}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
+      DTS:refId="Package\merge stf grp"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{541C047E-9662-43A6-9382-7DD97A46F130}"
+      DTS:DTSID="{F87BB7EC-7890-406D-916D-7E19A943F009}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
+      DTS:ObjectName="merge stf grp"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-          SQLTask:SqlStatementSource="Truncate Table stg.For_Grp" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="exec stg.mergeStfGrp" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Merge for_grps"
-      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{94A66555-002E-4E55-BCFF-A1C8EA52A633}"
-      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Merge for_grps"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-          SQLTask:SqlStatementSource="exec stg.mergeForGrp" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Transfer For Grps"
+      DTS:refId="Package\Stf Grp transfer"
       DTS:CreationName="SSIS.Pipeline.3"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{76E00E74-4923-49B3-BC63-A37745278CA8}"
+      DTS:DTSID="{8B16B512-BFEA-4A86-8741-723E11EE8266}"
       DTS:ExecutableType="SSIS.Pipeline.3"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Transfer For Grps"
+      DTS:ObjectName="Stf Grp transfer"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -64,11 +48,11 @@
           version="1">
           <components>
             <component
-              refId="Package\Transfer For Grps\FOR_GRP DST"
+              refId="Package\Stf Grp transfer\Stf_Grp dst"
               componentClassID="DTSAdapter.OLEDBDestination.3"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="FOR_GRP DST"
+              name="Stf_Grp dst"
               usesDispositions="true"
               version="4">
               <properties>
@@ -79,7 +63,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[stg].[For_Grp]</property>
+                  name="OpenRowset">[stg].[Stf_Grp]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -121,7 +105,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Transfer For Grps\FOR_GRP DST.Connections[OleDbConnection]"
+                  refId="Package\Stf Grp transfer\Stf_Grp dst.Connections[OleDbConnection]"
                   connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
                   connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
                   description="The OLE DB runtime connection used to access the database."
@@ -129,93 +113,107 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input]"
+                  refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].Columns[FOR_GRP_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].Columns[STF_GRP_SK]"
                       cachedDataType="numeric"
-                      cachedName="FOR_GRP_SK"
+                      cachedName="STF_GRP_SK"
                       cachedPrecision="15"
                       cachedScale="1"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[FOR_GRP_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[FOR_GRP_SK]" />
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[STF_GRP_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[STF_GRP_SK]" />
                     <inputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].Columns[CODE]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].Columns[CODE]"
                       cachedDataType="wstr"
                       cachedLength="30"
                       cachedName="CODE"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[CODE]" />
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[CODE]" />
                     <inputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].Columns[LEFT_VISIT_NUM]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].Columns[LEFT_VISIT_NUM]"
                       cachedDataType="numeric"
                       cachedName="LEFT_VISIT_NUM"
                       cachedPrecision="15"
                       cachedScale="1"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[LEFT_VISIT_NUM]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[LEFT_VISIT_NUM]" />
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[LEFT_VISIT_NUM]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[LEFT_VISIT_NUM]" />
                     <inputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].Columns[RIGHT_VISIT_NUM]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].Columns[RIGHT_VISIT_NUM]"
                       cachedDataType="numeric"
                       cachedName="RIGHT_VISIT_NUM"
                       cachedPrecision="15"
                       cachedScale="1"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[RIGHT_VISIT_NUM]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[RIGHT_VISIT_NUM]" />
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[RIGHT_VISIT_NUM]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[RIGHT_VISIT_NUM]" />
                     <inputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].Columns[TIME_ZONE_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].Columns[TIME_ZONE_SK]"
                       cachedDataType="numeric"
                       cachedName="TIME_ZONE_SK"
                       cachedPrecision="15"
                       cachedScale="1"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[TIME_ZONE_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]" />
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[TIME_ZONE_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]" />
                     <inputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].Columns[OPEN_HRS_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].Columns[EMP_GRP_NODE_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_GRP_NODE_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_NODE_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[EMP_GRP_NODE_SK]" />
+                    <inputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].Columns[OPEN_HRS_SK]"
                       cachedDataType="numeric"
                       cachedName="OPEN_HRS_SK"
                       cachedPrecision="15"
                       cachedScale="1"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[OPEN_HRS_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[OPEN_HRS_SK]" />
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[OPEN_HRS_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[OPEN_HRS_SK]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[FOR_GRP_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[STF_GRP_SK]"
                       dataType="numeric"
-                      name="FOR_GRP_SK"
+                      name="STF_GRP_SK"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
                       dataType="wstr"
                       length="30"
                       name="CODE" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[LEFT_VISIT_NUM]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_NODE_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_NODE_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[LEFT_VISIT_NUM]"
                       dataType="numeric"
                       name="LEFT_VISIT_NUM"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[RIGHT_VISIT_NUM]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[RIGHT_VISIT_NUM]"
                       dataType="numeric"
                       name="RIGHT_VISIT_NUM"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[TIME_ZONE_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[TIME_ZONE_SK]"
                       dataType="numeric"
                       name="TIME_ZONE_SK"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input].ExternalColumns[OPEN_HRS_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[OPEN_HRS_SK]"
                       dataType="numeric"
                       name="OPEN_HRS_SK"
                       precision="15"
@@ -225,22 +223,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Transfer For Grps\FOR_GRP DST.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Stf Grp transfer\Stf_Grp dst.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Transfer For Grps\FOR_GRP DST.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP DST.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Transfer For Grps\FOR_GRP DST.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -249,11 +247,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\Transfer For Grps\FOR_GRP src"
+              refId="Package\Stf Grp transfer\Stf_Grp src"
               componentClassID="DTSAdapter.OLEDBSource.3"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="FOR_GRP src"
+              name="Stf_Grp src"
               usesDispositions="true"
               version="7">
               <properties>
@@ -264,7 +262,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[FOR_GRP]</property>
+                  name="OpenRowset">[dbo].[STF_GRP]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -298,7 +296,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Transfer For Grps\FOR_GRP src.Connections[OleDbConnection]"
+                  refId="Package\Stf Grp transfer\Stf_Grp src.Connections[OleDbConnection]"
                   connectionManagerID="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:external"
                   connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1]"
                   description="The OLE DB runtime connection used to access the database."
@@ -306,221 +304,217 @@
               </connections>
               <outputs>
                 <output
-                  refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output]"
+                  refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[FOR_GRP_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[STF_GRP_SK]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[FOR_GRP_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[FOR_GRP_SK]"
-                      name="FOR_GRP_SK"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[STF_GRP_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[STF_GRP_SK]"
+                      name="STF_GRP_SK"
                       precision="15"
                       scale="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[FOR_GRP_TREE_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[STF_GRP_TREE_SK]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[FOR_GRP_TREE_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[FOR_GRP_TREE_SK]"
-                      name="FOR_GRP_TREE_SK"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[STF_GRP_TREE_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[STF_GRP_TREE_SK]"
+                      name="STF_GRP_TREE_SK"
                       precision="15"
                       scale="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[CODE]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[CODE]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
                       length="30"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[CODE]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[CODE]"
                       name="CODE"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[DESCR]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[DESCR]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[DESCR]"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[DESCR]"
                       length="30"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[DESCR]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[DESCR]"
                       name="DESCR"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[LEFT_VISIT_NUM]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[LEFT_VISIT_NUM]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[LEFT_VISIT_NUM]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[LEFT_VISIT_NUM]"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[LEFT_VISIT_NUM]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[LEFT_VISIT_NUM]"
                       name="LEFT_VISIT_NUM"
                       precision="15"
                       scale="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[RIGHT_VISIT_NUM]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[RIGHT_VISIT_NUM]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[RIGHT_VISIT_NUM]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[RIGHT_VISIT_NUM]"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[RIGHT_VISIT_NUM]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[RIGHT_VISIT_NUM]"
                       name="RIGHT_VISIT_NUM"
                       precision="15"
                       scale="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[TIME_ZONE_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[TIME_ZONE_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]"
                       name="TIME_ZONE_SK"
                       precision="15"
                       scale="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[ACT_FOR_VOL_THD_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[EMP_GRP_NODE_SK]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[ACT_FOR_VOL_THD_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[ACT_FOR_VOL_THD_SK]"
-                      name="ACT_FOR_VOL_THD_SK"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_NODE_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[EMP_GRP_NODE_SK]"
+                      name="EMP_GRP_NODE_SK"
                       precision="15"
                       scale="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[ACT_FOR_AHT_THD_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[SCH_REQ_STF_THD_SK]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[ACT_FOR_AHT_THD_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[ACT_FOR_AHT_THD_SK]"
-                      name="ACT_FOR_AHT_THD_SK"
-                      precision="15"
-                      scale="1"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[SCH_REQ_STF_THD_SK]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[SCH_REQ_STF_THD_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[SCH_REQ_STF_THD_SK]"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[SCH_REQ_STF_THD_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[SCH_REQ_STF_THD_SK]"
                       name="SCH_REQ_STF_THD_SK"
                       precision="15"
                       scale="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[LONG_DELAY_FLAG]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[REQ_ACT_STF_THD_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[REQ_ACT_STF_THD_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[REQ_ACT_STF_THD_SK]"
+                      name="REQ_ACT_STF_THD_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[SCH_ACT_STF_THD_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[SCH_ACT_STF_THD_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[SCH_ACT_STF_THD_SK]"
+                      name="SCH_ACT_STF_THD_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[CHKR_STF_TOL_TYPE]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[LONG_DELAY_FLAG]"
-                      length="1"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[LONG_DELAY_FLAG]"
-                      name="LONG_DELAY_FLAG"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[CHKR_STF_TOL_TYPE]"
+                      length="3"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[CHKR_STF_TOL_TYPE]"
+                      name="CHKR_STF_TOL_TYPE"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[INI_SIM_Q_SEED]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[CHKR_NET_COL_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[CHKR_NET_COL_ID]"
+                      length="30"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[CHKR_NET_COL_ID]"
+                      name="CHKR_NET_COL_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[CHKR_REQ_COL_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[CHKR_REQ_COL_ID]"
+                      length="30"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[CHKR_REQ_COL_ID]"
+                      name="CHKR_REQ_COL_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[CHKR_SCH_COL_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[CHKR_SCH_COL_ID]"
+                      length="30"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[CHKR_SCH_COL_ID]"
+                      name="CHKR_SCH_COL_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[SPRSTATE_SK]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[INI_SIM_Q_SEED]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[INI_SIM_Q_SEED]"
-                      name="INI_SIM_Q_SEED"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[SPRSTATE_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[SPRSTATE_SK]"
+                      name="SPRSTATE_SK"
                       precision="15"
                       scale="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[DELAY_SCALE]"
-                      dataType="numeric"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[TLY_MODE]"
+                      dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[DELAY_SCALE]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[DELAY_SCALE]"
-                      name="DELAY_SCALE"
-                      precision="15"
-                      scale="1"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[TLY_MODE]"
+                      length="4"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[TLY_MODE]"
+                      name="TLY_MODE"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
                       name="UPD_TCS_LOGIN_SK"
                       precision="15"
                       scale="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
                       dataType="dbTimeStamp"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
                       name="UPD_TS"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[OPEN_HRS_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[OPEN_HRS_SK]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[OPEN_HRS_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[OPEN_HRS_SK]"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[OPEN_HRS_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[OPEN_HRS_SK]"
                       name="OPEN_HRS_SK"
-                      precision="15"
-                      scale="1"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[SVC_LEV_THD_SK]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[SVC_LEV_THD_SK]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[SVC_LEV_THD_SK]"
-                      name="SVC_LEV_THD_SK"
-                      precision="15"
-                      scale="1"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[ALPHA_PCT]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[ALPHA_PCT]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[ALPHA_PCT]"
-                      name="ALPHA_PCT"
-                      precision="15"
-                      scale="1"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[BETA_PCT]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[BETA_PCT]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[BETA_PCT]"
-                      name="BETA_PCT"
-                      precision="15"
-                      scale="1"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[GAMMA_PCT]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[GAMMA_PCT]"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].Columns[GAMMA_PCT]"
-                      name="GAMMA_PCT"
                       precision="15"
                       scale="1"
                       truncationRowDisposition="FailComponent" />
@@ -528,272 +522,264 @@
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[FOR_GRP_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[STF_GRP_SK]"
                       dataType="numeric"
-                      name="FOR_GRP_SK"
+                      name="STF_GRP_SK"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[FOR_GRP_TREE_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[STF_GRP_TREE_SK]"
                       dataType="numeric"
-                      name="FOR_GRP_TREE_SK"
+                      name="STF_GRP_TREE_SK"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
                       dataType="wstr"
                       length="30"
                       name="CODE" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[DESCR]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[DESCR]"
                       dataType="wstr"
                       length="30"
                       name="DESCR" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[LEFT_VISIT_NUM]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[LEFT_VISIT_NUM]"
                       dataType="numeric"
                       name="LEFT_VISIT_NUM"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[RIGHT_VISIT_NUM]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[RIGHT_VISIT_NUM]"
                       dataType="numeric"
                       name="RIGHT_VISIT_NUM"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[TIME_ZONE_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[TIME_ZONE_SK]"
                       dataType="numeric"
                       name="TIME_ZONE_SK"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[ACT_FOR_VOL_THD_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_NODE_SK]"
                       dataType="numeric"
-                      name="ACT_FOR_VOL_THD_SK"
+                      name="EMP_GRP_NODE_SK"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[ACT_FOR_AHT_THD_SK]"
-                      dataType="numeric"
-                      name="ACT_FOR_AHT_THD_SK"
-                      precision="15"
-                      scale="1" />
-                    <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[SCH_REQ_STF_THD_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[SCH_REQ_STF_THD_SK]"
                       dataType="numeric"
                       name="SCH_REQ_STF_THD_SK"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[LONG_DELAY_FLAG]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[REQ_ACT_STF_THD_SK]"
+                      dataType="numeric"
+                      name="REQ_ACT_STF_THD_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[SCH_ACT_STF_THD_SK]"
+                      dataType="numeric"
+                      name="SCH_ACT_STF_THD_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[CHKR_STF_TOL_TYPE]"
                       dataType="wstr"
-                      length="1"
-                      name="LONG_DELAY_FLAG" />
+                      length="3"
+                      name="CHKR_STF_TOL_TYPE" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[INI_SIM_Q_SEED]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[CHKR_NET_COL_ID]"
+                      dataType="wstr"
+                      length="30"
+                      name="CHKR_NET_COL_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[CHKR_REQ_COL_ID]"
+                      dataType="wstr"
+                      length="30"
+                      name="CHKR_REQ_COL_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[CHKR_SCH_COL_ID]"
+                      dataType="wstr"
+                      length="30"
+                      name="CHKR_SCH_COL_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[SPRSTATE_SK]"
                       dataType="numeric"
-                      name="INI_SIM_Q_SEED"
+                      name="SPRSTATE_SK"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[DELAY_SCALE]"
-                      dataType="numeric"
-                      name="DELAY_SCALE"
-                      precision="15"
-                      scale="1" />
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[TLY_MODE]"
+                      dataType="wstr"
+                      length="4"
+                      name="TLY_MODE" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
                       dataType="numeric"
                       name="UPD_TCS_LOGIN_SK"
                       precision="15"
                       scale="1" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
                       dataType="dbTimeStamp"
                       name="UPD_TS" />
                     <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[OPEN_HRS_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].ExternalColumns[OPEN_HRS_SK]"
                       dataType="numeric"
                       name="OPEN_HRS_SK"
-                      precision="15"
-                      scale="1" />
-                    <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[SVC_LEV_THD_SK]"
-                      dataType="numeric"
-                      name="SVC_LEV_THD_SK"
-                      precision="15"
-                      scale="1" />
-                    <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[ALPHA_PCT]"
-                      dataType="numeric"
-                      name="ALPHA_PCT"
-                      precision="15"
-                      scale="1" />
-                    <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[BETA_PCT]"
-                      dataType="numeric"
-                      name="BETA_PCT"
-                      precision="15"
-                      scale="1" />
-                    <externalMetadataColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output].ExternalColumns[GAMMA_PCT]"
-                      dataType="numeric"
-                      name="GAMMA_PCT"
                       precision="15"
                       scale="1" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output]"
+                  refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[FOR_GRP_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[STF_GRP_SK]"
                       dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[FOR_GRP_SK]"
-                      name="FOR_GRP_SK"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[STF_GRP_SK]"
+                      name="STF_GRP_SK"
                       precision="15"
                       scale="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[FOR_GRP_TREE_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[STF_GRP_TREE_SK]"
                       dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[FOR_GRP_TREE_SK]"
-                      name="FOR_GRP_TREE_SK"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[STF_GRP_TREE_SK]"
+                      name="STF_GRP_TREE_SK"
                       precision="15"
                       scale="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[CODE]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[CODE]"
                       dataType="wstr"
                       length="30"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[CODE]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[CODE]"
                       name="CODE" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[DESCR]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[DESCR]"
                       dataType="wstr"
                       length="30"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[DESCR]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[DESCR]"
                       name="DESCR" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[LEFT_VISIT_NUM]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[LEFT_VISIT_NUM]"
                       dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[LEFT_VISIT_NUM]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[LEFT_VISIT_NUM]"
                       name="LEFT_VISIT_NUM"
                       precision="15"
                       scale="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[RIGHT_VISIT_NUM]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[RIGHT_VISIT_NUM]"
                       dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[RIGHT_VISIT_NUM]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[RIGHT_VISIT_NUM]"
                       name="RIGHT_VISIT_NUM"
                       precision="15"
                       scale="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[TIME_ZONE_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[TIME_ZONE_SK]"
                       dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[TIME_ZONE_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[TIME_ZONE_SK]"
                       name="TIME_ZONE_SK"
                       precision="15"
                       scale="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[ACT_FOR_VOL_THD_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_NODE_SK]"
                       dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[ACT_FOR_VOL_THD_SK]"
-                      name="ACT_FOR_VOL_THD_SK"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_NODE_SK]"
+                      name="EMP_GRP_NODE_SK"
                       precision="15"
                       scale="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[ACT_FOR_AHT_THD_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[SCH_REQ_STF_THD_SK]"
                       dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[ACT_FOR_AHT_THD_SK]"
-                      name="ACT_FOR_AHT_THD_SK"
-                      precision="15"
-                      scale="1" />
-                    <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[SCH_REQ_STF_THD_SK]"
-                      dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[SCH_REQ_STF_THD_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[SCH_REQ_STF_THD_SK]"
                       name="SCH_REQ_STF_THD_SK"
                       precision="15"
                       scale="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[LONG_DELAY_FLAG]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[REQ_ACT_STF_THD_SK]"
+                      dataType="numeric"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[REQ_ACT_STF_THD_SK]"
+                      name="REQ_ACT_STF_THD_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[SCH_ACT_STF_THD_SK]"
+                      dataType="numeric"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[SCH_ACT_STF_THD_SK]"
+                      name="SCH_ACT_STF_THD_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[CHKR_STF_TOL_TYPE]"
                       dataType="wstr"
-                      length="1"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[LONG_DELAY_FLAG]"
-                      name="LONG_DELAY_FLAG" />
+                      length="3"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[CHKR_STF_TOL_TYPE]"
+                      name="CHKR_STF_TOL_TYPE" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[INI_SIM_Q_SEED]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[CHKR_NET_COL_ID]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[CHKR_NET_COL_ID]"
+                      name="CHKR_NET_COL_ID" />
+                    <outputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[CHKR_REQ_COL_ID]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[CHKR_REQ_COL_ID]"
+                      name="CHKR_REQ_COL_ID" />
+                    <outputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[CHKR_SCH_COL_ID]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[CHKR_SCH_COL_ID]"
+                      name="CHKR_SCH_COL_ID" />
+                    <outputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[SPRSTATE_SK]"
                       dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[INI_SIM_Q_SEED]"
-                      name="INI_SIM_Q_SEED"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[SPRSTATE_SK]"
+                      name="SPRSTATE_SK"
                       precision="15"
                       scale="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[DELAY_SCALE]"
-                      dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[DELAY_SCALE]"
-                      name="DELAY_SCALE"
-                      precision="15"
-                      scale="1" />
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[TLY_MODE]"
+                      dataType="wstr"
+                      length="4"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[TLY_MODE]"
+                      name="TLY_MODE" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
                       dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
                       name="UPD_TCS_LOGIN_SK"
                       precision="15"
                       scale="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
                       dataType="dbTimeStamp"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
                       name="UPD_TS" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[OPEN_HRS_SK]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[OPEN_HRS_SK]"
                       dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[OPEN_HRS_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[OPEN_HRS_SK]"
                       name="OPEN_HRS_SK"
                       precision="15"
                       scale="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[SVC_LEV_THD_SK]"
-                      dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[SVC_LEV_THD_SK]"
-                      name="SVC_LEV_THD_SK"
-                      precision="15"
-                      scale="1" />
-                    <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[ALPHA_PCT]"
-                      dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[ALPHA_PCT]"
-                      name="ALPHA_PCT"
-                      precision="15"
-                      scale="1" />
-                    <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[BETA_PCT]"
-                      dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[BETA_PCT]"
-                      name="BETA_PCT"
-                      precision="15"
-                      scale="1" />
-                    <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[GAMMA_PCT]"
-                      dataType="numeric"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[GAMMA_PCT]"
-                      name="GAMMA_PCT"
-                      precision="15"
-                      scale="1" />
-                    <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -804,12 +790,28 @@
           </components>
           <paths>
             <path
-              refId="Package\Transfer For Grps.Paths[OLE DB Source Output]"
-              endId="Package\Transfer For Grps\FOR_GRP DST.Inputs[OLE DB Destination Input]"
+              refId="Package\Stf Grp transfer.Paths[OLE DB Source Output]"
+              endId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input]"
               name="OLE DB Source Output"
-              startId="Package\Transfer For Grps\FOR_GRP src.Outputs[OLE DB Source Output]" />
+              startId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate stg stf grp"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5CE0DECC-0B8E-4995-AFA4-B7401A361459}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate stg stf grp"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Truncate Table stg.Stf_Grp" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -817,19 +819,19 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{138B9E4C-61C5-411B-BA5B-A73A36F7EC61}"
-      DTS:From="Package\Transfer For Grps"
+      DTS:DTSID="{2ABAA936-A588-4AD3-95AC-60B6ECA0959B}"
+      DTS:From="Package\Truncate stg stf grp"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Merge for_grps" />
+      DTS:To="Package\Stf Grp transfer" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{A57458B6-D6ED-4887-B7F1-ACA949D40D43}"
-      DTS:From="Package\Execute SQL Task"
+      DTS:DTSID="{BC75D6EA-5A42-48E2-96CB-8E35C627EED9}"
+      DTS:From="Package\Stf Grp transfer"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Transfer For Grps" />
+      DTS:To="Package\merge stf grp" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -844,31 +846,31 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="163,42"
-          Id="Package\Execute SQL Task"
-          TopLeft="55.5,9.5" />
+          Size="143,42"
+          Id="Package\merge stf grp"
+          TopLeft="76.5,229.5" />
         <NodeLayout
-          Size="151,42"
-          Id="Package\Merge for_grps"
-          TopLeft="55.5,224.5" />
+          Size="152,42"
+          Id="Package\Stf Grp transfer"
+          TopLeft="71.5,141.5" />
         <NodeLayout
-          Size="162,42"
-          Id="Package\Transfer For Grps"
-          TopLeft="52.5,107.5" />
+          Size="172,42"
+          Id="Package\Truncate stg stf grp"
+          TopLeft="63.5,57.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="132.25,149.5">
+          TopLeft="148.5,99.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,75"
+              EndConnector="0,42"
               Start="0,0"
-              End="0,67.5">
+              End="0,34.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,67.5" />
+                    End="0,34.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -879,7 +881,45 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="135.25,51.5">
+          TopLeft="147.75,183.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Stf Grp transfer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Stf Grp transfer\Stf_Grp src"
+          TopLeft="32.5,15.5" />
+        <NodeLayout
+          Size="132,42"
+          Id="Package\Stf Grp transfer\Stf_Grp dst"
+          TopLeft="36.5,113.5" />
+        <EdgeLayout
+          Id="Package\Stf Grp transfer.Paths[OLE DB Source Output]"
+          TopLeft="100.25,57.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -901,47 +941,9 @@
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
-  </Package>
-  <TaskHost
-    design-time-name="Package\Transfer For Grps">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="147,42"
-          Id="Package\Transfer For Grps\FOR_GRP DST"
-          TopLeft="60,154" />
-        <NodeLayout
-          Size="141,42"
-          Id="Package\Transfer For Grps\FOR_GRP src"
-          TopLeft="69,60" />
-        <EdgeLayout
-          Id="Package\Transfer For Grps.Paths[OLE DB Source Output]"
-          TopLeft="136.5,102">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,52"
-              Start="0,0"
-              End="0,44.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,44.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Transfer For Grps\FOR_GRP DST">
+    design-time-name="Package\Stf Grp transfer\Stf_Grp dst">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -954,7 +956,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Transfer For Grps\FOR_GRP src">
+    design-time-name="Package\Stf Grp transfer\Stf_Grp src">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

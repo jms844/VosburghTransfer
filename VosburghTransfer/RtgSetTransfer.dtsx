@@ -1,0 +1,631 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/24/2017 8:53:41 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="6LVFP32"
+  DTS:CreatorName="CORP\jms844"
+  DTS:DTSID="{0A2F4BE0-D243-449F-B1A6-F790A291AAAB}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="RtgSetTransfer"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{3AB4DC28-B88E-4ACA-ACDD-DF1C220DE115}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Merge RS"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{526B5D3B-C26A-4157-B267-EDD36D5026BD}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge RS"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="exec stg.mergeRS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Transfer RS"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7F18D998-94BE-4133-871B-156514970CF7}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transfer RS"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Transfer RS\RS dst"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="RS dst"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[RTG_SET]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transfer RS\RS dst.Connections[OleDbConnection]"
+                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].Columns[RTG_SET_SK]"
+                      cachedDataType="numeric"
+                      cachedName="RTG_SET_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[RTG_SET_SK]"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[RTG_SET_SK]" />
+                    <inputColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].Columns[CODE]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="CODE"
+                      externalMetadataColumnId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[CODE]" />
+                    <inputColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].Columns[DESCR]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="DESCR"
+                      externalMetadataColumnId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[DESCR]"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[DESCR]" />
+                    <inputColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].Columns[SRVC_LEV_GOAL_SEC]"
+                      cachedDataType="numeric"
+                      cachedName="SRVC_LEV_GOAL_SEC"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[SRVC_LEV_GOAL_SEC]"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[SRVC_LEV_GOAL_SEC]" />
+                    <inputColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].Columns[UPD_TCS_LOGIN_SK]"
+                      cachedDataType="numeric"
+                      cachedName="UPD_TCS_LOGIN_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]" />
+                    <inputColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].Columns[UPD_TS]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="UPD_TS"
+                      externalMetadataColumnId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TS]"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[UPD_TS]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[RTG_SET_SK]"
+                      dataType="numeric"
+                      name="RTG_SET_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
+                      dataType="wstr"
+                      length="30"
+                      name="CODE" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[DESCR]"
+                      dataType="wstr"
+                      length="30"
+                      name="DESCR" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[SRVC_LEV_GOAL_SEC]"
+                      dataType="numeric"
+                      name="SRVC_LEV_GOAL_SEC"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      name="UPD_TS" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Transfer RS\RS dst.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer RS\RS dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transfer RS\RS dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transfer RS\RS dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Transfer RS\RS src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="RS src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[RTG_SET]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transfer RS\RS src.Connections[OleDbConnection]"
+                  connectionManagerID="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[RTG_SET_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[RTG_SET_SK]"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[RTG_SET_SK]"
+                      name="RTG_SET_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[CODE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
+                      length="30"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[CODE]"
+                      name="CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[DESCR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[DESCR]"
+                      length="30"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[DESCR]"
+                      name="DESCR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[SRVC_LEV_GOAL_SEC]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[SRVC_LEV_GOAL_SEC]"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[SRVC_LEV_GOAL_SEC]"
+                      name="SRVC_LEV_GOAL_SEC"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
+                      name="UPD_TS"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[RTG_SET_SK]"
+                      dataType="numeric"
+                      name="RTG_SET_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
+                      dataType="wstr"
+                      length="30"
+                      name="CODE" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[DESCR]"
+                      dataType="wstr"
+                      length="30"
+                      name="DESCR" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[SRVC_LEV_GOAL_SEC]"
+                      dataType="numeric"
+                      name="SRVC_LEV_GOAL_SEC"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      name="UPD_TS" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[RTG_SET_SK]"
+                      dataType="numeric"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[RTG_SET_SK]"
+                      name="RTG_SET_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[CODE]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[CODE]"
+                      name="CODE" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[DESCR]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[DESCR]"
+                      name="DESCR" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[SRVC_LEV_GOAL_SEC]"
+                      dataType="numeric"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[SRVC_LEV_GOAL_SEC]"
+                      name="SRVC_LEV_GOAL_SEC"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
+                      name="UPD_TS" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transfer RS\RS src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Transfer RS.Paths[OLE DB Source Output]"
+              endId="Package\Transfer RS\RS dst.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Transfer RS\RS src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate RS stg"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{73E7919F-4B75-47B8-88FF-63F3CAA6989C}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate RS stg"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Truncate Table stg.RTG_SET" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7928BA83-DAF8-4EA3-892E-1E4B172E9B97}"
+      DTS:From="Package\Truncate RS stg"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Transfer RS" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{FD979D77-9754-4907-AF9B-81A5DCEAB680}"
+      DTS:From="Package\Transfer RS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Merge RS" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Truncate RS stg"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Transfer RS"
+          TopLeft="21.5,83.5" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Merge RS"
+          TopLeft="20.5,181.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="85.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="85.5,125.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Transfer RS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Transfer RS\RS src"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="109,42"
+          Id="Package\Transfer RS\RS dst"
+          TopLeft="11.5,121.5" />
+        <EdgeLayout
+          Id="Package\Transfer RS.Paths[OLE DB Source Output]"
+          TopLeft="62.75,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74"
+              Start="0,0"
+              End="0,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transfer RS\RS src">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transfer RS\RS dst">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

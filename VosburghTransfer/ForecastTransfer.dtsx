@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ForecastTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{555B6D17-7F84-4661-8D6F-D477691F09E3}">
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{159B6F97-C7F8-45EB-B6CA-656BDE1E7045}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:Variables>
@@ -642,96 +642,6 @@ where [refTable].[splitLobID] = ?</property>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
-      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{DFCDC132-76C8-48F9-8CB5-5555D591418C}"
-      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-          SQLTask:SqlStatementSource="Select FOR_GRP_SK From recent.Forecast"
-          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-          <SQLTask:ResultBinding
-            SQLTask:ResultName="0"
-            SQLTask:DtsVariableName="User::FG" />
-        </SQLTask:SqlTaskData>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute SQL Task 1"
-      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{6AC5920A-6A36-4028-92BB-9920D87BE1B1}"
-      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task 1"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-          SQLTask:SqlStatementSource="Update recent.Forecast&#xA;Set&#xA;&#x9;recent.Forecast.CRE_TS = src.CRE_TS&#xA;From&#xA;&#x9;[recent].[Forecast] Join (&#xA;&#x9;&#x9;&#x9;Select&#xA;&#x9;&#x9;&#x9;&#x9;FOR_GRP_SK&#xA;&#x9;&#x9;&#x9;&#x9;,MAX(CRE_TS) CRE_TS&#xA;&#x9;&#x9;&#x9;From&#xA;&#x9;&#x9;&#x9;&#x9;FgForecast&#xA;&#x9;&#x9;&#x9;GROUP BY&#xA;&#x9;&#x9;&#x9;&#x9;FOR_GRP_SK&#xA;&#x9;&#x9;) src&#xA;&#x9;&#x9;&#x9;on recent.Forecast.FOR_GRP_SK = src.FOR_GRP_SK" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute SQL Task 2"
-      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{E1D810F2-BB06-4637-ACDD-B71E13C71BC2}"
-      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task 2"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-          SQLTask:SqlStatementSource="Update&#xA;&#x9;dst&#xA;Set&#xA;&#x9;[Current] = 0&#xA;From FgForecast dst Join (&#xA;&#x9;Select&#xA;&#x9;&#x9;FOR_GRP_SK&#xA;&#x9;&#x9;,FOR_DATE&#xA;&#x9;&#x9;,INTERVAL&#xA;&#x9;&#x9;,MAX(CRE_TS) CRE_TS&#xA;&#x9;From&#xA;&#x9;&#x9;FgForecast&#xA;&#x9;Group by&#xA;&#x9;&#x9;FOR_GRP_SK&#xA;&#x9;&#x9;,FOR_DATE&#xA;&#x9;&#x9;,INTERVAL&#xA;) src&#xA;&#x9;on dst.FOR_GRP_SK = src.FOR_GRP_SK&#xA;&#x9;and dst.FOR_DATE = src.FOR_DATE&#xA;&#x9;and dst.INTERVAL = src.INTERVAL&#xA;&#x9;and dst.CRE_TS != src.CRE_TS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute SQL Task 3"
-      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
-      DTS:DTSID="{BAA72A1E-1DD6-4C70-8D4B-6D50DA4A27F0}"
-      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task 3"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-          SQLTask:SqlStatementSource="Update dest&#xA;Set&#xA;&#x9;dest.[Current] = 1&#xA;From&#xA;&#x9;FgForecast dest Join recent.Forecast src&#xA;&#x9;&#x9;on dest.FOR_GRP_SK = src.FOR_GRP_SK&#xA;&#x9;&#x9;AND dest.CRE_TS = src.CRE_TS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute SQL Task 4"
-      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{AF1C4983-7635-4140-A4B6-18219C1FD655}"
-      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task 4"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-          SQLTask:SqlStatementSource="Update&#xA;&#x9;FgForecast&#xA;Set&#xA;&#x9;INTERVAL = DATEADD(HH,DATEPART(HH,INTERVAL),DATEADD(MI,Datepart(MI,INTERVAL),FOR_DATE))" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
       DTS:refId="Package\Foreach Loop Container"
       DTS:CreationName="STOCK:FOREACHLOOP"
       DTS:Description="Foreach Loop Container"
@@ -854,7 +764,7 @@ where [refTable].[splitLobID] = ?</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[FgForecast]</property>
+                      name="OpenRowset">[stg].[FgForecast]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -934,24 +844,6 @@ where [refTable].[splitLobID] = ?</property>
                           externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RUN_NAME]"
                           lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[RUN_NAME]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[INTERVAL]"
-                          cachedDataType="dbTime2"
-                          cachedName="INTERVAL"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[INTERVAL]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[INTERVAL]" />
-                        <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FOR_DATE]"
-                          cachedDataType="dbDate"
-                          cachedName="FOR_DATE"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FOR_DATE]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOR_DATE]" />
-                        <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FOR_WEEK]"
-                          cachedDataType="dbDate"
-                          cachedName="FOR_WEEK"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FOR_WEEK]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOR_WEEK]" />
-                        <inputColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VOL]"
                           cachedDataType="numeric"
                           cachedName="VOL"
@@ -977,6 +869,36 @@ where [refTable].[splitLobID] = ?</property>
                           cachedName="[Current]"
                           externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Current]"
                           lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[[Current]]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[yearNum]"
+                          cachedDataType="i4"
+                          cachedName="yearNum"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[yearNum]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[monthNum]"
+                          cachedDataType="i4"
+                          cachedName="monthNum"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[monthNum]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[monthNum]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[dayNum]"
+                          cachedDataType="i4"
+                          cachedName="dayNum"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[dayNum]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[dayNum]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[hourNum]"
+                          cachedDataType="i4"
+                          cachedName="hourNum"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[hourNum]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[hourNum]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[minuteNum]"
+                          cachedDataType="i4"
+                          cachedName="minuteNum"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[minuteNum]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[minuteNum]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -998,18 +920,6 @@ where [refTable].[splitLobID] = ?</property>
                           length="30"
                           name="RUN_NAME" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[INTERVAL]"
-                          dataType="dbTimeStamp"
-                          name="INTERVAL" />
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FOR_DATE]"
-                          dataType="dbTimeStamp"
-                          name="FOR_DATE" />
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FOR_WEEK]"
-                          dataType="dbTimeStamp"
-                          name="FOR_WEEK" />
-                        <externalMetadataColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VOL]"
                           dataType="numeric"
                           name="VOL"
@@ -1028,9 +938,25 @@ where [refTable].[splitLobID] = ?</property>
                           dataType="bool"
                           name="Current" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WeekNum]"
-                          dataType="i4"
-                          name="WeekNum" />
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
+                          dataType="i2"
+                          name="yearNum" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[monthNum]"
+                          dataType="ui1"
+                          name="monthNum" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[dayNum]"
+                          dataType="ui1"
+                          name="dayNum" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[hourNum]"
+                          dataType="ui1"
+                          name="hourNum" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[minuteNum]"
+                          dataType="ui1"
+                          name="minuteNum" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1086,14 +1012,13 @@ where [refTable].[splitLobID] = ?</property>
                       name="SqlCommand"
                       UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select
 	FRFM.FOR_GRP_SK
---	,FG.CODE
 	,FR.FOR_RUN_SK
 	,RSFR.RUN_NAME
---	,FR.RUN_TYPE
---	,FR.FOR_TYPE
-	,CAST(DATEADD(MI,START_MOMENT - BIAS_MI,'1899-12-30') AS datetime) [INTERVAL]
-	,CAST(DATEADD(MI,START_MOMENT - BIAS_MI,'1899-12-30') AS date) [FOR_DATE]
-	,CAST(DATEADD(DD,-DATEPART(DW,DATEADD(MI,START_MOMENT - BIAS_MI,'1899-12-30')) + 1,DATEADD(MI,START_MOMENT - BIAS_MI,'1899-12-30')) AS DATE)[FOR_WEEK]
+	,Datepart(YY,DATEADD(MI,START_MOMENT - BIAS_MI,'1899-12-30')) yearNum
+	,Datepart(MM,DATEADD(MI,START_MOMENT - BIAS_MI,'1899-12-30')) monthNum
+	,Datepart(DD,DATEADD(MI,START_MOMENT - BIAS_MI,'1899-12-30')) dayNum
+	,Datepart(HH,DATEADD(MI,START_MOMENT - BIAS_MI,'1899-12-30')) hourNum
+	,Datepart(MI,DATEADD(MI,START_MOMENT - BIAS_MI,'1899-12-30')) minuteNum
 	,VOL
 	,FR.CRE_TS
 	,FR.MEMO
@@ -1102,8 +1027,6 @@ From
 		ON IVF.FOR_RUN_FOR_MBR_SK = FRFM.FOR_RUN_FOR_MBR_SK
 	JOIN FOR_RUN FR
 		ON FRFM.FOR_RUN_SK = FR.FOR_RUN_SK
---	JOIN FOR_GRP FG
---		ON FRFM.FOR_GRP_SK = FG.FOR_GRP_SK
 	JOIN TIME_ZONE_DET TZD
 		ON FR.TIME_ZONE_SK = TZD.TIME_ZONE_SK
 		AND DATEADD(MI,IVF.START_MOMENT,'1899-12-30') &gt;= Dateadd(mi,BIAS_MI,TZD.START_TS) 
@@ -1185,33 +1108,6 @@ Order by
                           name="RUN_NAME"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[INTERVAL]"
-                          dataType="dbTime2"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[INTERVAL]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[INTERVAL]"
-                          name="INTERVAL"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOR_DATE]"
-                          dataType="dbDate"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FOR_DATE]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOR_DATE]"
-                          name="FOR_DATE"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOR_WEEK]"
-                          dataType="dbDate"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FOR_WEEK]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FOR_WEEK]"
-                          name="FOR_WEEK"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[VOL]"
                           dataType="numeric"
                           errorOrTruncationOperation="Conversion"
@@ -1240,6 +1136,51 @@ Order by
                           lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MEMO]"
                           name="MEMO"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[yearNum]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[yearNum]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[yearNum]"
+                          name="yearNum"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[monthNum]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[monthNum]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[monthNum]"
+                          name="monthNum"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[dayNum]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[dayNum]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[dayNum]"
+                          name="dayNum"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[hourNum]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[hourNum]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[hourNum]"
+                          name="hourNum"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[minuteNum]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[minuteNum]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[minuteNum]"
+                          name="minuteNum"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -1261,18 +1202,6 @@ Order by
                           length="30"
                           name="RUN_NAME" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[INTERVAL]"
-                          dataType="dbTimeStamp"
-                          name="INTERVAL" />
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FOR_DATE]"
-                          dataType="dbDate"
-                          name="FOR_DATE" />
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FOR_WEEK]"
-                          dataType="dbDate"
-                          name="FOR_WEEK" />
-                        <externalMetadataColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[VOL]"
                           dataType="numeric"
                           name="VOL"
@@ -1286,6 +1215,26 @@ Order by
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MEMO]"
                           dataType="nText"
                           name="MEMO" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[yearNum]"
+                          dataType="i4"
+                          name="yearNum" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[monthNum]"
+                          dataType="i4"
+                          name="monthNum" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[dayNum]"
+                          dataType="i4"
+                          name="dayNum" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[hourNum]"
+                          dataType="i4"
+                          name="hourNum" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[minuteNum]"
+                          dataType="i4"
+                          name="minuteNum" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -1314,20 +1263,30 @@ Order by
                           lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RUN_NAME]"
                           name="RUN_NAME" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[INTERVAL]"
-                          dataType="dbTimeStamp"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[INTERVAL]"
-                          name="INTERVAL" />
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[yearNum]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[yearNum]"
+                          name="yearNum" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FOR_DATE]"
-                          dataType="dbDate"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FOR_DATE]"
-                          name="FOR_DATE" />
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[monthNum]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[monthNum]"
+                          name="monthNum" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FOR_WEEK]"
-                          dataType="dbDate"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FOR_WEEK]"
-                          name="FOR_WEEK" />
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dayNum]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dayNum]"
+                          name="dayNum" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[hourNum]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[hourNum]"
+                          name="hourNum" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[minuteNum]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[minuteNum]"
+                          name="minuteNum" />
                         <outputColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[VOL]"
                           dataType="numeric"
@@ -1426,48 +1385,138 @@ Order by
           DTS:VariableName="User::For_Grp_Sk" />
       </DTS:ForEachVariableMappings>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\List of Forecast Groups"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DFCDC132-76C8-48F9-8CB5-5555D591418C}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="List of Forecast Groups"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Select FOR_GRP_SK From recent.Forecast"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::FG" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merg stg FgForecast"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{c8c20328-9e1b-4d42-b0f3-60a4767b354a}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merg stg FgForecast"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="exec stg.updateFgForecast" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set Current"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E1D810F2-BB06-4637-ACDD-B71E13C71BC2}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set Current"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Update&#xA;&#x9;dst&#xA;Set&#xA;&#x9;[Current] = 0&#xA;From fcst.FgForecast dst Join (&#xA;&#x9;Select&#xA;&#x9;&#x9;FOR_GRP_SK&#xA;&#x9;&#x9;,Datefromparts(yearNum, monthNum, dayNum) FOR_DATE&#xA;&#x9;&#x9;,Timefromparts(hourNum, minuteNum, 0,0,0) INTERVAL&#xA;&#x9;&#x9;,MAX(CRE_TS) CRE_TS&#xA;&#x9;From&#xA;&#x9;&#x9;fcst.FgForecast&#xA;&#x9;Group by&#xA;&#x9;&#x9;FOR_GRP_SK&#xA;&#x9;&#x9;,Datefromparts(yearNum, monthNum, dayNum)&#xA;&#x9;&#x9;,Timefromparts(hourNum, minuteNum, 0,0,0)&#xA;) src&#xA;&#x9;on dst.FOR_GRP_SK = src.FOR_GRP_SK&#xA;&#x9;and Datefromparts(dst.yearNum, dst.monthNum, dst.dayNum) = src.FOR_DATE&#xA;&#x9;and Timefromparts(dst.hourNum, dst.minuteNum, 0,0,0) = src.INTERVAL&#xA;&#x9;and dst.CRE_TS != src.CRE_TS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Stg"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BAA72A1E-1DD6-4C70-8D4B-6D50DA4A27F0}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Stg"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Truncate Table stg.FgForecast" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Recent Forecast"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6AC5920A-6A36-4028-92BB-9920D87BE1B1}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Recent Forecast"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Update recent.Forecast&#xA;Set&#xA;&#x9;recent.Forecast.CRE_TS = src.CRE_TS&#xA;From&#xA;&#x9;[recent].[Forecast] Join (&#xA;&#x9;&#x9;&#x9;Select&#xA;&#x9;&#x9;&#x9;&#x9;FOR_GRP_SK&#xA;&#x9;&#x9;&#x9;&#x9;,MAX(CRE_TS) CRE_TS&#xA;&#x9;&#x9;&#x9;From&#xA;&#x9;&#x9;&#x9;&#x9;fcst.FgForecast&#xA;&#x9;&#x9;&#x9;GROUP BY&#xA;&#x9;&#x9;&#x9;&#x9;FOR_GRP_SK&#xA;&#x9;&#x9;) src&#xA;&#x9;&#x9;&#x9;on recent.Forecast.FOR_GRP_SK = src.FOR_GRP_SK" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{790378D2-EB4B-4D72-9D81-B84497099D03}"
-      DTS:From="Package\Execute SQL Task"
+      DTS:From="Package\List of Forecast Groups"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\Foreach Loop Container" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{86ED49C0-E159-4643-906A-A22A63CD4CD8}"
+      DTS:DTSID="{19A5D4B9-5377-437A-BF24-10968C26E920}"
       DTS:From="Package\Foreach Loop Container"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Execute SQL Task 1" />
+      DTS:To="Package\Merg stg FgForecast" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
-      DTS:DTSID="{AF77830A-14D6-4998-8ED5-0BA664881D57}"
-      DTS:From="Package\Execute SQL Task 1"
+      DTS:DTSID="{7474EDFB-D376-46E8-8362-767345B05D98}"
+      DTS:From="Package\Update Recent Forecast"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
-      DTS:To="Package\Execute SQL Task 4" />
+      DTS:To="Package\Set Current" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
       DTS:DTSID="{B150CD4E-D392-4755-BCF8-CC0A703F9982}"
-      DTS:From="Package\Execute SQL Task 2"
+      DTS:From="Package\Set Current"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\Execute SQL Task 3" />
+      DTS:To="Package\Truncate Stg" />
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
       DTS:CreationName=""
-      DTS:DTSID="{08C46E4A-2E54-4D4A-91DD-2B6196F0432C}"
-      DTS:From="Package\Execute SQL Task 4"
+      DTS:DTSID="{149481E5-9139-4794-B4FA-4CEDE31A245A}"
+      DTS:From="Package\Merg stg FgForecast"
       DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 4"
-      DTS:To="Package\Execute SQL Task 2" />
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Update Recent Forecast" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1484,57 +1533,29 @@ Order by
         <NodeLayout
           Size="151,42"
           Id="Package\Data Flow Task"
-          TopLeft="561.5,141.5" />
-        <NodeLayout
-          Size="163,42"
-          Id="Package\Execute SQL Task"
-          TopLeft="61.5,55.5" />
-        <NodeLayout
-          Size="172,42"
-          Id="Package\Execute SQL Task 1"
-          TopLeft="74.5,431.5" />
-        <NodeLayout
-          Size="172,42"
-          Id="Package\Execute SQL Task 2"
-          TopLeft="74.5,581.5" />
-        <NodeLayout
-          Size="172,42"
-          Id="Package\Execute SQL Task 3"
-          TopLeft="75.5,671.261904761905" />
+          TopLeft="5.50000000000011,721.5" />
         <NodeLayout
           Size="151,42"
           Id="Package\Foreach Loop Container\Data Flow Task"
-          TopLeft="25.5,90.5" />
+          TopLeft="11.5,107.5" />
         <NodeLayout
           Size="163,42"
           Id="Package\Foreach Loop Container\Execute SQL Task"
-          TopLeft="5.5,5.5" />
+          TopLeft="5.50000000000001,5.5" />
         <EdgeLayout
           Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
           TopLeft="87,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="14,43"
+              EndConnector="0,60"
               Start="0,0"
-              End="14,35.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,17.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,17.5"
-                    Point2="0,21.5"
-                    Point3="4,21.5" />
-                  <mssgle:LineSegment
-                    End="10,21.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="10,21.5"
-                    Point2="14,21.5"
-                    Point3="14,25.5" />
-                  <mssgle:LineSegment
-                    End="14,35.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1546,36 +1567,44 @@ Order by
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="268,187"
-          Size="268,230"
+          PanelSize="174,204"
+          Size="174,248"
           Id="Package\Foreach Loop Container"
-          TopLeft="33.5,168.5" />
+          TopLeft="200,107.5" />
+        <NodeLayout
+          Size="187,42"
+          Id="Package\List of Forecast Groups"
+          TopLeft="193.5,5.5" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Merg stg FgForecast"
+          TopLeft="199.5,415.5" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Set Current"
+          TopLeft="220.5,619.5" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Truncate Stg"
+          TopLeft="217.5,721.5" />
+        <NodeLayout
+          Size="191,42"
+          Id="Package\Update Recent Forecast"
+          TopLeft="191.5,517.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="143,97.5">
+          TopLeft="287,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="24.5,71"
+              EndConnector="0,60"
               Start="0,0"
-              End="24.5,63.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.5"
-                    Point2="0,35.5"
-                    Point3="4,35.5" />
-                  <mssgle:LineSegment
-                    End="20.5,35.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="20.5,35.5"
-                    Point2="24.5,35.5"
-                    Point3="24.5,39.5" />
-                  <mssgle:LineSegment
-                    End="24.5,63.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1585,19 +1614,19 @@ Order by
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="164,398.5">
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="287,559.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,33"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,25.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1608,44 +1637,18 @@ Order by
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="161,623.5">
+          TopLeft="287,661.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,47.761904761905"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,40.261904761905">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,40.261904761905" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="172,42"
-          Id="Package\Execute SQL Task 4"
-          TopLeft="78.5,513.5" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="162.5,473.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,40"
-              Start="0,0"
-              End="0,32.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1655,19 +1658,41 @@ Order by
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="162.5,555.5">
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="287,457.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,26"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,18.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.5" />
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="287,355.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1739,9 +1764,7 @@ Order by
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -1800,66 +1823,78 @@ Order by
     design-time-name="Package\Foreach Loop Container\Data Flow Task">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination"
-          TopLeft="17.5,196.5" />
-        <NodeLayout
-          Size="154,42"
-          Id="Package\Foreach Loop Container\Data Flow Task\Derived Column"
-          TopLeft="30.5,102.5" />
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="150,42"
           Id="Package\Foreach Loop Container\Data Flow Task\OLE DB Source"
-          TopLeft="36.5,6.5" />
+          TopLeft="16,5.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Foreach Loop Container\Data Flow Task\Derived Column"
+          TopLeft="14,107.5" />
         <EdgeLayout
-          Id="Package\Foreach Loop Container\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="109.5,48.5">
+          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="91,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,54"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,46.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,46.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-27.84953125,20.6357421875,55.6990625,11.228515625"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="105.25,144.5">
+          Id="Package\Foreach Loop Container\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="91,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,52"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,44.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-27.84953125,20.6357421875,55.6990625,11.228515625"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination">
     <Properties>
@@ -1870,14 +1905,6 @@ Order by
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Foreach Loop Container\Data Flow Task\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

@@ -1,0 +1,2428 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/22/2017 3:16:15 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="6LVFP32"
+  DTS:CreatorName="CORP\jms844"
+  DTS:DTSID="{4ABF89BD-982B-4FDE-BF44-CBAB187B767D}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="EmpGrpTransfer"
+  DTS:PackageType="5"
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{43F444DA-2F7F-47AF-A7EA-E6BDB35645B2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\EMP_GRP_ASS Transfer"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{bd1eb091-279e-430e-89bf-979b60cdc6f8}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EMP_GRP_ASS Transfer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\EMP_GRP_ASS Transfer\EGA dst"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="EGA dst"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[EMP_GRP_ASS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EMP_GRP_ASS Transfer\EGA dst.Connections[OleDbConnection]"
+                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].Columns[EMP_GRP_NODE_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_GRP_NODE_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_NODE_SK]"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[EMP_GRP_NODE_SK]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].Columns[EMP_GRP_ASS_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_GRP_ASS_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_ASS_SK]"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[EMP_GRP_ASS_SK]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].Columns[EMP_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_SK]"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[EMP_SK]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].Columns[START_NOM_DATE]"
+                      cachedDataType="numeric"
+                      cachedName="START_NOM_DATE"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[START_NOM_DATE]"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[START_NOM_DATE]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].Columns[STOP_NOM_DATE]"
+                      cachedDataType="numeric"
+                      cachedName="STOP_NOM_DATE"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[STOP_NOM_DATE]"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[STOP_NOM_DATE]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].Columns[LDR]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="LDR"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[LDR]"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[LDR]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_NODE_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_NODE_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_ASS_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_ASS_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_SK]"
+                      dataType="numeric"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[START_NOM_DATE]"
+                      dataType="numeric"
+                      name="START_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[STOP_NOM_DATE]"
+                      dataType="numeric"
+                      name="STOP_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input].ExternalColumns[LDR]"
+                      dataType="wstr"
+                      length="1"
+                      name="LDR" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\EMP_GRP_ASS Transfer\EGA dst.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\EMP_GRP_ASS Transfer\EGA src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="EGA src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[EMP_GRP_ASS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EMP_GRP_ASS Transfer\EGA src.Connections[OleDbConnection]"
+                  connectionManagerID="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[EMP_GRP_NODE_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_NODE_SK]"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[EMP_GRP_NODE_SK]"
+                      name="EMP_GRP_NODE_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[EMP_GRP_ASS_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_ASS_SK]"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[EMP_GRP_ASS_SK]"
+                      name="EMP_GRP_ASS_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[EMP_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[EMP_SK]"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[EMP_SK]"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[START_NOM_DATE]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[START_NOM_DATE]"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[START_NOM_DATE]"
+                      name="START_NOM_DATE"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[STOP_NOM_DATE]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[STOP_NOM_DATE]"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[STOP_NOM_DATE]"
+                      name="STOP_NOM_DATE"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[LDR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[LDR]"
+                      length="1"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].Columns[LDR]"
+                      name="LDR"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_NODE_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_NODE_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_ASS_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_ASS_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[EMP_SK]"
+                      dataType="numeric"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[START_NOM_DATE]"
+                      dataType="numeric"
+                      name="START_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[STOP_NOM_DATE]"
+                      dataType="numeric"
+                      name="STOP_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output].ExternalColumns[LDR]"
+                      dataType="wstr"
+                      length="1"
+                      name="LDR" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_ASS_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_ASS_SK]"
+                      name="EMP_GRP_ASS_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[EMP_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[EMP_SK]"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_NODE_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_NODE_SK]"
+                      name="EMP_GRP_NODE_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[START_NOM_DATE]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[START_NOM_DATE]"
+                      name="START_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[STOP_NOM_DATE]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[STOP_NOM_DATE]"
+                      name="STOP_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[LDR]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[LDR]"
+                      name="LDR" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\EMP_GRP_ASS Transfer.Paths[OLE DB Source Output]"
+              endId="Package\EMP_GRP_ASS Transfer\EGA dst.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\EMP_GRP_ASS Transfer\EGA src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EMP_GRP_CLASS Transfer"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{f5bb30a9-6c44-40b0-ae12-793c1b5baf3a}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EMP_GRP_CLASS Transfer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="EMP_GRP_CLASS dest"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[EMP_GRP_CLASS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Connections[OleDbConnection]"
+                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input].Columns[EMP_GRP_CLASS_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_GRP_CLASS_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_CLASS_SK]"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].Columns[EMP_GRP_CLASS_SK]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input].Columns[LABEL]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="LABEL"
+                      externalMetadataColumnId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input].ExternalColumns[LABEL]"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].Columns[LABEL]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input].Columns[EMP_GRP_TREE_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_GRP_TREE_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_TREE_SK]"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].Columns[EMP_GRP_TREE_SK]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_CLASS_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_CLASS_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input].ExternalColumns[LABEL]"
+                      dataType="wstr"
+                      length="30"
+                      name="LABEL" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="EMP_GRP_CLASS src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[EMP_GRP_CLASS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Connections[OleDbConnection]"
+                  connectionManagerID="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].Columns[EMP_GRP_CLASS_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_CLASS_SK]"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].Columns[EMP_GRP_CLASS_SK]"
+                      name="EMP_GRP_CLASS_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].Columns[LABEL]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].ExternalColumns[LABEL]"
+                      length="30"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].Columns[LABEL]"
+                      name="LABEL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].Columns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_TREE_SK]"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].Columns[EMP_GRP_TREE_SK]"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_CLASS_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_CLASS_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].ExternalColumns[LABEL]"
+                      dataType="wstr"
+                      length="30"
+                      name="LABEL" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_CLASS_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_CLASS_SK]"
+                      name="EMP_GRP_CLASS_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Error Output].Columns[LABEL]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Error Output].Columns[LABEL]"
+                      name="LABEL" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_TREE_SK]"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\EMP_GRP_CLASS Transfer.Paths[OLE DB Source Output]"
+              endId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EMP_GRP_NODE Transfer"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{506d16bf-e1dc-40e1-b53d-cae34bd1d370}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EMP_GRP_NODE Transfer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="EMP_GRP_NODE src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[EMP_GRP_NODE]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Connections[OleDbConnection]"
+                  connectionManagerID="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[EMP_GRP_NODE_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_NODE_SK]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[EMP_GRP_NODE_SK]"
+                      name="EMP_GRP_NODE_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_TREE_SK]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[EMP_GRP_TREE_SK]"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[CODE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
+                      length="30"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[CODE]"
+                      name="CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[DESCR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[DESCR]"
+                      length="30"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[DESCR]"
+                      name="DESCR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[LEFT_VISIT_NUM]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[LEFT_VISIT_NUM]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[LEFT_VISIT_NUM]"
+                      name="LEFT_VISIT_NUM"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[RIGHT_VISIT_NUM]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[RIGHT_VISIT_NUM]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[RIGHT_VISIT_NUM]"
+                      name="RIGHT_VISIT_NUM"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[ALLOW_ASS_FLAG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[ALLOW_ASS_FLAG]"
+                      length="1"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[ALLOW_ASS_FLAG]"
+                      name="ALLOW_ASS_FLAG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[ALLOW_LDR_FLAG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[ALLOW_LDR_FLAG]"
+                      length="1"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[ALLOW_LDR_FLAG]"
+                      name="ALLOW_LDR_FLAG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[EMP_GRP_CLASS_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_CLASS_SK]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[EMP_GRP_CLASS_SK]"
+                      name="EMP_GRP_CLASS_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
+                      name="UPD_TS"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_NODE_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_NODE_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
+                      dataType="wstr"
+                      length="30"
+                      name="CODE" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[DESCR]"
+                      dataType="wstr"
+                      length="30"
+                      name="DESCR" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[LEFT_VISIT_NUM]"
+                      dataType="numeric"
+                      name="LEFT_VISIT_NUM"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[RIGHT_VISIT_NUM]"
+                      dataType="numeric"
+                      name="RIGHT_VISIT_NUM"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[ALLOW_ASS_FLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="ALLOW_ASS_FLAG" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[ALLOW_LDR_FLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="ALLOW_LDR_FLAG" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_CLASS_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_CLASS_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      name="UPD_TS" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_NODE_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_NODE_SK]"
+                      name="EMP_GRP_NODE_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_TREE_SK]"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[CODE]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[CODE]"
+                      name="CODE" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[DESCR]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[DESCR]"
+                      name="DESCR" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[LEFT_VISIT_NUM]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[LEFT_VISIT_NUM]"
+                      name="LEFT_VISIT_NUM"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[RIGHT_VISIT_NUM]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[RIGHT_VISIT_NUM]"
+                      name="RIGHT_VISIT_NUM"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[ALLOW_ASS_FLAG]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[ALLOW_ASS_FLAG]"
+                      name="ALLOW_ASS_FLAG" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[ALLOW_LDR_FLAG]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[ALLOW_LDR_FLAG]"
+                      name="ALLOW_LDR_FLAG" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_CLASS_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_CLASS_SK]"
+                      name="EMP_GRP_CLASS_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
+                      name="UPD_TS" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="EMP_GRP_NODE_STG dest"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[EMP_GRP_NODE]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Connections[OleDbConnection]"
+                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].Columns[EMP_GRP_NODE_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_GRP_NODE_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_NODE_SK]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[EMP_GRP_NODE_SK]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].Columns[EMP_GRP_TREE_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_GRP_TREE_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_TREE_SK]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[EMP_GRP_TREE_SK]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].Columns[CODE]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="CODE"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[CODE]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].Columns[DESCR]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="DESCR"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[DESCR]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[DESCR]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].Columns[LEFT_VISIT_NUM]"
+                      cachedDataType="numeric"
+                      cachedName="LEFT_VISIT_NUM"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[LEFT_VISIT_NUM]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[LEFT_VISIT_NUM]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].Columns[RIGHT_VISIT_NUM]"
+                      cachedDataType="numeric"
+                      cachedName="RIGHT_VISIT_NUM"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[RIGHT_VISIT_NUM]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[RIGHT_VISIT_NUM]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].Columns[ALLOW_ASS_FLAG]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ALLOW_ASS_FLAG"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[ALLOW_ASS_FLAG]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[ALLOW_ASS_FLAG]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].Columns[ALLOW_LDR_FLAG]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ALLOW_LDR_FLAG"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[ALLOW_LDR_FLAG]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[ALLOW_LDR_FLAG]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].Columns[EMP_GRP_CLASS_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_GRP_CLASS_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_CLASS_SK]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[EMP_GRP_CLASS_SK]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].Columns[UPD_TCS_LOGIN_SK]"
+                      cachedDataType="numeric"
+                      cachedName="UPD_TCS_LOGIN_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]" />
+                    <inputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].Columns[UPD_TS]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="UPD_TS"
+                      externalMetadataColumnId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TS]"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output].Columns[UPD_TS]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      name="UPD_TS" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_NODE_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_NODE_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
+                      dataType="wstr"
+                      length="30"
+                      name="CODE" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[DESCR]"
+                      dataType="wstr"
+                      length="30"
+                      name="DESCR" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[LEFT_VISIT_NUM]"
+                      dataType="numeric"
+                      name="LEFT_VISIT_NUM"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[RIGHT_VISIT_NUM]"
+                      dataType="numeric"
+                      name="RIGHT_VISIT_NUM"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[ALLOW_ASS_FLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="ALLOW_ASS_FLAG" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[ALLOW_LDR_FLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="ALLOW_LDR_FLAG" />
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_CLASS_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_CLASS_SK"
+                      precision="15"
+                      scale="1" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\EMP_GRP_NODE Transfer.Paths[OLE DB Source Output]"
+              endId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EMP_GRP_TREE Transfer"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{fadf7398-184b-4958-8fd4-0c6c679ec5e0}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EMP_GRP_TREE Transfer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Emp_grp_Tree src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[EMP_GRP_TREE]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Connections[OleDbConnection]"
+                  connectionManagerID="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Output].Columns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_TREE_SK]"
+                      lineageId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Output].Columns[EMP_GRP_TREE_SK]"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Output].ExternalColumns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Error Output].Columns[EMP_GRP_TREE_SK]"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Emp_grp_Tree stg"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[EMP_GRP_TREE]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Connections[OleDbConnection]"
+                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Inputs[OLE DB Destination Input].Columns[EMP_GRP_TREE_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_GRP_TREE_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_TREE_SK]"
+                      lineageId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Output].Columns[EMP_GRP_TREE_SK]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Inputs[OLE DB Destination Input].ExternalColumns[EMP_GRP_TREE_SK]"
+                      dataType="numeric"
+                      name="EMP_GRP_TREE_SK"
+                      precision="15"
+                      scale="1" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\EMP_GRP_TREE Transfer.Paths[OLE DB Source Output]"
+              endId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge EGA"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0c5355fb-4f34-4eef-bf98-eeb29e77adda}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge EGA"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="exec stg.mergeEGA" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge EGC"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{22212ae4-78f8-4354-b223-65779d7cd8e9}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge EGC"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="exec stg.mergeEGC" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge EGN"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5f7f47ff-a832-4ea5-b42f-e685eae36cd4}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge EGN"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="exec stg.mergeEGN" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge EGT"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B315AD20-2251-4D95-9EB5-CF9DBA69F5F5}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge EGT"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="exec stg.mergeEGT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate EGA"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2ffbe46e-45ba-4ce3-8baf-370bb9d586ad}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate EGA"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Truncate Table stg.EMP_GRP_ASS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate EGC"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0a79fe3c-3442-4255-a689-13916388bcc5}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate EGC"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Truncate Table stg.EMP_GRP_CLASS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate EGN"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0d415d7a-8735-48b9-a090-2ccf5afdda1d}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate EGN"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Truncate Table stg.EMP_GRP_NODE" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate EGT"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{83D3BDCA-8846-459E-BDBC-732F6FDD874D}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate EGT"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Truncate Table stg.EMP_GRP_TREE" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{80BDBF39-32CF-4D44-AA15-72B4D9C65029}"
+      DTS:From="Package\EMP_GRP_TREE Transfer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Merge EGT" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0A0D5557-B65F-4807-A6DA-32C1A219EB60}"
+      DTS:From="Package\Truncate EGT"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\EMP_GRP_TREE Transfer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{BEE07E3F-BEF2-4F64-A293-A392452BF2EF}"
+      DTS:From="Package\Merge EGN"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\Truncate EGA" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{5C2B2AFB-7E88-424E-BECD-5CAA536A6581}"
+      DTS:From="Package\Truncate EGC"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\EMP_GRP_CLASS Transfer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{B245CD8E-9CEA-4183-BCE9-E5CDA713DBB2}"
+      DTS:From="Package\EMP_GRP_CLASS Transfer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Merge EGC" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{2F16B022-4C31-4EEA-A584-5B78330B2743}"
+      DTS:From="Package\Truncate EGN"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\EMP_GRP_NODE Transfer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{BE91A896-9131-461D-AEB2-CD143BD8327A}"
+      DTS:From="Package\EMP_GRP_NODE Transfer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Merge EGN" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{8C9C6577-0D37-472F-875B-F83B1590D1AC}"
+      DTS:From="Package\Merge EGT"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Truncate EGC" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{D2CA0FDB-AC9A-4EE4-B622-2321F0991C07}"
+      DTS:From="Package\Merge EGC"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Truncate EGN" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{EC2A7725-FC8C-4416-B96A-B5B28FF40F48}"
+      DTS:From="Package\Truncate EGA"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\EMP_GRP_ASS Transfer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{4F9DBFA6-B5C6-42DC-8283-D6AE7EFCD78D}"
+      DTS:From="Package\EMP_GRP_ASS Transfer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\Merge EGA" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="191,42"
+          Id="Package\EMP_GRP_ASS Transfer"
+          TopLeft="252.5,724.5" />
+        <NodeLayout
+          Size="203,42"
+          Id="Package\EMP_GRP_CLASS Transfer"
+          TopLeft="5.50000000000006,413.5" />
+        <NodeLayout
+          Size="201,42"
+          Id="Package\EMP_GRP_NODE Transfer"
+          TopLeft="6.5000000000001,719.5" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\EMP_GRP_TREE Transfer"
+          TopLeft="8.00000000000001,107.5" />
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Merge EGA"
+          TopLeft="287,826.5" />
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Merge EGC"
+          TopLeft="41.5000000000001,515.5" />
+        <NodeLayout
+          Size="132,42"
+          Id="Package\Merge EGN"
+          TopLeft="41.0000000000001,821.5" />
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Merge EGT"
+          TopLeft="41.5,209.5" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Truncate EGA"
+          TopLeft="281,622.5" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Truncate EGC"
+          TopLeft="35,311.5" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Truncate EGN"
+          TopLeft="35.0000000000001,617.5" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Truncate EGT"
+          TopLeft="35.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="107,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="107,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="127.666666666667,821.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="202.666666666667,-157"
+              Start="0,0"
+              End="202.666666666667,-149.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-74.5963190184049" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-74.5963190184049"
+                    Point2="0,-78.5963190184049"
+                    Point3="4,-78.5963190184049" />
+                  <mssgle:LineSegment
+                    End="198.666666666667,-78.5963190184049" />
+                  <mssgle:CubicBezierSegment
+                    Point1="198.666666666667,-78.5963190184049"
+                    Point2="202.666666666667,-78.5963190184049"
+                    Point3="202.666666666667,-82.5963190184049" />
+                  <mssgle:LineSegment
+                    End="202.666666666667,-149.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="107,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="107,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="107,659.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="107,761.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="107,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="107,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="375.666666666667,664.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-27.6666666666667,60"
+              Start="0,0"
+              End="-27.6666666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.3956043956044" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.3956043956044"
+                    Point2="0,24.3956043956044"
+                    Point3="-4,24.3956043956044" />
+                  <mssgle:LineSegment
+                    End="-23.6666666666667,24.3956043956044" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-23.6666666666667,24.3956043956044"
+                    Point2="-27.6666666666667,24.3956043956044"
+                    Point3="-27.6666666666667,28.3956043956044" />
+                  <mssgle:LineSegment
+                    End="-27.6666666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="350.25,766.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\EMP_GRP_ASS Transfer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="115,42"
+          Id="Package\EMP_GRP_ASS Transfer\EGA src"
+          TopLeft="27.5,5.5" />
+        <NodeLayout
+          Size="116,42"
+          Id="Package\EMP_GRP_ASS Transfer\EGA dst"
+          TopLeft="23.5,129.5" />
+        <EdgeLayout
+          Id="Package\EMP_GRP_ASS Transfer.Paths[OLE DB Source Output]"
+          TopLeft="83.25,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,82"
+              Start="0,0"
+              End="0,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\EMP_GRP_ASS Transfer\EGA dst">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\EMP_GRP_ASS Transfer\EGA src">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\EMP_GRP_CLASS Transfer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="177,42"
+          Id="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS src"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest"
+          TopLeft="14.5,139.5" />
+        <EdgeLayout
+          Id="Package\EMP_GRP_CLASS Transfer.Paths[OLE DB Source Output]"
+          TopLeft="94,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.5,92"
+              Start="0,0"
+              End="12.5,84.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,42"
+                    Point2="0,46"
+                    Point3="4,46" />
+                  <mssgle:LineSegment
+                    End="8.5,46" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.5,46"
+                    Point2="12.5,46"
+                    Point3="12.5,50" />
+                  <mssgle:LineSegment
+                    End="12.5,84.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\EMP_GRP_CLASS Transfer\EMP_GRP_CLASS dest">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\EMP_GRP_NODE Transfer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE src"
+          TopLeft="27.5,5.5" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest"
+          TopLeft="8.5,149.5" />
+        <EdgeLayout
+          Id="Package\EMP_GRP_NODE Transfer.Paths[OLE DB Source Output]"
+          TopLeft="113.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,102"
+              Start="0,0"
+              End="0,94.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,94.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\EMP_GRP_NODE Transfer\EMP_GRP_NODE_STG dest">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\EMP_GRP_TREE Transfer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="166,42"
+          Id="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg"
+          TopLeft="23.5,124.5" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree src"
+          TopLeft="26.5,19.5" />
+        <EdgeLayout
+          Id="Package\EMP_GRP_TREE Transfer.Paths[OLE DB Source Output]"
+          TopLeft="107.75,61.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63"
+              Start="0,0"
+              End="0,55.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\EMP_GRP_TREE Transfer\Emp_grp_Tree stg">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

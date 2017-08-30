@@ -1,0 +1,1765 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/1/2017 3:24:26 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="6LVFP32"
+  DTS:CreatorName="CORP\jms844"
+  DTS:DTSID="{20B59408-84ED-46DF-8B5C-BED30AB9177C}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="FrontierTransferRT"
+  DTS:PackageType="5"
+  DTS:VersionBuild="56"
+  DTS:VersionGUID="{AF084B8A-DCE5-471B-8A10-AF7E03135DCD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{DEA25F4D-9266-4FB9-9EFF-0AC52310EF36}"
+      DTS:ObjectName="vendorID">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">1</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{04AF0442-ECB1-42FE-987E-311AE47A74FF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="latestIntervalDate">
+      <DTS:VariableValue
+        DTS:DataType="7">6/22/2017</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{909961D3-5F1A-43FF-B6EF-19D50163C0D1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="latestIntervalStarttime">
+      <DTS:VariableValue
+        DTS:DataType="2">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Frontier hSplit Transfer"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9FC5332A-4941-45A5-A967-3CFD500DE387}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Frontier hSplit Transfer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Frontier hSplit Historical Data"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Declare @startDate as datetime= ?;
+Declare @starttime as smallint = ?;
+
+Select
+	[row_date]
+    ,cast(cast((starttime - starttime % 100) / 2400.0 + ((starttime % 100) / 1440.0) as datetime) as time(0)) as interval
+    ,[acd]
+    ,[split]
+    ,Sum([i_availtime])[i_availtime]
+    ,Sum([i_ringtime])[i_ringtime]
+    ,Sum([ringtime])[ringtime]
+    ,Sum([ringcalls])[ringcalls]
+    ,Sum([i_acdtime])[i_acdtime]
+    ,Sum([acdtime])[acdtime]
+    ,Sum([acdcalls])[acdcalls]
+    ,Sum([i_acwtime])[i_acwtime]
+    ,Sum([acwtime])[acwtime]
+    ,Sum([i_acwouttime])[i_acwouttime]
+    ,Sum([acwouttime])[acwouttime]
+    ,Sum([acwoutcalls])[acwoutcalls]
+    ,Sum([i_acwintime])[i_acwintime]
+    ,Sum([acwintime])[acwintime]
+    ,Sum([acwincalls])[acwincalls]
+    ,Sum([i_auxtime])[i_auxtime]
+    ,Sum([i_auxouttime])[i_auxouttime]
+    ,Sum([auxouttime])[auxouttime]
+    ,Sum([auxoutcalls])[auxoutcalls]
+    ,Sum([i_auxintime])[i_auxintime]
+    ,Sum([auxintime])[auxintime]
+    ,Sum([auxincalls])[auxincalls]
+    ,Sum([i_othertime])[i_othertime]
+    ,Sum([i_acdothertime])[i_acdothertime]
+    ,Sum([holdtime])[holdtime]
+    ,Sum([holdcalls])[holdcalls]
+    ,Sum([holdabncalls])[holdabncalls]
+    ,Sum([transferred])[transferred]
+    ,Sum([conference])[conference]
+    ,Sum([abncalls])[abncalls]
+    ,Sum([abntime])[abntime]
+    ,Sum([acceptable])[acceptable]
+    ,Sum([i_arrived])[i_arrived]
+    ,Sum([dequecalls])[dequecalls]
+    ,Sum([busycalls])[busycalls]
+    ,Sum([disccalls])[disccalls]
+    ,Sum([outflowcalls])[outflowcalls]
+    ,Sum([anstime])[anstime]
+	,Cast(? as tinyInt) vendorID
+	,month(row_date) monthNum
+	,year(row_date) yearNum
+    ,Sum(i_tavailtime)i_tavailtime
+From
+	vw_Hsplit_combined
+Where
+	row_date = @startDate
+	and starttime &gt;= @starttime
+	and split not between 3900 and 4000
+	and (i_availtime &gt; 0
+		or acdcalls &gt; 0
+		or abncalls &gt; 0
+		or i_arrived &gt; 0)
+Group by
+	row_date
+	,starttime
+	,acd
+	,split;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{04AF0442-ECB1-42FE-987E-311AE47A74FF};"Parameter1:Input",{909961D3-5F1A-43FF-B6EF-19D50163C0D1};"Parameter2:Input",{DEA25F4D-6D99-4FB9-9EFF-0AC52310EF36};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Connections[OleDbConnection]"
+                  connectionManagerID="{839E8B7C-411F-45BE-8246-56D354A55CBA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP03_DCPRD03.Avaya_ECH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[row_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[row_date]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[row_date]"
+                      name="row_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acd]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acd]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acd]"
+                      name="acd"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[split]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[split]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[split]"
+                      name="split"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_availtime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_availtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_availtime]"
+                      name="i_availtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acdtime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_acdtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acdtime]"
+                      name="i_acdtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acwtime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_acwtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acwtime]"
+                      name="i_acwtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acwouttime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_acwouttime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acwouttime]"
+                      name="i_acwouttime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acwintime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_acwintime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acwintime]"
+                      name="i_acwintime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_auxtime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_auxtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_auxtime]"
+                      name="i_auxtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_auxouttime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_auxouttime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_auxouttime]"
+                      name="i_auxouttime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_auxintime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_auxintime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_auxintime]"
+                      name="i_auxintime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_othertime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_othertime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_othertime]"
+                      name="i_othertime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwincalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwincalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwincalls]"
+                      name="acwincalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwintime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwintime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwintime]"
+                      name="acwintime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxincalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxincalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxincalls]"
+                      name="auxincalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxintime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxintime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxintime]"
+                      name="auxintime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwoutcalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwoutcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwoutcalls]"
+                      name="acwoutcalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwouttime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwouttime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwouttime]"
+                      name="acwouttime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxoutcalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxoutcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxoutcalls]"
+                      name="auxoutcalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxouttime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxouttime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxouttime]"
+                      name="auxouttime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acdcalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acdcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acdcalls]"
+                      name="acdcalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[anstime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[anstime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[anstime]"
+                      name="anstime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acdtime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acdtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acdtime]"
+                      name="acdtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwtime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwtime]"
+                      name="acwtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[holdcalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[holdcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[holdcalls]"
+                      name="holdcalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[holdtime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[holdtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[holdtime]"
+                      name="holdtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[holdabncalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[holdabncalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[holdabncalls]"
+                      name="holdabncalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[transferred]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[transferred]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[transferred]"
+                      name="transferred"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[conference]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[conference]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[conference]"
+                      name="conference"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[abncalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[abncalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[abncalls]"
+                      name="abncalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[abntime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[abntime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[abntime]"
+                      name="abntime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[dequecalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[dequecalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[dequecalls]"
+                      name="dequecalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[busycalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[busycalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[busycalls]"
+                      name="busycalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[disccalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[disccalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[disccalls]"
+                      name="disccalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[outflowcalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[outflowcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[outflowcalls]"
+                      name="outflowcalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acceptable]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acceptable]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acceptable]"
+                      name="acceptable"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_ringtime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_ringtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_ringtime]"
+                      name="i_ringtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[ringtime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[ringtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[ringtime]"
+                      name="ringtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[ringcalls]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[ringcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[ringcalls]"
+                      name="ringcalls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acdothertime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_acdothertime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acdothertime]"
+                      name="i_acdothertime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_arrived]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_arrived]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_arrived]"
+                      name="i_arrived"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[vendorID]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[vendorID]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[vendorID]"
+                      name="vendorID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[monthNum]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[monthNum]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[monthNum]"
+                      name="monthNum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[yearNum]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[yearNum]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[yearNum]"
+                      name="yearNum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[interval]"
+                      dataType="dbTime2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[interval]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[interval]"
+                      name="interval"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                      name="i_tavailtime"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[row_date]"
+                      dataType="dbDate"
+                      name="row_date" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acd]"
+                      dataType="i2"
+                      name="acd" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[split]"
+                      dataType="i2"
+                      name="split" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_availtime]"
+                      dataType="i4"
+                      name="i_availtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_acdtime]"
+                      dataType="i4"
+                      name="i_acdtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_acwtime]"
+                      dataType="i4"
+                      name="i_acwtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_acwouttime]"
+                      dataType="i4"
+                      name="i_acwouttime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_acwintime]"
+                      dataType="i4"
+                      name="i_acwintime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_auxtime]"
+                      dataType="i4"
+                      name="i_auxtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_auxouttime]"
+                      dataType="i4"
+                      name="i_auxouttime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_auxintime]"
+                      dataType="i4"
+                      name="i_auxintime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_othertime]"
+                      dataType="i4"
+                      name="i_othertime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwincalls]"
+                      dataType="i4"
+                      name="acwincalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwintime]"
+                      dataType="i4"
+                      name="acwintime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxincalls]"
+                      dataType="i4"
+                      name="auxincalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxintime]"
+                      dataType="i4"
+                      name="auxintime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwoutcalls]"
+                      dataType="i4"
+                      name="acwoutcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwouttime]"
+                      dataType="i4"
+                      name="acwouttime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxoutcalls]"
+                      dataType="i4"
+                      name="auxoutcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[auxouttime]"
+                      dataType="i4"
+                      name="auxouttime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acdcalls]"
+                      dataType="i4"
+                      name="acdcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[anstime]"
+                      dataType="i4"
+                      name="anstime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acdtime]"
+                      dataType="i4"
+                      name="acdtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acwtime]"
+                      dataType="i4"
+                      name="acwtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[holdcalls]"
+                      dataType="i4"
+                      name="holdcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[holdtime]"
+                      dataType="i4"
+                      name="holdtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[holdabncalls]"
+                      dataType="i4"
+                      name="holdabncalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[transferred]"
+                      dataType="i4"
+                      name="transferred" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[conference]"
+                      dataType="i4"
+                      name="conference" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[abncalls]"
+                      dataType="i4"
+                      name="abncalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[abntime]"
+                      dataType="i4"
+                      name="abntime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[dequecalls]"
+                      dataType="i4"
+                      name="dequecalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[busycalls]"
+                      dataType="i4"
+                      name="busycalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[disccalls]"
+                      dataType="i4"
+                      name="disccalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[outflowcalls]"
+                      dataType="i4"
+                      name="outflowcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[acceptable]"
+                      dataType="i4"
+                      name="acceptable" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_ringtime]"
+                      dataType="i4"
+                      name="i_ringtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[ringtime]"
+                      dataType="i4"
+                      name="ringtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[ringcalls]"
+                      dataType="i4"
+                      name="ringcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_acdothertime]"
+                      dataType="i4"
+                      name="i_acdothertime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_arrived]"
+                      dataType="i4"
+                      name="i_arrived" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[vendorID]"
+                      dataType="ui1"
+                      name="vendorID" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[monthNum]"
+                      dataType="i4"
+                      name="monthNum" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[yearNum]"
+                      dataType="i4"
+                      name="yearNum" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[interval]"
+                      dataType="dbTime2"
+                      name="interval" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                      dataType="i4"
+                      name="i_tavailtime" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[row_date]"
+                      dataType="dbDate"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[row_date]"
+                      name="row_date" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[interval]"
+                      dataType="dbTime2"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[interval]"
+                      name="interval" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acd]"
+                      dataType="i2"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acd]"
+                      name="acd" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[split]"
+                      dataType="i2"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[split]"
+                      name="split" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_availtime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_availtime]"
+                      name="i_availtime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_acdtime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_acdtime]"
+                      name="i_acdtime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_acwtime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_acwtime]"
+                      name="i_acwtime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_acwouttime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_acwouttime]"
+                      name="i_acwouttime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_acwintime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_acwintime]"
+                      name="i_acwintime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_auxtime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_auxtime]"
+                      name="i_auxtime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_auxouttime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_auxouttime]"
+                      name="i_auxouttime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_auxintime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_auxintime]"
+                      name="i_auxintime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_othertime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_othertime]"
+                      name="i_othertime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwincalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwincalls]"
+                      name="acwincalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwintime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwintime]"
+                      name="acwintime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxincalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxincalls]"
+                      name="auxincalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxintime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxintime]"
+                      name="auxintime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwoutcalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwoutcalls]"
+                      name="acwoutcalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwouttime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwouttime]"
+                      name="acwouttime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxoutcalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxoutcalls]"
+                      name="auxoutcalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxouttime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[auxouttime]"
+                      name="auxouttime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acdcalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acdcalls]"
+                      name="acdcalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[anstime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[anstime]"
+                      name="anstime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acdtime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acdtime]"
+                      name="acdtime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwtime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acwtime]"
+                      name="acwtime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[holdcalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[holdcalls]"
+                      name="holdcalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[holdtime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[holdtime]"
+                      name="holdtime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[holdabncalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[holdabncalls]"
+                      name="holdabncalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[transferred]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[transferred]"
+                      name="transferred" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[conference]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[conference]"
+                      name="conference" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[abncalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[abncalls]"
+                      name="abncalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[abntime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[abntime]"
+                      name="abntime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[dequecalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[dequecalls]"
+                      name="dequecalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[busycalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[busycalls]"
+                      name="busycalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[disccalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[disccalls]"
+                      name="disccalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[outflowcalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[outflowcalls]"
+                      name="outflowcalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acceptable]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[acceptable]"
+                      name="acceptable" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_ringtime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_ringtime]"
+                      name="i_ringtime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ringtime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ringtime]"
+                      name="ringtime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ringcalls]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ringcalls]"
+                      name="ringcalls" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_acdothertime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_acdothertime]"
+                      name="i_acdothertime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_arrived]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_arrived]"
+                      name="i_arrived" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[vendorID]"
+                      dataType="ui1"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[vendorID]"
+                      name="vendorID" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[monthNum]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[monthNum]"
+                      name="monthNum" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[yearNum]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[yearNum]"
+                      name="yearNum" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                      name="i_tavailtime" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Frontier hSplit Transfer\hSplit Stg"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="hSplit Stg"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[hSplitInterval]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Frontier hSplit Transfer\hSplit Stg.Connections[OleDbConnection]"
+                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[row_date]"
+                      cachedDataType="dbDate"
+                      cachedName="row_date"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[row_date]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[row_date]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[acd]"
+                      cachedDataType="i2"
+                      cachedName="acd"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acd]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acd]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[split]"
+                      cachedDataType="i2"
+                      cachedName="split"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[split]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[split]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_availtime]"
+                      cachedDataType="i4"
+                      cachedName="i_availtime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_availtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_availtime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_acdtime]"
+                      cachedDataType="i4"
+                      cachedName="i_acdtime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_acdtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acdtime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_acwtime]"
+                      cachedDataType="i4"
+                      cachedName="i_acwtime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_acwtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acwtime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_acwouttime]"
+                      cachedDataType="i4"
+                      cachedName="i_acwouttime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_acwouttime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acwouttime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_acwintime]"
+                      cachedDataType="i4"
+                      cachedName="i_acwintime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_acwintime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acwintime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_auxtime]"
+                      cachedDataType="i4"
+                      cachedName="i_auxtime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_auxtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_auxtime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_auxouttime]"
+                      cachedDataType="i4"
+                      cachedName="i_auxouttime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_auxouttime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_auxouttime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_auxintime]"
+                      cachedDataType="i4"
+                      cachedName="i_auxintime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_auxintime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_auxintime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_othertime]"
+                      cachedDataType="i4"
+                      cachedName="i_othertime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_othertime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_othertime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[acwincalls]"
+                      cachedDataType="i2"
+                      cachedName="acwincalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acwincalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwincalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[acwintime]"
+                      cachedDataType="i4"
+                      cachedName="acwintime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acwintime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwintime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[auxincalls]"
+                      cachedDataType="i2"
+                      cachedName="auxincalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[auxincalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxincalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[auxintime]"
+                      cachedDataType="i4"
+                      cachedName="auxintime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[auxintime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxintime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[acwoutcalls]"
+                      cachedDataType="i2"
+                      cachedName="acwoutcalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acwoutcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwoutcalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[acwouttime]"
+                      cachedDataType="i4"
+                      cachedName="acwouttime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acwouttime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwouttime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[auxoutcalls]"
+                      cachedDataType="i2"
+                      cachedName="auxoutcalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[auxoutcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxoutcalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[auxouttime]"
+                      cachedDataType="i4"
+                      cachedName="auxouttime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[auxouttime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[auxouttime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[acdcalls]"
+                      cachedDataType="i2"
+                      cachedName="acdcalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acdcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acdcalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[anstime]"
+                      cachedDataType="i4"
+                      cachedName="anstime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[anstime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[anstime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[acdtime]"
+                      cachedDataType="i4"
+                      cachedName="acdtime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acdtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acdtime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[acwtime]"
+                      cachedDataType="i4"
+                      cachedName="acwtime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acwtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acwtime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[holdcalls]"
+                      cachedDataType="i2"
+                      cachedName="holdcalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[holdcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[holdcalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[holdtime]"
+                      cachedDataType="i4"
+                      cachedName="holdtime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[holdtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[holdtime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[holdabncalls]"
+                      cachedDataType="i2"
+                      cachedName="holdabncalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[holdabncalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[holdabncalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[transferred]"
+                      cachedDataType="i2"
+                      cachedName="transferred"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[transferred]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[transferred]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[conference]"
+                      cachedDataType="i2"
+                      cachedName="conference"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[conference]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[conference]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[abncalls]"
+                      cachedDataType="i2"
+                      cachedName="abncalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[abncalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[abncalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[abntime]"
+                      cachedDataType="i4"
+                      cachedName="abntime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[abntime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[abntime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[dequecalls]"
+                      cachedDataType="i2"
+                      cachedName="dequecalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[dequecalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[dequecalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[busycalls]"
+                      cachedDataType="i2"
+                      cachedName="busycalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[busycalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[busycalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[disccalls]"
+                      cachedDataType="i2"
+                      cachedName="disccalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[disccalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[disccalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[outflowcalls]"
+                      cachedDataType="i2"
+                      cachedName="outflowcalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[outflowcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[outflowcalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[acceptable]"
+                      cachedDataType="i2"
+                      cachedName="acceptable"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acceptable]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[acceptable]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_ringtime]"
+                      cachedDataType="i4"
+                      cachedName="i_ringtime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_ringtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_ringtime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[ringtime]"
+                      cachedDataType="i4"
+                      cachedName="ringtime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[ringtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[ringtime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[ringcalls]"
+                      cachedDataType="i2"
+                      cachedName="ringcalls"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[ringcalls]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[ringcalls]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_acdothertime]"
+                      cachedDataType="i4"
+                      cachedName="i_acdothertime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_acdothertime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_acdothertime]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_arrived]"
+                      cachedDataType="i4"
+                      cachedName="i_arrived"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_arrived]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_arrived]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[vendorID]"
+                      cachedDataType="ui1"
+                      cachedName="vendorID"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[vendorID]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[vendorID]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[interval]"
+                      cachedDataType="dbTime2"
+                      cachedName="interval"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[interval]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[interval]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[monthNum]"
+                      cachedDataType="i4"
+                      cachedName="monthNum"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[monthNum]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[monthNum]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[yearNum]"
+                      cachedDataType="i4"
+                      cachedName="yearNum"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[yearNum]" />
+                    <inputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_tavailtime]"
+                      cachedDataType="i4"
+                      cachedName="i_tavailtime"
+                      externalMetadataColumnId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                      lineageId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[row_date]"
+                      dataType="dbDate"
+                      name="row_date" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acd]"
+                      dataType="i2"
+                      name="acd" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[split]"
+                      dataType="i2"
+                      name="split" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[vendorID]"
+                      dataType="i4"
+                      name="vendorID" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_availtime]"
+                      dataType="i4"
+                      name="i_availtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_acdtime]"
+                      dataType="i4"
+                      name="i_acdtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_acwtime]"
+                      dataType="i4"
+                      name="i_acwtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_acwouttime]"
+                      dataType="i4"
+                      name="i_acwouttime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_acwintime]"
+                      dataType="i4"
+                      name="i_acwintime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_auxtime]"
+                      dataType="i4"
+                      name="i_auxtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_auxouttime]"
+                      dataType="i4"
+                      name="i_auxouttime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_auxintime]"
+                      dataType="i4"
+                      name="i_auxintime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_othertime]"
+                      dataType="i4"
+                      name="i_othertime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acwincalls]"
+                      dataType="i2"
+                      name="acwincalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acwintime]"
+                      dataType="i4"
+                      name="acwintime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[auxincalls]"
+                      dataType="i2"
+                      name="auxincalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[auxintime]"
+                      dataType="i4"
+                      name="auxintime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acwoutcalls]"
+                      dataType="i2"
+                      name="acwoutcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acwouttime]"
+                      dataType="i4"
+                      name="acwouttime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[auxoutcalls]"
+                      dataType="i2"
+                      name="auxoutcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[auxouttime]"
+                      dataType="i4"
+                      name="auxouttime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acdcalls]"
+                      dataType="i2"
+                      name="acdcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[anstime]"
+                      dataType="i4"
+                      name="anstime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acdtime]"
+                      dataType="i4"
+                      name="acdtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acwtime]"
+                      dataType="i4"
+                      name="acwtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[holdcalls]"
+                      dataType="i2"
+                      name="holdcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[holdtime]"
+                      dataType="i4"
+                      name="holdtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[holdabncalls]"
+                      dataType="i2"
+                      name="holdabncalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[transferred]"
+                      dataType="i2"
+                      name="transferred" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[conference]"
+                      dataType="i2"
+                      name="conference" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[abncalls]"
+                      dataType="i2"
+                      name="abncalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[abntime]"
+                      dataType="i4"
+                      name="abntime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[dequecalls]"
+                      dataType="i2"
+                      name="dequecalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[busycalls]"
+                      dataType="i2"
+                      name="busycalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[disccalls]"
+                      dataType="i2"
+                      name="disccalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[outflowcalls]"
+                      dataType="i2"
+                      name="outflowcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[acceptable]"
+                      dataType="i2"
+                      name="acceptable" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_ringtime]"
+                      dataType="i4"
+                      name="i_ringtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[ringtime]"
+                      dataType="i4"
+                      name="ringtime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[ringcalls]"
+                      dataType="i2"
+                      name="ringcalls" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_acdothertime]"
+                      dataType="i4"
+                      name="i_acdothertime" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_arrived]"
+                      dataType="i4"
+                      name="i_arrived" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[interval]"
+                      dataType="dbTime2"
+                      name="interval" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[monthNum]"
+                      dataType="ui1"
+                      name="monthNum" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
+                      dataType="i2"
+                      name="yearNum" />
+                    <externalMetadataColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                      dataType="i4"
+                      name="i_tavailtime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Frontier hSplit Transfer\hSplit Stg.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\hSplit Stg.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Frontier hSplit Transfer\hSplit Stg.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Frontier hSplit Transfer\hSplit Stg.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Frontier hSplit Transfer.Paths[OLE DB Source Output]"
+              endId="Package\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get latest Interval"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D429CD6C-6F28-4172-AEC7-98B39968BF3D}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get latest Interval"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="exec stg.getLatestInterval ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::latestIntervalDate" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="1"
+            SQLTask:DtsVariableName="User::latestIntervalStarttime" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::vendorID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{237F9340-F7FA-4E61-BDBC-285C4A9F3C07}"
+      DTS:From="Package\Get latest Interval"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Frontier hSplit Transfer" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Frontier hSplit Transfer"
+          TopLeft="294.5,165.5" />
+        <NodeLayout
+          Size="164,43"
+          Id="Package\Get latest Interval"
+          TopLeft="303,4.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="386.75,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,118"
+              Start="0,0"
+              End="0,110.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,110.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Frontier hSplit Transfer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Frontier hSplit Transfer\hSplit Stg"
+          TopLeft="178.5,138.5" />
+        <NodeLayout
+          Size="217,42"
+          Id="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data"
+          TopLeft="137.5,28.5" />
+        <EdgeLayout
+          Id="Package\Frontier hSplit Transfer.Paths[OLE DB Source Output]"
+          TopLeft="243.25,70.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68"
+              Start="0,0"
+              End="0,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Frontier hSplit Transfer\Frontier hSplit Historical Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Frontier hSplit Transfer\hSplit Stg">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="6/23/2017 3:48:56 PM"
@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SykesTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{809CB098-35AD-41EA-9FC9-3B9E9B9AA168}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{DC2986D3-39BA-465E-BD6D-CC6230FA0638}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:PackageParameters>
@@ -149,8 +149,8 @@
                   <connections>
                     <connection
                       refId="Package\For each date\Sykes hSplit Transfer\hSplit Stg.Connections[OleDbConnection]"
-                      connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
-                      connectionManagerRefId="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
+                      connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -432,6 +432,12 @@
                           cachedName="yearNum"
                           externalMetadataColumnId="Package\For each date\Sykes hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
                           lineageId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Output].Columns[yearNum]" />
+                        <inputColumn
+                          refId="Package\For each date\Sykes hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_tavailtime]"
+                          cachedDataType="i4"
+                          cachedName="i_tavailtime"
+                          externalMetadataColumnId="Package\For each date\Sykes hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                          lineageId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -616,9 +622,9 @@
                           dataType="i4"
                           name="yearNum" />
                         <externalMetadataColumn
-                          refId="Package\For each date\Sykes hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[monthDate]"
-                          dataType="dbDate"
-                          name="monthDate" />
+                          refId="Package\For each date\Sykes hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                          dataType="i4"
+                          name="i_tavailtime" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -720,6 +726,7 @@ Select
 	,Cast(? as tinyInt) vendorID
 	,month(row_date) monthNum
 	,year(row_date) yearNum
+    ,i_tavailtime
 From
 	vend_sykes.vw_Hsplit
 Where
@@ -749,8 +756,8 @@ Where
                   <connections>
                     <connection
                       refId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Connections[OleDbConnection]"
-                      connectionManagerID="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:invalid"
-                      connectionManagerRefId="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:invalid"
+                      connectionManagerID="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP03_DCPRD03.InterfaceMaintenance]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -1164,6 +1171,15 @@ Where
                           lineageId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Output].Columns[interval]"
                           name="interval"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                          lineageId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                          name="i_tavailtime"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -1347,6 +1363,10 @@ Where
                           refId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[interval]"
                           dataType="dbTime2"
                           name="interval" />
+                        <externalMetadataColumn
+                          refId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                          dataType="i4"
+                          name="i_tavailtime" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -1579,6 +1599,11 @@ Where
                           dataType="i4"
                           lineageId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[yearNum]"
                           name="yearNum" />
+                        <outputColumn
+                          refId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                          dataType="i4"
+                          lineageId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                          name="i_tavailtime" />
                         <outputColumn
                           refId="Package\For each date\Sykes hSplit Transfer\Sykes hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           dataType="i4"

@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="6/23/2017 3:24:33 PM"
@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="EmpereonTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{AF044ED2-B853-4B17-9F07-98A2A2397D18}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{C93F7359-5530-46BC-B823-3CE31E52F9A1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:PackageParameters>
@@ -163,6 +163,7 @@ Select
 	,Cast(? as tinyInt) vendorID
 	,month(row_date) monthNum
 	,year(row_date) yearNum
+    ,i_tavailtime
 From
 	vend_Empereon.vw_Hsplit
 Where
@@ -192,8 +193,8 @@ Where
                   <connections>
                     <connection
                       refId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Connections[OleDbConnection]"
-                      connectionManagerID="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:invalid"
-                      connectionManagerRefId="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:invalid"
+                      connectionManagerID="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP03_DCPRD03.InterfaceMaintenance]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -607,6 +608,15 @@ Where
                           lineageId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Output].Columns[interval]"
                           name="interval"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                          lineageId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                          name="i_tavailtime"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -790,6 +800,10 @@ Where
                           refId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[interval]"
                           dataType="dbTime2"
                           name="interval" />
+                        <externalMetadataColumn
+                          refId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                          dataType="i4"
+                          name="i_tavailtime" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -1023,6 +1037,11 @@ Where
                           lineageId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[yearNum]"
                           name="yearNum" />
                         <outputColumn
+                          refId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                          dataType="i4"
+                          lineageId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                          name="i_tavailtime" />
+                        <outputColumn
                           refId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
                           lineageId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
@@ -1098,8 +1117,8 @@ Where
                   <connections>
                     <connection
                       refId="Package\For each date\Empereon hSplit Transfer\hSplit Stg.Connections[OleDbConnection]"
-                      connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
-                      connectionManagerRefId="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
+                      connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -1381,6 +1400,12 @@ Where
                           cachedName="yearNum"
                           externalMetadataColumnId="Package\For each date\Empereon hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
                           lineageId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Output].Columns[yearNum]" />
+                        <inputColumn
+                          refId="Package\For each date\Empereon hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_tavailtime]"
+                          cachedDataType="i4"
+                          cachedName="i_tavailtime"
+                          externalMetadataColumnId="Package\For each date\Empereon hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                          lineageId="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -1565,9 +1590,9 @@ Where
                           dataType="i4"
                           name="yearNum" />
                         <externalMetadataColumn
-                          refId="Package\For each date\Empereon hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[monthDate]"
-                          dataType="dbDate"
-                          name="monthDate" />
+                          refId="Package\For each date\Empereon hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                          dataType="i4"
+                          name="i_tavailtime" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1714,13 +1739,13 @@ Where
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="228,42"
-          Id="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data"
-          TopLeft="129.5,30.5" />
-        <NodeLayout
           Size="124,42"
           Id="Package\For each date\Empereon hSplit Transfer\hSplit Stg"
           TopLeft="177.5,135.5" />
+        <NodeLayout
+          Size="228,42"
+          Id="Package\For each date\Empereon hSplit Transfer\Empereon hSplit Historical Data"
+          TopLeft="129.5,30.5" />
         <EdgeLayout
           Id="Package\For each date\Empereon hSplit Transfer.Paths[OLE DB Source Output]"
           TopLeft="241.5,72.5">

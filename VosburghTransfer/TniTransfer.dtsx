@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="6/23/2017 3:54:37 PM"
@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="TniTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{B04F59B1-C67F-4D4D-8F45-3C7F4353461D}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{E9EEB5E7-0CA1-4A23-AFF6-12D57FF2138C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:PackageParameters>
@@ -149,8 +149,8 @@
                   <connections>
                     <connection
                       refId="Package\For each date\TNI hSplit Transfer\hSplit Stg.Connections[OleDbConnection]"
-                      connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
-                      connectionManagerRefId="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
+                      connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -432,6 +432,12 @@
                           cachedName="yearNum"
                           externalMetadataColumnId="Package\For each date\TNI hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
                           lineageId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Output].Columns[yearNum]" />
+                        <inputColumn
+                          refId="Package\For each date\TNI hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_tavailtime]"
+                          cachedDataType="i4"
+                          cachedName="i_tavailtime"
+                          externalMetadataColumnId="Package\For each date\TNI hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                          lineageId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -616,9 +622,9 @@
                           dataType="i4"
                           name="yearNum" />
                         <externalMetadataColumn
-                          refId="Package\For each date\TNI hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[monthDate]"
-                          dataType="dbDate"
-                          name="monthDate" />
+                          refId="Package\For each date\TNI hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                          dataType="i4"
+                          name="i_tavailtime" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -716,13 +722,14 @@ Select
 		When Skill_Id in (1262, 1276, 1307) then Sum(ANS60)
 		else Sum(ANS120)
 	end as acceptable	
-	,Sum(acdcalls)i_arrived
+	,Sum(Coalesce(Calls_Handled,acdcalls) + Coalesce(Call_Abandoned,abncalls))i_arrived
 	,Sum(dequecalls)dequecalls
 	,Sum(busycalls)busycalls
 	,Sum(disccalls)disccalls
 	,Month(Coalesce(CallDate,row_date)) monthNum
 	,Year(Coalesce(CallDate,row_date)) yearNum
 	,Sum(outflowcalls)outflowcalls
+	,Sum(i_availtime)i_tavailtime
 From
 	vend_tni.vw_CallDistribution cd Full Outer Join vend_tni.vw_Hsplit hsplit
 		on cd.Skill_Id = hsplit.split
@@ -757,8 +764,8 @@ Group by Skill_Id, CallDate, Interval,row_date,starttime,split;</property>
                   <connections>
                     <connection
                       refId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Connections[OleDbConnection]"
-                      connectionManagerID="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:invalid"
-                      connectionManagerRefId="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:invalid"
+                      connectionManagerID="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP03_DCPRD03.InterfaceMaintenance]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -1172,6 +1179,15 @@ Group by Skill_Id, CallDate, Interval,row_date,starttime,split;</property>
                           lineageId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Output].Columns[yearNum]"
                           name="yearNum"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                          lineageId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                          name="i_tavailtime"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -1355,6 +1371,10 @@ Group by Skill_Id, CallDate, Interval,row_date,starttime,split;</property>
                           refId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[yearNum]"
                           dataType="i4"
                           name="yearNum" />
+                        <externalMetadataColumn
+                          refId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                          dataType="i4"
+                          name="i_tavailtime" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -1587,6 +1607,11 @@ Group by Skill_Id, CallDate, Interval,row_date,starttime,split;</property>
                           dataType="ui1"
                           lineageId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[vendorID]"
                           name="vendorID" />
+                        <outputColumn
+                          refId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                          dataType="i4"
+                          lineageId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                          name="i_tavailtime" />
                         <outputColumn
                           refId="Package\For each date\TNI hSplit Transfer\TNI hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           dataType="i4"

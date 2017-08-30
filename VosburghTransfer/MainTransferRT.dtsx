@@ -5,14 +5,14 @@
   DTS:CreationName="SSIS.Package.3"
   DTS:CreatorComputerName="6LVFP32"
   DTS:CreatorName="CORP\jms844"
-  DTS:DTSID="{CE43934B-E438-48DC-B362-1E1CC4FBAC92}"
+  DTS:DTSID="{0DAFFAE2-4191-4104-8740-698967277F8D}"
   DTS:ExecutableType="SSIS.Package.3"
   DTS:LastModifiedProductVersion="13.0.4001.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="MainTransfer"
+  DTS:ObjectName="MainTransferRT"
   DTS:PackageType="5"
-  DTS:VersionBuild="36"
-  DTS:VersionGUID="{D4E4EFB4-E69A-4550-AF65-665A69EABFAD}">
+  DTS:VersionBuild="41"
+  DTS:VersionGUID="{6D0E162D-F9DC-420F-BE6E-0C6990FCF86F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:Variables />
@@ -21,7 +21,7 @@
       DTS:refId="Package\hSplit Merge"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{4c43ea85-e07e-4b2a-8a95-815bfba41438}"
+      DTS:DTSID="{89359F8B-72B6-4E61-A809-960EC79E8A0D}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="hSplit Merge"
@@ -31,31 +31,30 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-          SQLTask:SqlStatementSource="exec fact.updateHsplit;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="exec stg.updateHsplitInterval;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Rebuild stgHsplit Index"
+      DTS:refId="Package\New Splits"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{2BACF801-B403-4FD1-A082-6E9D5B0FAABE}"
+      DTS:DTSID="{EE3574CF-A147-4972-873B-165356CB1323}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Rebuild stgHsplit Index"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ObjectName="New Splits"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-          SQLTask:SqlStatementSource="exec rebuildStgHsplit" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="exec mergeNewSplits; exec mergeNewSplitDetails;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Sequence Container"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{48C6D557-CC7E-427A-96E0-58EE975E3953}"
+      DTS:DTSID="{21BB5CFF-1074-4126-85FC-D380B370AC1F}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Sequence Container">
@@ -65,7 +64,8 @@
           DTS:refId="Package\Sequence Container\Execute Package Alorica"
           DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{78CCEFFB-345D-4D76-9C5D-F41690E84C21}"
+          DTS:Disabled="True"
+          DTS:DTSID="{FC025406-FB3D-4F05-849E-375DA4B642F3}"
           DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package Alorica"
@@ -82,7 +82,7 @@
           DTS:refId="Package\Sequence Container\Execute Package Empereon"
           DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{fa5983c2-a0a2-4261-bea8-0f5ad251fc48}"
+          DTS:DTSID="{99A26A10-7CAD-4C60-909E-41984106B22E}"
           DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package Empereon"
@@ -91,7 +91,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>EmpereonTransfer.dtsx</PackageName>
+              <PackageName>EmpereonTransferRT.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -99,7 +99,7 @@
           DTS:refId="Package\Sequence Container\Execute Package Ibex"
           DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{96b550aa-6dd6-4a26-8d25-1d9dc0f23e87}"
+          DTS:DTSID="{8403395C-C75B-4634-8F69-1DD96B22E332}"
           DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package Ibex"
@@ -108,7 +108,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>IbexTransfer.dtsx</PackageName>
+              <PackageName>IbexTransferRT.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -116,7 +116,8 @@
           DTS:refId="Package\Sequence Container\Execute Package OTD"
           DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{982f2a32-c981-4aac-bbe9-5d9c0207f868}"
+          DTS:Disabled="True"
+          DTS:DTSID="{AE608FEB-22B7-4D6F-B87D-56955721BCC1}"
           DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package OTD"
@@ -125,7 +126,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>OtdTransfer.dtsx</PackageName>
+              <PackageName>OtdTransferRT.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -133,7 +134,7 @@
           DTS:refId="Package\Sequence Container\Execute Package Sykes"
           DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{b29ed97b-99b9-49ad-925c-bbc48fd50c8a}"
+          DTS:DTSID="{F0CECFC8-049A-43CE-8686-D24392BB4C41}"
           DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package Sykes"
@@ -142,7 +143,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>SykesTransfer.dtsx</PackageName>
+              <PackageName>SykesTransferRT.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -150,7 +151,7 @@
           DTS:refId="Package\Sequence Container\Execute Package TNI"
           DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{2da5b4ff-c268-4a33-a0f7-f7ecba6b5a87}"
+          DTS:DTSID="{1214624C-473E-400C-8B45-67268CEC816C}"
           DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package TNI"
@@ -159,7 +160,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>TniTransfer.dtsx</PackageName>
+              <PackageName>TniTransferRT.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -167,7 +168,8 @@
           DTS:refId="Package\Sequence Container\Execute Package TP"
           DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{ea7a9eb4-d978-4452-9781-61a9e4a8e330}"
+          DTS:Disabled="True"
+          DTS:DTSID="{BE1F6EED-C13E-4A92-8262-FED57680900E}"
           DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute Package TP"
@@ -184,7 +186,7 @@
           DTS:refId="Package\Sequence Container\Execute PackageFrontier"
           DTS:CreationName="SSIS.ExecutePackageTask.3"
           DTS:Description="Execute PackageFrontier"
-          DTS:DTSID="{36C7E6AA-72E3-4142-AE6A-665F0D885D57}"
+          DTS:DTSID="{F52683CD-4D73-4AA9-95FB-5A511F44468E}"
           DTS:ExecutableType="SSIS.ExecutePackageTask.3"
           DTS:LocaleID="-1"
           DTS:ObjectName="Execute PackageFrontier"
@@ -193,25 +195,25 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>FrontierTransfer.dtsx</PackageName>
+              <PackageName>FrontierTransferRT.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Sequence Container\Update latest day hSplit"
+          DTS:refId="Package\Sequence Container\Update Recent Intervals"
           DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{2194143B-06EB-4E61-A862-A0F953AA1690}"
+          DTS:DTSID="{F8001D39-CC6B-4E3A-8CD6-C16135D5BD22}"
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Update latest day hSplit"
+          DTS:ObjectName="Update Recent Intervals"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
           DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-              SQLTask:SqlStatementSource="exec updateLastDateHsplit" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="exec recent.updateRecentIntervals" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
@@ -219,74 +221,74 @@
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{425F0F43-993E-4C7B-9F0D-6F6D41F13D74}"
+          DTS:DTSID="{438AB384-E4BD-446D-8B7C-EB061BDB6A01}"
           DTS:From="Package\Sequence Container\Execute PackageFrontier"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
-          DTS:To="Package\Sequence Container\Update latest day hSplit"
+          DTS:To="Package\Sequence Container\Update Recent Intervals"
           DTS:Value="2" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
-          DTS:DTSID="{1481E624-E6A6-4BCE-86FE-F36716E247D3}"
+          DTS:DTSID="{6FC65928-D7CF-4A4D-BA09-ECBC2335E505}"
           DTS:From="Package\Sequence Container\Execute Package Alorica"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 2"
-          DTS:To="Package\Sequence Container\Update latest day hSplit"
+          DTS:To="Package\Sequence Container\Update Recent Intervals"
           DTS:Value="2" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
           DTS:CreationName=""
-          DTS:DTSID="{E08BD45C-232B-4624-A0A5-CDC8A16FCD5D}"
+          DTS:DTSID="{5873BA61-4F60-4F8C-B4D9-943DAB74D16A}"
           DTS:From="Package\Sequence Container\Execute Package Empereon"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 3"
-          DTS:To="Package\Sequence Container\Update latest day hSplit"
+          DTS:To="Package\Sequence Container\Update Recent Intervals"
           DTS:Value="2" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
           DTS:CreationName=""
-          DTS:DTSID="{8A2EF5D0-78CE-4F44-8019-9EBE58E4CD3C}"
+          DTS:DTSID="{36182E00-639B-43B6-9907-21D7FF9BD280}"
           DTS:From="Package\Sequence Container\Execute Package Ibex"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 4"
-          DTS:To="Package\Sequence Container\Update latest day hSplit"
+          DTS:To="Package\Sequence Container\Update Recent Intervals"
           DTS:Value="2" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
           DTS:CreationName=""
-          DTS:DTSID="{1640584A-CAE6-4406-BAC0-606708AEB5C9}"
+          DTS:DTSID="{6CE5C398-3A1A-4DEA-B633-B214B915E2EE}"
           DTS:From="Package\Sequence Container\Execute Package OTD"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 5"
-          DTS:To="Package\Sequence Container\Update latest day hSplit"
+          DTS:To="Package\Sequence Container\Update Recent Intervals"
           DTS:Value="2" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 6]"
           DTS:CreationName=""
-          DTS:DTSID="{453AEB98-B955-4FED-8565-8C88589DA467}"
+          DTS:DTSID="{10421217-4DC5-4A83-90C1-D7AB770496A7}"
           DTS:From="Package\Sequence Container\Execute Package Sykes"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 6"
-          DTS:To="Package\Sequence Container\Update latest day hSplit"
+          DTS:To="Package\Sequence Container\Update Recent Intervals"
           DTS:Value="2" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
           DTS:CreationName=""
-          DTS:DTSID="{3F712413-E7FE-48D5-90F1-4175C1B93E4B}"
+          DTS:DTSID="{E0EAD9C6-1EB6-40C5-9246-E864BC97F39D}"
           DTS:From="Package\Sequence Container\Execute Package TP"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 7"
-          DTS:To="Package\Sequence Container\Update latest day hSplit"
+          DTS:To="Package\Sequence Container\Update Recent Intervals"
           DTS:Value="2" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 8]"
           DTS:CreationName=""
-          DTS:DTSID="{F88D4208-48DF-48B7-B6D8-9CEC9B60C1B3}"
+          DTS:DTSID="{D252BA1E-3145-46C7-A3C2-C7889DBCD18B}"
           DTS:From="Package\Sequence Container\Execute Package TNI"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 8"
-          DTS:To="Package\Sequence Container\Update latest day hSplit"
+          DTS:To="Package\Sequence Container\Update Recent Intervals"
           DTS:Value="2" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
@@ -294,7 +296,7 @@
       DTS:refId="Package\Truncate hSplit Stg"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{cd0d2cf5-451d-4325-99f6-66ca51bff728}"
+      DTS:DTSID="{4849A067-67E5-4778-8084-4580ACCA19D3}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="Truncate hSplit Stg"
@@ -304,7 +306,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
-          SQLTask:SqlStatementSource="Truncate Table hSplitStg" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="Truncate Table stg.hSplitInterval" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -312,29 +314,28 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{4F5BA1EE-45F3-4806-BA07-F3257AB5A8C2}"
+      DTS:DTSID="{E59208B0-F239-4727-90A5-CAE766C31DBF}"
       DTS:From="Package\hSplit Merge"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Truncate hSplit Stg" />
+      DTS:To="Package\New Splits" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{4F6B35F9-C2FF-4576-B1E2-C0295891D5AA}"
+      DTS:DTSID="{DEF6DF75-503F-4A78-990B-C632F54B7B7E}"
       DTS:From="Package\Sequence Container"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Rebuild stgHsplit Index"
+      DTS:To="Package\hSplit Merge"
       DTS:Value="2" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
-      DTS:DTSID="{3F52F079-D8A1-4877-A721-376EE3051F69}"
-      DTS:From="Package\Rebuild stgHsplit Index"
+      DTS:DTSID="{FC296EC4-9732-46B8-A634-D09E118B59E8}"
+      DTS:From="Package\New Splits"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
-      DTS:To="Package\hSplit Merge"
-      DTS:Value="2" />
+      DTS:To="Package\Truncate hSplit Stg" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -351,11 +352,7 @@
         <NodeLayout
           Size="138,42"
           Id="Package\hSplit Merge"
-          TopLeft="931.5,415.5" />
-        <NodeLayout
-          Size="188,42"
-          Id="Package\Rebuild stgHsplit Index"
-          TopLeft="906.5,313.5" />
+          TopLeft="930.5,326.5" />
         <NodeLayout
           Size="193,42"
           Id="Package\Sequence Container\Execute Package Alorica"
@@ -389,42 +386,42 @@
           Id="Package\Sequence Container\Execute PackageFrontier"
           TopLeft="7,5.5" />
         <NodeLayout
-          Size="191,42"
-          Id="Package\Sequence Container\Update latest day hSplit"
+          Size="193,42"
+          Id="Package\Sequence Container\Update Recent Intervals"
           TopLeft="782,107.5" />
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
-          TopLeft="135.666666666667,47.5">
+          TopLeft="104.5,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="670.666666666667,59.9999999999999"
+              EndConnector="702.055555555556,60"
               Start="0,0"
-              End="670.666666666667,52.4999999999999">
+              End="702.055555555556,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,39.6517112012862" />
+                    End="0,43.8292794860028" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,39.6517112012862"
-                    Point2="0,43.6517112012862"
-                    Point3="4,43.6517112012862" />
+                    Point1="0,43.8292794860028"
+                    Point2="0,47.8292794860028"
+                    Point3="4,47.8292794860028" />
                   <mssgle:LineSegment
-                    End="666.666666666667,43.6517112012862" />
+                    End="698.055555555556,47.8292794860028" />
                   <mssgle:CubicBezierSegment
-                    Point1="666.666666666667,43.6517112012862"
-                    Point2="670.666666666667,43.6517112012862"
-                    Point3="670.666666666667,47.6517112012862" />
+                    Point1="698.055555555556,47.8292794860028"
+                    Point2="702.055555555556,47.8292794860028"
+                    Point3="702.055555555556,51.8292794860028" />
                   <mssgle:LineSegment
-                    End="670.666666666667,52.4999999999999" />
+                    End="702.055555555556,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="310.028880208333,48.6517112012862,50.60890625,11.609375"
+              BoundingBox="325.723324652778,52.8292794860028,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -434,33 +431,33 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="467.166666666667,59.9999999999999"
+              EndConnector="467.611111111111,60"
               Start="0,0"
-              End="467.166666666667,52.4999999999999">
+              End="467.611111111111,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.8799048751486" />
+                    End="0,36.8866222047862" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,36.8799048751486"
-                    Point2="0,40.8799048751486"
-                    Point3="4,40.8799048751486" />
+                    Point1="0,36.8866222047862"
+                    Point2="0,40.8866222047862"
+                    Point3="4,40.8866222047862" />
                   <mssgle:LineSegment
-                    End="463.166666666667,40.8799048751486" />
+                    End="463.611111111111,40.8866222047862" />
                   <mssgle:CubicBezierSegment
-                    Point1="463.166666666667,40.8799048751486"
-                    Point2="467.166666666667,40.8799048751486"
-                    Point3="467.166666666667,44.8799048751486" />
+                    Point1="463.611111111111,40.8866222047862"
+                    Point2="467.611111111111,40.8866222047862"
+                    Point3="467.611111111111,44.8866222047862" />
                   <mssgle:LineSegment
-                    End="467.166666666667,52.4999999999999" />
+                    End="467.611111111111,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="208.278880208334,45.8799048751486,50.60890625,11.609375"
+              BoundingBox="208.501102430556,45.8866222047862,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -470,33 +467,33 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="225.5,60"
+              EndConnector="226.166666666667,60.0000000000001"
               Start="0,0"
-              End="225.5,52.5">
+              End="226.166666666667,52.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.7009345794393" />
+                    End="0,31.7040082219939" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.7009345794393"
-                    Point2="0,35.7009345794393"
-                    Point3="4,35.7009345794393" />
+                    Point1="0,31.7040082219939"
+                    Point2="0,35.7040082219939"
+                    Point3="4,35.7040082219939" />
                   <mssgle:LineSegment
-                    End="221.5,35.7009345794393" />
+                    End="222.166666666667,35.7040082219939" />
                   <mssgle:CubicBezierSegment
-                    Point1="221.5,35.7009345794393"
-                    Point2="225.5,35.7009345794393"
-                    Point3="225.5,39.7009345794393" />
+                    Point1="222.166666666667,35.7040082219939"
+                    Point2="226.166666666667,35.7040082219939"
+                    Point3="226.166666666667,39.7040082219939" />
                   <mssgle:LineSegment
-                    End="225.5,52.5" />
+                    End="226.166666666667,52.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="87.445546875,40.7009345794393,50.60890625,11.609375"
+              BoundingBox="87.7788802083333,40.7040082219939,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -506,33 +503,33 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-10.1666666666666,60"
+              EndConnector="-9.27777777777783,60.0000000000001"
               Start="0,0"
-              End="-10.1666666666666,52.5">
+              End="-9.27777777777783,52.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.6866359447005" />
+                    End="0,27.6874429917909" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,27.6866359447005"
-                    Point2="0,31.6866359447005"
-                    Point3="-4,31.6866359447005" />
+                    Point1="0,27.6874429917909"
+                    Point2="0,31.6874429917909"
+                    Point3="-4,31.6874429917909" />
                   <mssgle:LineSegment
-                    End="-6.16666666666663,31.6866359447005" />
+                    End="-5.27777777777783,31.6874429917909" />
                   <mssgle:CubicBezierSegment
-                    Point1="-6.16666666666663,31.6866359447005"
-                    Point2="-10.1666666666666,31.6866359447005"
-                    Point3="-10.1666666666666,35.6866359447005" />
+                    Point1="-5.27777777777783,31.6874429917909"
+                    Point2="-9.27777777777783,31.6874429917909"
+                    Point3="-9.27777777777783,35.6874429917909" />
                   <mssgle:LineSegment
-                    End="-10.1666666666666,52.5" />
+                    End="-9.27777777777783,52.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-30.3877864583333,36.6866359447005,50.60890625,11.609375"
+              BoundingBox="-29.9433420138889,36.6874429917909,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -542,33 +539,33 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-232.333333333333,60.0000000000001"
+              EndConnector="-231.222222222222,60.0000000000001"
               Start="0,0"
-              End="-232.333333333333,52.5000000000001">
+              End="-231.222222222222,52.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.6866359447005" />
+                    End="0,27.6874429917909" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,27.6866359447005"
-                    Point2="0,31.6866359447005"
-                    Point3="-4,31.6866359447005" />
+                    Point1="0,27.6874429917909"
+                    Point2="0,31.6874429917909"
+                    Point3="-4,31.6874429917909" />
                   <mssgle:LineSegment
-                    End="-228.333333333333,31.6866359447005" />
+                    End="-227.222222222222,31.6874429917909" />
                   <mssgle:CubicBezierSegment
-                    Point1="-228.333333333333,31.6866359447005"
-                    Point2="-232.333333333333,31.6866359447005"
-                    Point3="-232.333333333333,35.6866359447005" />
+                    Point1="-227.222222222222,31.6874429917909"
+                    Point2="-231.222222222222,31.6874429917909"
+                    Point3="-231.222222222222,35.6874429917909" />
                   <mssgle:LineSegment
-                    End="-232.333333333333,52.5000000000001" />
+                    End="-231.222222222222,52.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-141.471119791667,36.6866359447005,50.60890625,11.609375"
+              BoundingBox="-140.915564236111,36.6874429917909,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -578,33 +575,33 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-469,60.0000000000001"
+              EndConnector="-467.666666666667,60.0000000000001"
               Start="0,0"
-              End="-469,52.5000000000001">
+              End="-467.666666666667,52.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.7009345794393" />
+                    End="0,31.7040082219939" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.7009345794393"
-                    Point2="0,35.7009345794393"
-                    Point3="-4,35.7009345794393" />
+                    Point1="0,31.7040082219939"
+                    Point2="0,35.7040082219939"
+                    Point3="-4,35.7040082219939" />
                   <mssgle:LineSegment
-                    End="-465,35.7009345794393" />
+                    End="-463.666666666667,35.7040082219939" />
                   <mssgle:CubicBezierSegment
-                    Point1="-465,35.7009345794393"
-                    Point2="-469,35.7009345794393"
-                    Point3="-469,39.7009345794393" />
+                    Point1="-463.666666666667,35.7040082219939"
+                    Point2="-467.666666666667,35.7040082219939"
+                    Point3="-467.666666666667,39.7040082219939" />
                   <mssgle:LineSegment
-                    End="-469,52.5000000000001" />
+                    End="-467.666666666667,52.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-259.804453125,40.7009345794393,50.60890625,11.609375"
+              BoundingBox="-259.137786458333,40.7040082219939,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -614,33 +611,33 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-705.166666666667,60.0000000000001"
+              EndConnector="-703.611111111111,60.0000000000002"
               Start="0,0"
-              End="-705.166666666667,52.5000000000001">
+              End="-703.611111111111,52.5000000000002">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.8799048751487" />
+                    End="0,36.8866222047864" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,36.8799048751487"
-                    Point2="0,40.8799048751487"
-                    Point3="-4,40.8799048751487" />
+                    Point1="0,36.8866222047864"
+                    Point2="0,40.8866222047864"
+                    Point3="-4,40.8866222047864" />
                   <mssgle:LineSegment
-                    End="-701.166666666667,40.8799048751487" />
+                    End="-699.611111111111,40.8866222047864" />
                   <mssgle:CubicBezierSegment
-                    Point1="-701.166666666667,40.8799048751487"
-                    Point2="-705.166666666667,40.8799048751487"
-                    Point3="-705.166666666667,44.8799048751487" />
+                    Point1="-699.611111111111,40.8866222047864"
+                    Point2="-703.611111111111,40.8866222047864"
+                    Point3="-703.611111111111,44.8866222047864" />
                   <mssgle:LineSegment
-                    End="-705.166666666667,52.5000000000001" />
+                    End="-703.611111111111,52.5000000000002" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-377.887786458333,45.8799048751487,50.60890625,11.609375"
+              BoundingBox="-377.110008680556,45.8866222047864,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -650,33 +647,33 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-938.833333333333,60.0000000000001"
+              EndConnector="-937.055555555556,60.0000000000002"
               Start="0,0"
-              End="-938.833333333333,52.5000000000001">
+              End="-937.055555555556,52.5000000000002">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,43.816411682893" />
+                    End="0,43.8292794860029" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,43.816411682893"
-                    Point2="0,47.816411682893"
-                    Point3="-4,47.816411682893" />
+                    Point1="0,43.8292794860029"
+                    Point2="0,47.8292794860029"
+                    Point3="-4,47.8292794860029" />
                   <mssgle:LineSegment
-                    End="-934.833333333333,47.816411682893" />
+                    End="-933.055555555556,47.8292794860029" />
                   <mssgle:CubicBezierSegment
-                    Point1="-934.833333333333,47.816411682893"
-                    Point2="-938.833333333333,47.816411682893"
-                    Point3="-938.833333333333,51.816411682893" />
+                    Point1="-933.055555555556,47.8292794860029"
+                    Point2="-937.055555555556,47.8292794860029"
+                    Point3="-937.055555555556,51.8292794860029" />
                   <mssgle:LineSegment
-                    End="-938.833333333333,52.5000000000001" />
+                    End="-937.055555555556,52.5000000000002" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-494.721119791667,52.816411682893,50.60890625,11.609375"
+              BoundingBox="-493.832230902778,52.8292794860029,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -690,21 +687,49 @@
         <NodeLayout
           Size="169,42"
           Id="Package\Truncate hSplit Stg"
-          TopLeft="916,517.5" />
+          TopLeft="918,504.5" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="1000.5,457.5">
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="1000,253.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="0,73.0000000000001"
               Start="0,0"
-              End="0,52.5">
+              End="0,65.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,65.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-25.304453125,26.9453125000001,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="128,42"
+          Id="Package\New Splits"
+          TopLeft="939.354082629699,412.331578947368" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="1001.42704131485,368.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.8315789473684"
+              Start="0,0"
+              End="0,36.3315789473684">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.3315789473684" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -714,51 +739,25 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="1000.5,253.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
-              Start="0,0"
-              End="0,52.5000000000001">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5000000000001" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-25.304453125,20.4453125000001,50.60890625,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="1000.5,355.5">
+          TopLeft="1002.92704131485,454.331578947368">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="0,50.1684210526316"
               Start="0,0"
-              End="0,52.5">
+              End="0,42.6684210526316">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,42.6684210526316" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-25.304453125,20.4453125,50.60890625,11.609375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

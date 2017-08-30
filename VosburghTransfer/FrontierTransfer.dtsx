@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="FrontierTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="51"
-  DTS:VersionGUID="{99050876-EA2B-4374-87CC-459813D9219A}">
+  DTS:VersionBuild="53"
+  DTS:VersionGUID="{381F1899-3F61-4D90-80C2-6A129CB61FAE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:PackageParameters>
@@ -190,6 +190,7 @@ Select
 	,Cast(? as tinyInt) vendorID
 	,month(row_date) monthNum
 	,year(row_date) yearNum
+    ,Sum(i_tavailtime)i_tavailtime
 From
 	vw_Hsplit
 Where
@@ -644,6 +645,15 @@ Group by
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[interval]"
                           name="interval"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                          lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                          name="i_tavailtime"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -827,6 +837,10 @@ Group by
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[interval]"
                           dataType="dbTime2"
                           name="interval" />
+                        <externalMetadataColumn
+                          refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                          dataType="i4"
+                          name="i_tavailtime" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -1059,6 +1073,11 @@ Group by
                           dataType="i4"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[yearNum]"
                           name="yearNum" />
+                        <outputColumn
+                          refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                          dataType="i4"
+                          lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                          name="i_tavailtime" />
                         <outputColumn
                           refId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
@@ -1418,6 +1437,12 @@ Group by
                           cachedName="yearNum"
                           externalMetadataColumnId="Package\For each date\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
                           lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[yearNum]" />
+                        <inputColumn
+                          refId="Package\For each date\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_tavailtime]"
+                          cachedDataType="i4"
+                          cachedName="i_tavailtime"
+                          externalMetadataColumnId="Package\For each date\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                          lineageId="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -1601,6 +1626,10 @@ Group by
                           refId="Package\For each date\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
                           dataType="i4"
                           name="yearNum" />
+                        <externalMetadataColumn
+                          refId="Package\For each date\Frontier hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                          dataType="i4"
+                          name="i_tavailtime" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1745,15 +1774,15 @@ Group by
     design-time-name="Package\For each date\Frontier hSplit Transfer">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="124,42"
-          Id="Package\For each date\Frontier hSplit Transfer\hSplit Stg"
-          TopLeft="178.5,138.5" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="217,42"
           Id="Package\For each date\Frontier hSplit Transfer\Frontier hSplit Historical Data"
           TopLeft="137.5,28.5" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\For each date\Frontier hSplit Transfer\hSplit Stg"
+          TopLeft="178.5,138.5" />
         <EdgeLayout
           Id="Package\For each date\Frontier hSplit Transfer.Paths[OLE DB Source Output]"
           TopLeft="243.25,70.5">
@@ -1773,9 +1802,7 @@ Group by
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

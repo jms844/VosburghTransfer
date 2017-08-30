@@ -1,0 +1,2384 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/23/2017 2:41:28 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="6LVFP32"
+  DTS:CreatorName="CORP\jms844"
+  DTS:DTSID="{0F1CB547-D6B2-455D-BDF7-050CE52AA61D}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="EmpTransfer"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{90001573-A233-40D0-8236-38DA9DAFAF77}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\AcdInst Transfer"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{767edf0c-3bfd-49fd-8178-64211ca31f97}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="AcdInst Transfer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\AcdInst Transfer\Acd Inst dst"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Acd Inst dst"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[ACD_INST]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AcdInst Transfer\Acd Inst dst.Connections[OleDbConnection]"
+                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[TIME_ZONE_SK]"
+                      cachedDataType="numeric"
+                      cachedName="TIME_ZONE_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[TIME_ZONE_SK]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]" />
+                    <inputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[UPD_TCS_LOGIN_SK]"
+                      cachedDataType="numeric"
+                      cachedName="UPD_TCS_LOGIN_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]" />
+                    <inputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[UPD_TS]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="UPD_TS"
+                      externalMetadataColumnId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TS]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[UPD_TS]" />
+                    <inputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[ACD_INST_SK]"
+                      cachedDataType="numeric"
+                      cachedName="ACD_INST_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_INST_SK]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_INST_SK]" />
+                    <inputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[CODE]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="CODE"
+                      externalMetadataColumnId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[CODE]" />
+                    <inputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[DESCR]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="DESCR"
+                      externalMetadataColumnId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[DESCR]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[DESCR]" />
+                    <inputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[ACD_STRM_ID]"
+                      cachedDataType="numeric"
+                      cachedName="ACD_STRM_ID"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_STRM_ID]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_STRM_ID]" />
+                    <inputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[ACD_SITE_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ACD_SITE_ID"
+                      externalMetadataColumnId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_SITE_ID]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_SITE_ID]" />
+                    <inputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[ACD_MDL_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ACD_MDL_NAME"
+                      externalMetadataColumnId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_MDL_NAME]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_MDL_NAME]" />
+                    <inputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[ACD_UNIT]"
+                      cachedDataType="numeric"
+                      cachedName="ACD_UNIT"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_UNIT]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_UNIT]" />
+                    <inputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[AP_FRML_SET_SK]"
+                      cachedDataType="numeric"
+                      cachedName="AP_FRML_SET_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[AP_FRML_SET_SK]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[AP_FRML_SET_SK]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[TIME_ZONE_SK]"
+                      dataType="numeric"
+                      name="TIME_ZONE_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      name="UPD_TS" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_INST_SK]"
+                      dataType="numeric"
+                      name="ACD_INST_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
+                      dataType="wstr"
+                      length="30"
+                      name="CODE" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[DESCR]"
+                      dataType="wstr"
+                      length="30"
+                      name="DESCR" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_STRM_ID]"
+                      dataType="numeric"
+                      name="ACD_STRM_ID"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_SITE_ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="ACD_SITE_ID" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_MDL_NAME]"
+                      dataType="wstr"
+                      length="10"
+                      name="ACD_MDL_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_UNIT]"
+                      dataType="numeric"
+                      name="ACD_UNIT"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[AP_FRML_SET_SK]"
+                      dataType="numeric"
+                      name="AP_FRML_SET_SK"
+                      precision="15"
+                      scale="1" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\AcdInst Transfer\Acd Inst dst.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AcdInst Transfer\Acd Inst dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\Acd Inst dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AcdInst Transfer\Acd Inst dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\AcdInst Transfer\ACD Inst Src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="ACD Inst Src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ACD_INST]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AcdInst Transfer\ACD Inst Src.Connections[OleDbConnection]"
+                  connectionManagerID="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[TIME_ZONE_SK]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]"
+                      name="TIME_ZONE_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
+                      name="UPD_TS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_INST_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_INST_SK]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_INST_SK]"
+                      name="ACD_INST_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[CODE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
+                      length="30"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[CODE]"
+                      name="CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[DESCR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[DESCR]"
+                      length="30"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[DESCR]"
+                      name="DESCR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_STRM_ID]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_STRM_ID]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_STRM_ID]"
+                      name="ACD_STRM_ID"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_SITE_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_SITE_ID]"
+                      length="20"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_SITE_ID]"
+                      name="ACD_SITE_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_MDL_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_MDL_NAME]"
+                      length="10"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_MDL_NAME]"
+                      name="ACD_MDL_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_UNIT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_UNIT]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_UNIT]"
+                      name="ACD_UNIT"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[AP_FRML_SET_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[AP_FRML_SET_SK]"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[AP_FRML_SET_SK]"
+                      name="AP_FRML_SET_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[TIME_ZONE_SK]"
+                      dataType="numeric"
+                      name="TIME_ZONE_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      name="UPD_TS" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_INST_SK]"
+                      dataType="numeric"
+                      name="ACD_INST_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
+                      dataType="wstr"
+                      length="30"
+                      name="CODE" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[DESCR]"
+                      dataType="wstr"
+                      length="30"
+                      name="DESCR" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_STRM_ID]"
+                      dataType="numeric"
+                      name="ACD_STRM_ID"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_SITE_ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="ACD_SITE_ID" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_MDL_NAME]"
+                      dataType="wstr"
+                      length="10"
+                      name="ACD_MDL_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_UNIT]"
+                      dataType="numeric"
+                      name="ACD_UNIT"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[AP_FRML_SET_SK]"
+                      dataType="numeric"
+                      name="AP_FRML_SET_SK"
+                      precision="15"
+                      scale="1" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_INST_SK]"
+                      dataType="numeric"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_INST_SK]"
+                      name="ACD_INST_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[CODE]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[CODE]"
+                      name="CODE" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[DESCR]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[DESCR]"
+                      name="DESCR" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_STRM_ID]"
+                      dataType="numeric"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_STRM_ID]"
+                      name="ACD_STRM_ID"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_SITE_ID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_SITE_ID]"
+                      name="ACD_SITE_ID" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_MDL_NAME]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_MDL_NAME]"
+                      name="ACD_MDL_NAME" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_UNIT]"
+                      dataType="numeric"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_UNIT]"
+                      name="ACD_UNIT"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[TIME_ZONE_SK]"
+                      dataType="numeric"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[TIME_ZONE_SK]"
+                      name="TIME_ZONE_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[AP_FRML_SET_SK]"
+                      dataType="numeric"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[AP_FRML_SET_SK]"
+                      name="AP_FRML_SET_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
+                      name="UPD_TS" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\AcdInst Transfer.Paths[OLE DB Source Output]"
+              endId="Package\AcdInst Transfer\Acd Inst dst.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\AcdInst Transfer\ACD Inst Src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\AcdLogin Transfer"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{e942f0b2-486c-4e99-a55f-0b27544c8dc3}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="AcdLogin Transfer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\AcdLogin Transfer\Acd Inst dst"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Acd Inst dst"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[ACD_LOGIN]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AcdLogin Transfer\Acd Inst dst.Connections[OleDbConnection]"
+                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[ACD_INST_SK]"
+                      cachedDataType="numeric"
+                      cachedName="ACD_INST_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_INST_SK]"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_INST_SK]" />
+                    <inputColumn
+                      refId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[ACD_LOGIN_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ACD_LOGIN_ID"
+                      externalMetadataColumnId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_LOGIN_ID]"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_LOGIN_ID]" />
+                    <inputColumn
+                      refId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[EMP_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_SK]"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[EMP_SK]" />
+                    <inputColumn
+                      refId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].Columns[ACD_GRP_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="ACD_GRP_ID"
+                      externalMetadataColumnId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_GRP_ID]"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_GRP_ID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_INST_SK]"
+                      dataType="numeric"
+                      name="ACD_INST_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_LOGIN_ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="ACD_LOGIN_ID" />
+                    <externalMetadataColumn
+                      refId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_SK]"
+                      dataType="numeric"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input].ExternalColumns[ACD_GRP_ID]"
+                      dataType="wstr"
+                      length="128"
+                      name="ACD_GRP_ID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\AcdLogin Transfer\Acd Inst dst.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\Acd Inst dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AcdLogin Transfer\Acd Inst dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\Acd Inst dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AcdLogin Transfer\Acd Inst dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\AcdLogin Transfer\ACD Inst Src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="ACD Inst Src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ACD_LOGIN]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AcdLogin Transfer\ACD Inst Src.Connections[OleDbConnection]"
+                  connectionManagerID="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_INST_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_INST_SK]"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_INST_SK]"
+                      name="ACD_INST_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_LOGIN_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_LOGIN_ID]"
+                      length="20"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_LOGIN_ID]"
+                      name="ACD_LOGIN_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[EMP_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[EMP_SK]"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[EMP_SK]"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_GRP_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_GRP_ID]"
+                      length="128"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].Columns[ACD_GRP_ID]"
+                      name="ACD_GRP_ID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_INST_SK]"
+                      dataType="numeric"
+                      name="ACD_INST_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_LOGIN_ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="ACD_LOGIN_ID" />
+                    <externalMetadataColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[EMP_SK]"
+                      dataType="numeric"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output].ExternalColumns[ACD_GRP_ID]"
+                      dataType="wstr"
+                      length="128"
+                      name="ACD_GRP_ID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_LOGIN_ID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_LOGIN_ID]"
+                      name="ACD_LOGIN_ID" />
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_INST_SK]"
+                      dataType="numeric"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_INST_SK]"
+                      name="ACD_INST_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[EMP_SK]"
+                      dataType="numeric"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[EMP_SK]"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_GRP_ID]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ACD_GRP_ID]"
+                      name="ACD_GRP_ID" />
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\AcdLogin Transfer.Paths[OLE DB Source Output]"
+              endId="Package\AcdLogin Transfer\Acd Inst dst.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\AcdLogin Transfer\ACD Inst Src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EMP Transfer"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5EAFC073-E47B-4201-8139-AC460A033272}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EMP Transfer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\EMP Transfer\EMP dst"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="EMP dst"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[EMP]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EMP Transfer\EMP dst.Connections[OleDbConnection]"
+                  connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[EMP_SK]"
+                      cachedDataType="numeric"
+                      cachedName="EMP_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_SK]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[EMP_SK]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[ID]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ID"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[ID]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[LAST_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="LAST_NAME"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[LAST_NAME]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[LAST_NAME]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[FIRST_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="FIRST_NAME"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[FIRST_NAME]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[FIRST_NAME]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[EFF_HIRE_NOM_DATE]"
+                      cachedDataType="numeric"
+                      cachedName="EFF_HIRE_NOM_DATE"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[EFF_HIRE_NOM_DATE]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[EFF_HIRE_NOM_DATE]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[TERM_NOM_DATE]"
+                      cachedDataType="numeric"
+                      cachedName="TERM_NOM_DATE"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[TERM_NOM_DATE]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[TERM_NOM_DATE]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[ACTIVE_FLAG]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ACTIVE_FLAG"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[ACTIVE_FLAG]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[ACTIVE_FLAG]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[SHORT_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="SHORT_NAME"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[SHORT_NAME]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[SHORT_NAME]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[SORT_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="SORT_NAME"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[SORT_NAME]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[SORT_NAME]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[TIME_ZONE_SK]"
+                      cachedDataType="numeric"
+                      cachedName="TIME_ZONE_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[TIME_ZONE_SK]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[SENIORITY]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="SENIORITY"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[SENIORITY]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[SENIORITY]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[EMAIL_ADR]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EMAIL_ADR"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[EMAIL_ADR]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[EMAIL_ADR]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[MEMO]"
+                      cachedDataType="nText"
+                      cachedName="MEMO"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[MEMO]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[MEMO]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[UPD_TCS_LOGIN_SK]"
+                      cachedDataType="numeric"
+                      cachedName="UPD_TCS_LOGIN_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[UPD_TS]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="UPD_TS"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TS]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[UPD_TS]" />
+                    <inputColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].Columns[IM_USR_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="IM_USR_NAME"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[IM_USR_NAME]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[IM_USR_NAME]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[EMP_SK]"
+                      dataType="numeric"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[LAST_NAME]"
+                      dataType="wstr"
+                      length="30"
+                      name="LAST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="30"
+                      name="FIRST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[EFF_HIRE_NOM_DATE]"
+                      dataType="numeric"
+                      name="EFF_HIRE_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[TERM_NOM_DATE]"
+                      dataType="numeric"
+                      name="TERM_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[ACTIVE_FLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="ACTIVE_FLAG" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[SHORT_NAME]"
+                      dataType="wstr"
+                      length="30"
+                      name="SHORT_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[SORT_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="SORT_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[TIME_ZONE_SK]"
+                      dataType="numeric"
+                      name="TIME_ZONE_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[SENIORITY]"
+                      dataType="wstr"
+                      length="12"
+                      name="SENIORITY" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[EMAIL_ADR]"
+                      dataType="wstr"
+                      length="255"
+                      name="EMAIL_ADR" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[MEMO]"
+                      dataType="nText"
+                      name="MEMO" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      name="UPD_TS" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input].ExternalColumns[IM_USR_NAME]"
+                      dataType="wstr"
+                      length="255"
+                      name="IM_USR_NAME" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\EMP Transfer\EMP dst.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EMP Transfer\EMP dst.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EMP Transfer\EMP dst.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\EMP Transfer\EMP Src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="EMP Src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[EMP]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\EMP Transfer\EMP Src.Connections[OleDbConnection]"
+                  connectionManagerID="{DB4335EE-0696-4FA0-8D26-DB60D9B06198}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP59_DCPRD59.WFM.Workforceuser1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[EMP_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[EMP_SK]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[EMP_SK]"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      length="10"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[ID]"
+                      name="ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[LAST_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[LAST_NAME]"
+                      length="30"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[LAST_NAME]"
+                      name="LAST_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[FIRST_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[FIRST_NAME]"
+                      length="30"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[FIRST_NAME]"
+                      name="FIRST_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[EFF_HIRE_NOM_DATE]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[EFF_HIRE_NOM_DATE]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[EFF_HIRE_NOM_DATE]"
+                      name="EFF_HIRE_NOM_DATE"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[TERM_NOM_DATE]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[TERM_NOM_DATE]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[TERM_NOM_DATE]"
+                      name="TERM_NOM_DATE"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[ACTIVE_FLAG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[ACTIVE_FLAG]"
+                      length="1"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[ACTIVE_FLAG]"
+                      name="ACTIVE_FLAG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[SHORT_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[SHORT_NAME]"
+                      length="30"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[SHORT_NAME]"
+                      name="SHORT_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[SORT_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[SORT_NAME]"
+                      length="60"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[SORT_NAME]"
+                      name="SORT_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[TIME_ZONE_SK]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[TIME_ZONE_SK]"
+                      name="TIME_ZONE_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[SENIORITY]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[SENIORITY]"
+                      length="12"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[SENIORITY]"
+                      name="SENIORITY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[EMAIL_ADR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[EMAIL_ADR]"
+                      length="255"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[EMAIL_ADR]"
+                      name="EMAIL_ADR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[MEMO]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[MEMO]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[MEMO]"
+                      name="MEMO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[UPD_TCS_LOGIN_SK]"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[UPD_TS]"
+                      name="UPD_TS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[IM_USR_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[IM_USR_NAME]"
+                      length="255"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].Columns[IM_USR_NAME]"
+                      name="IM_USR_NAME"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[EMP_SK]"
+                      dataType="numeric"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[LAST_NAME]"
+                      dataType="wstr"
+                      length="30"
+                      name="LAST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="30"
+                      name="FIRST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[EFF_HIRE_NOM_DATE]"
+                      dataType="numeric"
+                      name="EFF_HIRE_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[TERM_NOM_DATE]"
+                      dataType="numeric"
+                      name="TERM_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[ACTIVE_FLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="ACTIVE_FLAG" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[SHORT_NAME]"
+                      dataType="wstr"
+                      length="30"
+                      name="SHORT_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[SORT_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="SORT_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[TIME_ZONE_SK]"
+                      dataType="numeric"
+                      name="TIME_ZONE_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[SENIORITY]"
+                      dataType="wstr"
+                      length="12"
+                      name="SENIORITY" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[EMAIL_ADR]"
+                      dataType="wstr"
+                      length="255"
+                      name="EMAIL_ADR" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[MEMO]"
+                      dataType="nText"
+                      name="MEMO" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      name="UPD_TS" />
+                    <externalMetadataColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output].ExternalColumns[IM_USR_NAME]"
+                      dataType="wstr"
+                      length="255"
+                      name="IM_USR_NAME" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[EMP_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[EMP_SK]"
+                      name="EMP_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[ID]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[ID]"
+                      name="ID" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[LAST_NAME]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[LAST_NAME]"
+                      name="LAST_NAME" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[FIRST_NAME]"
+                      name="FIRST_NAME" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[EFF_HIRE_NOM_DATE]"
+                      dataType="numeric"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[EFF_HIRE_NOM_DATE]"
+                      name="EFF_HIRE_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[TERM_NOM_DATE]"
+                      dataType="numeric"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[TERM_NOM_DATE]"
+                      name="TERM_NOM_DATE"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[ACTIVE_FLAG]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[ACTIVE_FLAG]"
+                      name="ACTIVE_FLAG" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[SHORT_NAME]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[SHORT_NAME]"
+                      name="SHORT_NAME" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[SORT_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[SORT_NAME]"
+                      name="SORT_NAME" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[TIME_ZONE_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[TIME_ZONE_SK]"
+                      name="TIME_ZONE_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[SENIORITY]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[SENIORITY]"
+                      name="SENIORITY" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[EMAIL_ADR]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[EMAIL_ADR]"
+                      name="EMAIL_ADR" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[MEMO]"
+                      dataType="nText"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[MEMO]"
+                      name="MEMO" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
+                      dataType="numeric"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[UPD_TCS_LOGIN_SK]"
+                      name="UPD_TCS_LOGIN_SK"
+                      precision="15"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[UPD_TS]"
+                      name="UPD_TS" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[IM_USR_NAME]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[IM_USR_NAME]"
+                      name="IM_USR_NAME" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\EMP Transfer.Paths[OLE DB Source Output]"
+              endId="Package\EMP Transfer\EMP dst.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\EMP Transfer\EMP Src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge AcdInst"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{a996994b-fb5a-4056-8f75-87a94aed4ef6}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge AcdInst"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="exec stg.mergeAcdInst" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge AcdLogin"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9bedaf61-b347-40d0-9644-b91304ce37b1}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge AcdLogin"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="exec stg.mergeAcdLogin" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\mergeEMP"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{47A1DB11-EBDE-48DC-94B0-013E7C5A0BBC}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="mergeEMP"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="exec stg.mergeEMP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate AI stg"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{81c116b9-8815-41b1-a7a0-e576a8db70e2}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate AI stg"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Truncate Table stg.ACD_INST" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate AL"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{c9273b2e-0ffa-40ec-8062-58cc32006c1a}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate AL"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Truncate Table stg.ACD_LOGIN" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate EMP stg"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3C90B992-8C05-498C-AF6A-E7A0D6E1A13A}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate EMP stg"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4147DD02-F987-4E71-8837-3D0794578123}"
+          SQLTask:SqlStatementSource="Truncate Table stg.EMP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A30E6E4F-E694-4D64-8A6B-F41285172B11}"
+      DTS:From="Package\Truncate EMP stg"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\EMP Transfer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{DC79CCFB-51F8-4DE3-BC2C-41D81980B746}"
+      DTS:From="Package\EMP Transfer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\mergeEMP" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{a8c47397-1b97-4c58-bd99-a0b9ba486064}"
+      DTS:From="Package\AcdInst Transfer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1 1"
+      DTS:To="Package\Merge AcdInst" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{0d424c1d-8fd9-4b41-8fb7-ed79af635821}"
+      DTS:From="Package\Truncate AI stg"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\AcdInst Transfer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{400C43EC-AC0A-4F24-BD8B-A70D200F9CCA}"
+      DTS:From="Package\Truncate AL"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\AcdLogin Transfer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{7DC44CAE-4F82-43D8-A697-5BE835E1B6BE}"
+      DTS:From="Package\AcdLogin Transfer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Merge AcdLogin" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{D123C22F-8058-4498-9FAC-A4C623B31601}"
+      DTS:From="Package\Merge AcdInst"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Truncate AL" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{2BF6C4B2-4F92-4C77-B676-2421862BB97D}"
+      DTS:From="Package\mergeEMP"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Truncate AL" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Truncate EMP stg"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\EMP Transfer"
+          TopLeft="23.5,107.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="86.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8,60"
+              Start="0,0"
+              End="8,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="4,30" />
+                  <mssgle:LineSegment
+                    End="4,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,30"
+                    Point2="8,30"
+                    Point3="8,34" />
+                  <mssgle:LineSegment
+                    End="8,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129,42"
+          Id="Package\mergeEMP"
+          TopLeft="41,209.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="94.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11,60"
+              Start="0,0"
+              End="11,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="4,30" />
+                  <mssgle:LineSegment
+                    End="7,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7,30"
+                    Point2="11,30"
+                    Point3="11,34" />
+                  <mssgle:LineSegment
+                    End="11,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Truncate AI stg"
+          TopLeft="228.5,5.5" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\AcdInst Transfer"
+          TopLeft="226,107.5" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Merge AcdInst"
+          TopLeft="231,209.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="304.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1 1]"
+          TopLeft="304.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Truncate AL"
+          TopLeft="236.5,311.5" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\AcdLogin Transfer"
+          TopLeft="222.5,413.5" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Merge AcdLogin"
+          TopLeft="227.5,515.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="304.5,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="304.5,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="304.5,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="21.3333333333333,60"
+              Start="0,0"
+              End="21.3333333333333,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5813953488372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5813953488372"
+                    Point2="0,35.5813953488372"
+                    Point3="4,35.5813953488372" />
+                  <mssgle:LineSegment
+                    End="17.3333333333333,35.5813953488372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17.3333333333333,35.5813953488372"
+                    Point2="21.3333333333333,35.5813953488372"
+                    Point3="21.3333333333333,39.5813953488372" />
+                  <mssgle:LineSegment
+                    End="21.3333333333333,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="105.5,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="177.666666666667,60"
+              Start="0,0"
+              End="177.666666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5813953488372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5813953488372"
+                    Point2="0,35.5813953488372"
+                    Point3="4,35.5813953488372" />
+                  <mssgle:LineSegment
+                    End="173.666666666667,35.5813953488372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="173.666666666667,35.5813953488372"
+                    Point2="177.666666666667,35.5813953488372"
+                    Point3="177.666666666667,39.5813953488372" />
+                  <mssgle:LineSegment
+                    End="177.666666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\EMP Transfer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="117,42"
+          Id="Package\EMP Transfer\EMP Src"
+          TopLeft="20.5,5.5" />
+        <NodeLayout
+          Size="117,42"
+          Id="Package\EMP Transfer\EMP dst"
+          TopLeft="13.5,126.5" />
+        <EdgeLayout
+          Id="Package\EMP Transfer.Paths[OLE DB Source Output]"
+          TopLeft="75.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,79"
+              Start="0,0"
+              End="0,71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\EMP Transfer\EMP Src">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\EMP Transfer\EMP dst">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\AcdInst Transfer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="135,42"
+          Id="Package\AcdInst Transfer\Acd Inst dst"
+          TopLeft="13.5,126.5" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\AcdInst Transfer\ACD Inst Src"
+          TopLeft="20.5,5.5" />
+        <EdgeLayout
+          Id="Package\AcdInst Transfer.Paths[OLE DB Source Output]"
+          TopLeft="90,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9,79"
+              Start="0,0"
+              End="-9,71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.5"
+                    Point2="0,39.5"
+                    Point3="-4,39.5" />
+                  <mssgle:LineSegment
+                    End="-5,39.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5,39.5"
+                    Point2="-9,39.5"
+                    Point3="-9,43.5" />
+                  <mssgle:LineSegment
+                    End="-9,71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\AcdInst Transfer\Acd Inst dst">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\AcdInst Transfer\ACD Inst Src">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\AcdLogin Transfer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="135,42"
+          Id="Package\AcdLogin Transfer\Acd Inst dst"
+          TopLeft="18.5,124.5" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\AcdLogin Transfer\ACD Inst Src"
+          TopLeft="20.5,5.5" />
+        <EdgeLayout
+          Id="Package\AcdLogin Transfer.Paths[OLE DB Source Output]"
+          TopLeft="88,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,77"
+              Start="0,0"
+              End="0,69.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,69.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\AcdLogin Transfer\Acd Inst dst">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\AcdLogin Transfer\ACD Inst Src">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="6/23/2017 3:44:39 PM"
@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="OtdTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{8A2DBC9E-845C-4E55-9B91-5A5DCD45871D}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{0E2B02C7-9A4B-4E12-9B19-5618A912CFE4}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:PackageParameters>
@@ -149,8 +149,8 @@
                   <connections>
                     <connection
                       refId="Package\For each date\OTD hSplit Transfer\hSplit Stg.Connections[OleDbConnection]"
-                      connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
-                      connectionManagerRefId="{4147DD02-F987-4E71-8837-3D0794578123}:invalid"
+                      connectionManagerID="{4147DD02-F987-4E71-8837-3D0794578123}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVD05_DCDEV05.FSRE]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -432,6 +432,12 @@
                           cachedName="yearNum"
                           externalMetadataColumnId="Package\For each date\OTD hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
                           lineageId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Output].Columns[yearNum]" />
+                        <inputColumn
+                          refId="Package\For each date\OTD hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].Columns[i_tavailtime]"
+                          cachedDataType="i4"
+                          cachedName="i_tavailtime"
+                          externalMetadataColumnId="Package\For each date\OTD hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                          lineageId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -615,6 +621,10 @@
                           refId="Package\For each date\OTD hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[yearNum]"
                           dataType="i4"
                           name="yearNum" />
+                        <externalMetadataColumn
+                          refId="Package\For each date\OTD hSplit Transfer\hSplit Stg.Inputs[OLE DB Destination Input].ExternalColumns[i_tavailtime]"
+                          dataType="i4"
+                          name="i_tavailtime" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -716,6 +726,7 @@ Select
 	,Cast(? as tinyInt) vendorID
 	,month(row_date) monthNum
 	,year(row_date) yearNum
+    ,i_tavailtime
 From
 	vend_OneTouchDirect.vw_Hsplit
 Where
@@ -745,8 +756,8 @@ Where
                   <connections>
                     <connection
                       refId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Connections[OleDbConnection]"
-                      connectionManagerID="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:invalid"
-                      connectionManagerRefId="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:invalid"
+                      connectionManagerID="{AF79E45C-0BC9-44A1-9D12-99A55536DDB6}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[SQLINFWWDVP03_DCPRD03.InterfaceMaintenance]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -1160,6 +1171,15 @@ Where
                           lineageId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Output].Columns[interval]"
                           name="interval"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                          lineageId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Output].Columns[i_tavailtime]"
+                          name="i_tavailtime"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -1343,6 +1363,10 @@ Where
                           refId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[interval]"
                           dataType="dbTime2"
                           name="interval" />
+                        <externalMetadataColumn
+                          refId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Output].ExternalColumns[i_tavailtime]"
+                          dataType="i4"
+                          name="i_tavailtime" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -1575,6 +1599,11 @@ Where
                           dataType="i4"
                           lineageId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[yearNum]"
                           name="yearNum" />
+                        <outputColumn
+                          refId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                          dataType="i4"
+                          lineageId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[i_tavailtime]"
+                          name="i_tavailtime" />
                         <outputColumn
                           refId="Package\For each date\OTD hSplit Transfer\OTD hSplit Historical Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
