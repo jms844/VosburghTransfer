@@ -7,12 +7,12 @@
   DTS:CreatorName="CORP\jms844"
   DTS:DTSID="{20B59408-84ED-46DF-8B5C-BED30AB9177C}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LastModifiedProductVersion="14.0.0500.272"
   DTS:LocaleID="1033"
   DTS:ObjectName="FrontierTransferRT"
   DTS:PackageType="5"
-  DTS:VersionBuild="61"
-  DTS:VersionGUID="{742D3A30-3BAD-49A5-97C7-582159158CB9}">
+  DTS:VersionBuild="63"
+  DTS:VersionGUID="{CDC1C868-1FAF-4C17-B8DA-A86E7EC6CCE8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:PackageParameters>
@@ -2489,7 +2489,7 @@ Group by
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping">"Parameter0:Input",{04AF0442-ECB1-42FE-987E-311AE47A74FF};"Parameter1:Input",{887E971A-09A1-4818-938F-46994A4E7C82};"Parameter2:Input",{DEA25F4D-6D99-4FB9-9EFF-0AC52310EF36};</property>
+                  name="ParameterMapping">"Parameter0:Input",{5A1F8A4C-9C17-4256-8F2F-2F1C6C4962D6};"Parameter1:Input",{887E971A-09A1-4818-938F-46994A4E7C82};"Parameter2:Input",{DEA25F4D-6D99-4FB9-9EFF-0AC52310EF36};</property>
               </properties>
               <connections>
                 <connection
@@ -6203,7 +6203,6 @@ Group by
       DTS:refId="Package\Frontier hSplit Transfer"
       DTS:CreationName="SSIS.Pipeline.3"
       DTS:Description="Data Flow Task"
-      DTS:Disabled="True"
       DTS:DTSID="{9FC5332A-4941-45A5-A967-3CFD500DE387}"
       DTS:ExecutableType="SSIS.Pipeline.3"
       DTS:LocaleID="-1"
@@ -7772,7 +7771,6 @@ Group by
       DTS:refId="Package\Get latest Interval"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{D429CD6C-6F28-4172-AEC7-98B39968BF3D}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
