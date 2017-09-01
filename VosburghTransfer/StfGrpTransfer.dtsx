@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="StfGrpTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{70A33185-DA9E-48D0-BC80-E546E82B4B72}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{F93ADB06-AF0D-4A87-8BBE-DC89FD59619B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:Variables />
@@ -174,6 +174,14 @@
                       cachedScale="1"
                       externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[OPEN_HRS_SK]"
                       lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[OPEN_HRS_SK]" />
+                    <inputColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].Columns[STF_GRP_TREE_SK]"
+                      cachedDataType="numeric"
+                      cachedName="STF_GRP_TREE_SK"
+                      cachedPrecision="15"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[STF_GRP_TREE_SK]"
+                      lineageId="Package\Stf Grp transfer\Stf_Grp src.Outputs[OLE DB Source Output].Columns[STF_GRP_TREE_SK]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -216,6 +224,12 @@
                       refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[OPEN_HRS_SK]"
                       dataType="numeric"
                       name="OPEN_HRS_SK"
+                      precision="15"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Stf Grp transfer\Stf_Grp dst.Inputs[OLE DB Destination Input].ExternalColumns[STF_GRP_TREE_SK]"
+                      dataType="numeric"
+                      name="STF_GRP_TREE_SK"
                       precision="15"
                       scale="1" />
                   </externalMetadataColumns>

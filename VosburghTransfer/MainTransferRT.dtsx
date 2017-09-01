@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MainTransferRT"
   DTS:PackageType="5"
-  DTS:VersionBuild="41"
-  DTS:VersionGUID="{6D0E162D-F9DC-420F-BE6E-0C6990FCF86F}">
+  DTS:VersionBuild="42"
+  DTS:VersionGUID="{C036DCDA-DC86-41F5-98BD-21B8DDB96409}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:Variables />
@@ -354,6 +354,10 @@
           Id="Package\hSplit Merge"
           TopLeft="930.5,326.5" />
         <NodeLayout
+          Size="128,42"
+          Id="Package\New Splits"
+          TopLeft="939.354082629699,412.331578947368" />
+        <NodeLayout
           Size="193,42"
           Id="Package\Sequence Container\Execute Package Alorica"
           TopLeft="263,5.5" />
@@ -689,6 +693,28 @@
           Id="Package\Truncate hSplit Stg"
           TopLeft="918,504.5" />
         <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="1001.42704131485,368.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.831578947368"
+              Start="0,0"
+              End="0,36.331578947368">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.331578947368" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="1000,253.5">
           <EdgeLayout.Curve>
@@ -710,32 +736,6 @@
             <mssgm:EdgeLabel
               BoundingBox="-25.304453125,26.9453125000001,50.60890625,11.609375"
               RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="128,42"
-          Id="Package\New Splits"
-          TopLeft="939.354082629699,412.331578947368" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="1001.42704131485,368.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,43.8315789473684"
-              Start="0,0"
-              End="0,36.3315789473684">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,36.3315789473684" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
