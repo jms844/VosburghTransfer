@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="UmaTransfer"
   DTS:PackageType="5"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{22E57977-1D1F-4264-BE21-9F32185ED87B}">
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{14D76110-999C-473B-A4C3-437E087B6D54}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1638,7 +1638,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x0022_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="\\nspinfwcipp01\WorkforceManagement\Tools\UMA\Files\Frontier_UMA_2017-09-06.csv">
+          DTS:ConnectionString="\\nspinfwcipp01\WorkforceManagement\Tools\UMA\Files\Frontier_UMA_2017-09-15.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -3250,7 +3250,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="destPath">
       <DTS:VariableValue
-        DTS:DataType="8">\\nspinfwcipp01\WorkforceManagement\Tools\UMA\Files\Frontier_UMA_2017-09-06.csv</DTS:VariableValue>
+        DTS:DataType="8">\\nspinfwcipp01\WorkforceManagement\Tools\UMA\Files\Frontier_UMA_2017-09-15.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -3261,7 +3261,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="fileName">
       <DTS:VariableValue
-        DTS:DataType="8">Frontier_UMA_2017-09-06.csv</DTS:VariableValue>
+        DTS:DataType="8">Frontier_UMA_2017-09-15.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -3572,7 +3572,7 @@ Select
 	,DEPTS.CODE [Business Unit]
 	,SITES.CODE [LOCATION]
 	,'ENGLISH' [Language]
-	,TZ.ZONE_NAME [Time Zone]
+	,XTZ.XCHNG_TIME_ZONE_DESCR [Time Zone]
 	,AI.CODE [ACD Instance]
 	,LOGINS.LOGID [ACD ID]
 	,LOB.CODE [WFM Instance]
@@ -3584,7 +3584,7 @@ Select
 	,Null [Home Phone]
 	,Null [Password]
 	,Null [Tags]
-	,DATEADD(DD,EMP.EFF_HIRE_NOM_DATE,'1899-12-30') [Date of Hire]
+	,CAST(DATEADD(DD,EMP.EFF_HIRE_NOM_DATE,'1899-12-30') AS DATE) [Date of Hire]
 	,CRNRIDS.F_INT [Cornerstone ID]
 	,CRISIDS.F_STRING [CRIS ID]
 	,'BARGAINING UNIT' [ATTRIBUTE GROUP 1]
@@ -3756,6 +3756,8 @@ From
 		AND SITES.EMP_GRP_CLASS_SK = -989999872669
 	LEFT OUTER JOIN TIME_ZONE TZ
 		ON EMP.TIME_ZONE_SK = TZ.TIME_ZONE_SK
+	LEFT OUTER JOIN XCHNG_TIME_ZONE XTZ
+		ON TZ.XCHNG_TIME_ZONE_SK = XTZ.XCHNG_TIME_ZONE_SK
 	LEFT OUTER JOIN(
 		SELECT
 			EMP_SK
@@ -3771,9 +3773,9 @@ From
 		ON EMP.EMP_SK = LOGINS.EMP_SK
 	LEFT OUTER JOIN ACD_INST AI
 		ON LOGINS.ACD_INST_SK = AI.ACD_INST_SK
-	LEFT OUTER JOIN GROUPS LOB
+	JOIN GROUPS LOB
 		ON EMP.EMP_SK = LOB.EMP_SK
-		AND LOB.EMP_GRP_CLASS_SK = -978850495590
+		AND LOB.EMP_GRP_CLASS_SK = -969732556839
 	LEFT OUTER JOIN GROUPS BU
 		ON EMP.EMP_SK = BU.EMP_SK
 		AND BU.EMP_GRP_CLASS_SK = -978841154987
@@ -3786,10 +3788,10 @@ From
 	LEFT OUTER JOIN EXTRA_EMP_FIELD CRNRIDS
 		ON EMP.EMP_SK = CRNRIDS.EMP_SK
 		AND CRNRIDS.EXTRA_FIELD_SK = -969810392844
-Where
+--Where
 	--ROLES.CODE LIKE '%AGENT%'
 	--AND 
-	EMP.ID in (' TPA509119',' TPA503533',' TPA504251',' TPA504211',' TPA504794',' TPA510228',' TPA509116',' TPA501178',' TPA504973',' TPA510122',' TPA510144',' TPA509748',' TPA509498',' TPA509380',' TPA510240',' TPA509607',' TPA509691',' TPA509055',' TPA509072')
+	--EMP.ID in (' TPA509119',' TPA503533',' TPA504251',' TPA504211',' TPA504794',' TPA510228',' TPA509116',' TPA501178',' TPA504973',' TPA510122',' TPA510144',' TPA509748',' TPA509498',' TPA509380',' TPA510240',' TPA509607',' TPA509691',' TPA509055',' TPA509072')
 
 /**/</property>
                 <property
@@ -3925,7 +3927,7 @@ Where
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Output].ExternalColumns[Time Zone]"
-                      length="60"
+                      length="128"
                       lineageId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Output].Columns[Time Zone]"
                       name="Time Zone"
                       truncationRowDisposition="FailComponent" />
@@ -4035,7 +4037,7 @@ Where
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Output].Columns[Date of Hire]"
-                      dataType="dbTimeStamp"
+                      dataType="dbDate"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Output].ExternalColumns[Date of Hire]"
@@ -5487,7 +5489,7 @@ Where
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Output].ExternalColumns[Time Zone]"
                       dataType="wstr"
-                      length="60"
+                      length="128"
                       name="Time Zone" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Output].ExternalColumns[ACD Instance]"
@@ -5540,7 +5542,7 @@ Where
                       name="Tags" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Output].ExternalColumns[Date of Hire]"
-                      dataType="dbTimeStamp"
+                      dataType="dbDate"
                       name="Date of Hire" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Output].ExternalColumns[Cornerstone ID]"
@@ -6240,7 +6242,7 @@ Where
                     <outputColumn
                       refId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Error Output].Columns[Time Zone]"
                       dataType="wstr"
-                      length="60"
+                      length="128"
                       lineageId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Error Output].Columns[Time Zone]"
                       name="Time Zone" />
                     <outputColumn
@@ -6305,7 +6307,7 @@ Where
                       name="Tags" />
                     <outputColumn
                       refId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Error Output].Columns[Date of Hire]"
-                      dataType="dbTimeStamp"
+                      dataType="dbDate"
                       lineageId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Error Output].Columns[Date of Hire]"
                       name="Date of Hire" />
                     <outputColumn
@@ -7224,7 +7226,7 @@ Where
                     <inputColumn
                       refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[Time Zone]"
                       cachedDataType="wstr"
-                      cachedLength="60"
+                      cachedLength="128"
                       cachedName="Time Zone"
                       externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Time Zone]"
                       lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Time Zone]" />
@@ -7301,7 +7303,7 @@ Where
                       lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Tags]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[Date of Hire]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbDate"
                       cachedName="Date of Hire"
                       externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Date of Hire]"
                       lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Date of Hire]" />
@@ -9402,7 +9404,7 @@ Where
                     <inputColumn
                       refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Time Zone]"
                       cachedDataType="wstr"
-                      cachedLength="60"
+                      cachedLength="128"
                       cachedName="Time Zone"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[Time Zone]" />
                     <inputColumn
@@ -9467,7 +9469,7 @@ Where
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[Tags]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Date of Hire]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbDate"
                       cachedName="Date of Hire"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[Date of Hire]" />
                     <inputColumn
@@ -10449,7 +10451,7 @@ Where
                     <outputColumn
                       refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Time Zone]"
                       dataType="wstr"
-                      length="60"
+                      length="128"
                       lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Time Zone]"
                       name="Time Zone">
                       <properties>
@@ -10610,7 +10612,7 @@ Where
                     </outputColumn>
                     <outputColumn
                       refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Date of Hire]"
-                      dataType="dbTimeStamp"
+                      dataType="dbDate"
                       lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Date of Hire]"
                       name="Date of Hire">
                       <properties>
@@ -13159,7 +13161,7 @@ SELECT * FROM HIER;
                     <inputColumn
                       refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[Time Zone]"
                       cachedDataType="wstr"
-                      cachedLength="60"
+                      cachedLength="128"
                       cachedName="Time Zone"
                       lineageId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Output].Columns[Time Zone]">
                       <properties>
@@ -13356,7 +13358,7 @@ SELECT * FROM HIER;
                     </inputColumn>
                     <inputColumn
                       refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[Date of Hire]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbDate"
                       cachedName="Date of Hire"
                       lineageId="Package\Data Flow Task\eWFM Data.Outputs[OLE DB Source Output].Columns[Date of Hire]">
                       <properties>
@@ -15984,7 +15986,7 @@ SELECT * FROM HIER;
                     <outputColumn
                       refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[Time Zone]"
                       dataType="wstr"
-                      length="60"
+                      length="128"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[Time Zone]"
                       name="Time Zone">
                       <properties>
@@ -16145,7 +16147,7 @@ SELECT * FROM HIER;
                     </outputColumn>
                     <outputColumn
                       refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[Date of Hire]"
-                      dataType="dbTimeStamp"
+                      dataType="dbDate"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[Date of Hire]"
                       name="Date of Hire">
                       <properties>
@@ -18845,7 +18847,7 @@ SELECT * FROM HIER;
                     <inputColumn
                       refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input].Columns[Time Zone]"
                       cachedDataType="wstr"
-                      cachedLength="60"
+                      cachedLength="128"
                       cachedName="Time Zone"
                       lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Time Zone]">
                       <properties>
@@ -19042,7 +19044,7 @@ SELECT * FROM HIER;
                     </inputColumn>
                     <inputColumn
                       refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input].Columns[Date of Hire]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbDate"
                       cachedName="Date of Hire"
                       lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Date of Hire]">
                       <properties>
@@ -21683,7 +21685,7 @@ SELECT * FROM HIER;
                     <outputColumn
                       refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Time Zone]"
                       dataType="wstr"
-                      length="60"
+                      length="128"
                       lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Time Zone]"
                       name="Time Zone">
                       <properties>
@@ -21844,7 +21846,7 @@ SELECT * FROM HIER;
                     </outputColumn>
                     <outputColumn
                       refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Date of Hire]"
-                      dataType="dbTimeStamp"
+                      dataType="dbDate"
                       lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Date of Hire]"
                       name="Date of Hire">
                       <properties>
@@ -23957,6 +23959,10 @@ SELECT * FROM HIER;
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="158,42"
+          Id="Package\Archive UMA"
+          TopLeft="19.5,185.5" />
+        <NodeLayout
           Size="151,42"
           Id="Package\Data Flow Task"
           TopLeft="28.5,8.5" />
@@ -23986,10 +23992,6 @@ SELECT * FROM HIER;
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="158,42"
-          Id="Package\Archive UMA"
-          TopLeft="19.5,185.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="99,131.5">
@@ -24021,171 +24023,55 @@ SELECT * FROM HIER;
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="133,42"
-          Id="Package\Data Flow Task\eWFM Data"
-          TopLeft="50.5,5.5" />
-        <NodeLayout
           Size="147,42"
           Id="Package\Data Flow Task\OrgChart Data"
           TopLeft="260.5,8.5" />
         <NodeLayout
-          Size="154,42"
-          Id="Package\Data Flow Task\Derived Column"
-          TopLeft="256.5,95.5" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="333.75,50.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,45"
-              Start="0,0"
-              End="0,37.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,37.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="163,42"
-          Id="Package\Data Flow Task\Derived Column 1"
-          TopLeft="55.5,95.5" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[OLE DB Source Output1]"
-          TopLeft="117,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="20,48"
-              Start="0,0"
-              End="20,40.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20"
-                    Point2="0,24"
-                    Point3="4,24" />
-                  <mssgle:LineSegment
-                    End="16,24" />
-                  <mssgle:CubicBezierSegment
-                    Point1="16,24"
-                    Point2="20,24"
-                    Point3="20,28" />
-                  <mssgle:LineSegment
-                    End="20,40.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="133,42"
+          Id="Package\Data Flow Task\eWFM Data"
+          TopLeft="50.5,5.5" />
         <NodeLayout
           Size="98,42"
           Id="Package\Data Flow Task\Sort"
           TopLeft="76.5,190.5" />
         <NodeLayout
           Size="107,42"
+          Id="Package\Data Flow Task\Sort 2"
+          TopLeft="179.5,397.5" />
+        <NodeLayout
+          Size="107,42"
           Id="Package\Data Flow Task\Sort 1"
           TopLeft="281.5,181.5" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="137,137.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-11.5,53"
-              Start="0,0"
-              End="-11.5,45.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,22.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,22.5"
-                    Point2="0,26.5"
-                    Point3="-4,26.5" />
-                  <mssgle:LineSegment
-                    End="-7.5,26.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-7.5,26.5"
-                    Point2="-11.5,26.5"
-                    Point3="-11.5,30.5" />
-                  <mssgle:LineSegment
-                    End="-11.5,45.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Derived Column Output1]"
-          TopLeft="334.25,137.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,44"
-              Start="0,0"
-              End="0,36.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,36.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="130,42"
           Id="Package\Data Flow Task\Merge Join"
           TopLeft="162.5,290.5" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Data Flow Task\Flat File Destination"
+          TopLeft="145.5,467.5" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="256.5,95.5" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Data Flow Task\Derived Column 1"
+          TopLeft="55.5,95.5" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Sort Output]"
-          TopLeft="125.5,232.5">
+          Id="Package\Data Flow Task.Paths[Sort Output2]"
+          TopLeft="232.25,439.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="102,58"
+              EndConnector="0,28"
               Start="0,0"
-              End="102,50.5">
+              End="0,20.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,25"
-                    Point2="0,29"
-                    Point3="4,29" />
-                  <mssgle:LineSegment
-                    End="98,29" />
-                  <mssgle:CubicBezierSegment
-                    Point1="98,29"
-                    Point2="102,29"
-                    Point3="102,33" />
-                  <mssgle:LineSegment
-                    End="102,50.5" />
+                    End="0,20.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -24228,10 +24114,96 @@ SELECT * FROM HIER;
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="107,42"
-          Id="Package\Data Flow Task\Sort 2"
-          TopLeft="179.5,397.5" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Sort Output]"
+          TopLeft="125.5,232.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="102,58"
+              Start="0,0"
+              End="102,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25"
+                    Point2="0,29"
+                    Point3="4,29" />
+                  <mssgle:LineSegment
+                    End="98,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="98,29"
+                    Point2="102,29"
+                    Point3="102,33" />
+                  <mssgle:LineSegment
+                    End="102,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output1]"
+          TopLeft="117,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20,48"
+              Start="0,0"
+              End="20,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="4,24" />
+                  <mssgle:LineSegment
+                    End="16,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16,24"
+                    Point2="20,24"
+                    Point3="20,28" />
+                  <mssgle:LineSegment
+                    End="20,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="333.75,50.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Merge Join Output]"
           TopLeft="230.25,332.5">
@@ -24254,24 +24226,54 @@ SELECT * FROM HIER;
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="172,42"
-          Id="Package\Data Flow Task\Flat File Destination"
-          TopLeft="145.5,467.5" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Sort Output2]"
-          TopLeft="232.25,439.5">
+          Id="Package\Data Flow Task.Paths[Derived Column Output1]"
+          TopLeft="334.25,137.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,28"
+              EndConnector="0,44"
               Start="0,0"
-              End="0,20.5">
+              End="0,36.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.5" />
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="137,137.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11.5,53"
+              Start="0,0"
+              End="-11.5,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.5"
+                    Point2="0,26.5"
+                    Point3="-4,26.5" />
+                  <mssgle:LineSegment
+                    End="-7.5,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.5,26.5"
+                    Point2="-11.5,26.5"
+                    Point3="-11.5,30.5" />
+                  <mssgle:LineSegment
+                    End="-11.5,45.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -24284,7 +24286,7 @@ SELECT * FROM HIER;
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\eWFM Data">
+    design-time-name="Package\Data Flow Task\OrgChart Data">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -24292,7 +24294,7 @@ SELECT * FROM HIER;
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OrgChart Data">
+    design-time-name="Package\Data Flow Task\eWFM Data">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
